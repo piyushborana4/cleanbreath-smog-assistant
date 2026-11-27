@@ -1,0 +1,2530 @@
+<!-- Onboarding — CleanBreath -->
+<!DOCTYPE html><html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Onboarding — CleanBreath</title>
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <script id="tailwind-config">/** @type {import('tailwindcss').Config} */
+globalThis.tailwind = globalThis.tailwind || {};
+globalThis.tailwind.config = {
+  darkMode: 'class',
+  theme: {
+    extend: {
+      colors: {
+        'light-primary': '#004345',
+        'light-on-primary': '#FFFFFF',
+        'light-primary-container': '#0F5C5E',
+        'light-on-primary-container': '#F1FFFF',
+        'light-secondary': '#4B6363',
+        'light-on-secondary': '#FFFFFF',
+        'light-secondary-container': '#CBE5E5',
+        'light-on-secondary-container': '#1D3435',
+        'light-tertiary': '#5D3013',
+        'light-on-tertiary': '#FFFFFF',
+        'light-tertiary-container': '#794628',
+        'light-on-tertiary-container': '#FFEDE5',
+        'light-caution': '#B45309',
+        'light-on-caution': '#FFFFFF',
+        'light-caution-container': '#FEF3C7',
+        'light-on-caution-container': '#78350F',
+        'light-good': '#0F766E',
+        'light-on-good': '#FFFFFF',
+        'light-good-container': '#CCFBF1',
+        'light-on-good-container': '#134E4A',
+        'light-error': '#BA1A1A',
+        'light-on-error': '#FFFFFF',
+        'light-error-container': '#FFDAD6',
+        'light-on-error-container': '#93000A',
+        'light-background': '#F8FAF9',
+        'light-on-background': '#191C1C',
+        'light-surface': '#F8FAF9',
+        'light-surface-dim': '#D8DADA',
+        'light-surface-bright': '#F8FAF9',
+        'light-surface-container-lowest': '#FFFFFF',
+        'light-surface-container-low': '#F2F4F3',
+        'light-surface-container': '#ECEEEE',
+        'light-surface-container-high': '#E6E9E8',
+        'light-surface-container-highest': '#E1E3E2',
+        'light-on-surface': '#191C1C',
+        'light-surface-variant': '#DBE4E4',
+        'light-on-surface-variant': '#3F4949',
+        'light-outline': '#576060',
+        'light-outline-variant': '#BFC8C8',
+        'light-inverse-surface': '#2E3131',
+        'light-inverse-on-surface': '#EFF1F0',
+        'light-inverse-primary': '#90D2D4',
+        'light-shadow': '#000000',
+        'light-scrim': '#000000',
+        'dark-primary': '#90D2D4',
+        'dark-on-primary': '#003738',
+        'dark-primary-container': '#0F5C5E',
+        'dark-on-primary-container': '#F1FFFF',
+        'dark-secondary': '#B2CBCC',
+        'dark-on-secondary': '#1D3435',
+        'dark-secondary-container': '#334B4B',
+        'dark-on-secondary-container': '#DCF6F6',
+        'dark-tertiary': '#FDB791',
+        'dark-on-tertiary': '#4F2509',
+        'dark-tertiary-container': '#794628',
+        'dark-on-tertiary-container': '#FFEDE5',
+        'dark-caution': '#FBBF24',
+        'dark-on-caution': '#451A03',
+        'dark-caution-container': '#78350F',
+        'dark-on-caution-container': '#FEF3C7',
+        'dark-good': '#5EEAD4',
+        'dark-on-good': '#042F2E',
+        'dark-good-container': '#115E59',
+        'dark-on-good-container': '#CCFBF1',
+        'dark-error': '#FFB4AB',
+        'dark-on-error': '#690005',
+        'dark-error-container': '#93000A',
+        'dark-on-error-container': '#FFDAD6',
+        'dark-background': '#111414',
+        'dark-on-background': '#E1E3E2',
+        'dark-surface': '#111414',
+        'dark-surface-dim': '#111414',
+        'dark-surface-bright': '#363A3A',
+        'dark-surface-container-lowest': '#0B0F0F',
+        'dark-surface-container-low': '#191C1C',
+        'dark-surface-container': '#1D2020',
+        'dark-surface-container-high': '#272B2B',
+        'dark-surface-container-highest': '#323535',
+        'dark-on-surface': '#E1E3E2',
+        'dark-surface-variant': '#3F4949',
+        'dark-on-surface-variant': '#BFC8C8',
+        'dark-outline': '#899392',
+        'dark-outline-variant': '#3F4949',
+        'dark-inverse-surface': '#E1E3E2',
+        'dark-inverse-on-surface': '#2E3131',
+        'dark-inverse-primary': '#21686A',
+        'dark-shadow': '#000000',
+        'dark-scrim': '#000000',
+      },
+      borderRadius: {
+        'sm': '6px',
+        'DEFAULT': '12px',
+        'md': '16px',
+        'lg': '20px',
+        'xl': '28px',
+        'full': '9999px',
+      },
+      spacing: {
+        'gutter-xs': '4px',
+        'gutter-sm': '8px',
+        'gutter-md': '12px',
+        'gutter-lg': '16px',
+        'gutter-xl': '24px',
+        'section': '32px',
+        'page-margin': '16px',
+      },
+      fontFamily: {
+        'display': ['"Atkinson Hyperlegible"', 'sans-serif'],
+        'headline': ['"Atkinson Hyperlegible"', 'sans-serif'],
+        'title': ['"Atkinson Hyperlegible"', 'sans-serif'],
+        'body': ['"Hedvig Letters Sans"', 'sans-serif'],
+        'label': ['"Atkinson Hyperlegible"', 'sans-serif'],
+        'mono': ['"Source Code Pro"', 'monospace'],
+      },
+      fontSize: {
+        'display-lg': ['56px', { lineHeight: '62px', letterSpacing: '-0.5px', fontWeight: '700' }],
+        'display-lg-mobile': ['32px', { lineHeight: '38px', letterSpacing: '-0.25px', fontWeight: '700' }],
+        'headline-lg': ['36px', { lineHeight: '44px', letterSpacing: '-0.25px', fontWeight: '700' }],
+        'headline-lg-mobile': ['26px', { lineHeight: '32px', letterSpacing: '-0.2px', fontWeight: '700' }],
+        'headline-md': ['22px', { lineHeight: '28px', letterSpacing: '0px', fontWeight: '700' }],
+        'title-lg': ['20px', { lineHeight: '26px', letterSpacing: '0px', fontWeight: '700' }],
+        'title-md': ['18px', { lineHeight: '24px', letterSpacing: '0px', fontWeight: '700' }],
+        'body-lg': ['18px', { lineHeight: '28px', letterSpacing: '0px', fontWeight: '400' }],
+        'body-md': ['16px', { lineHeight: '24px', letterSpacing: '0px', fontWeight: '400' }],
+        'label-lg': ['16px', { lineHeight: '22px', letterSpacing: '0.1px', fontWeight: '700' }],
+        'label-md': ['14px', { lineHeight: '20px', letterSpacing: '0.15px', fontWeight: '700' }],
+        'label-sm': ['12px', { lineHeight: '16px', letterSpacing: '0.2px', fontWeight: '700' }],
+        'mono-md': ['15px', { lineHeight: '20px', letterSpacing: '0px', fontWeight: '600' }],
+      },
+      transitionDuration: {
+        'state-change': '120ms',
+        'surface-enter': '240ms',
+        'surface-exit': '160ms',
+      },
+      transitionDelay: {
+        'state-change': '0ms',
+        'surface-enter': '0ms',
+        'surface-exit': '0ms',
+      },
+      transitionTimingFunction: {
+        'state-change': 'ease-out',
+        'surface-enter': 'cubic-bezier(0.2, 0, 0, 1)',
+        'surface-exit': 'cubic-bezier(0.3, 0, 1, 1)',
+      },
+    },
+  },
+};
+if (typeof module !== 'undefined') module.exports = globalThis.tailwind.config;
+</script>
+  <link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&amp;family=Hedvig+Letters+Sans&amp;family=Source+Code+Pro:wght@600&amp;display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=block" rel="stylesheet">
+  <style>.material-symbols-outlined { display: inline-block; width: 1em; height: 1em; line-height: 1 !important; box-sizing: content-box; overflow: hidden; white-space: nowrap; direction: ltr; vertical-align: middle; }</style>
+</head>
+<body class="bg-light-surface dark:bg-dark-surface text-light-on-surface dark:text-dark-on-surface font-body text-body-md antialiased">
+  <div class="min-h-[884px] flex flex-col max-w-2xl mx-auto px-page-margin py-gutter-lg gap-gutter-xl" data-stitch-vh="min-h-[884px]===min-h-screen">
+
+    <!-- Top Header -->
+    <header class="flex items-center justify-between gap-gutter-md">
+      <div class="flex items-center gap-gutter-sm">
+        <span class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-light-primary dark:bg-dark-primary text-light-on-primary dark:text-dark-on-primary">
+          <span class="material-symbols-outlined text-title-lg" aria-hidden="true">air</span>
+        </span>
+        <span data-design-text-token="title-lg" class="font-headline text-title-lg text-light-on-surface dark:text-dark-on-surface">CleanBreath</span>
+      </div>
+      <div class="flex items-center gap-gutter-sm">
+        <a href="../dashboard/Dashboard.html" class="inline-flex items-center justify-center min-h-12 px-gutter-md rounded-full font-label text-label-md text-light-primary dark:text-dark-primary hover:bg-light-surface-container-low dark:hover:bg-dark-surface-container-low focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-light-primary dark:focus-visible:ring-dark-primary">
+          <span data-design-text-token="label-md">Skip</span>
+        </a>
+        <button id="theme-toggle" data-component-id="button-icon" data-component-type="button" data-component-variant="icon" type="button" aria-label="Toggle color theme" class="inline-flex items-center justify-center w-12 h-12 rounded-full bg-light-surface-container-low dark:bg-dark-surface-container-low text-light-on-surface dark:text-dark-on-surface border border-light-outline-variant dark:border-dark-outline-variant focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-light-primary dark:focus-visible:ring-dark-primary">
+          <span class="material-symbols-outlined text-title-lg" aria-hidden="true">dark_mode</span>
+        </button>
+      </div>
+    </header>
+
+    <!-- Step Progress Indicator -->
+    <nav aria-label="Onboarding steps" class="flex flex-col gap-gutter-sm">
+      <div class="flex items-center justify-between">
+        <span id="step-label" data-design-text-token="label-md" class="font-label text-label-md text-light-primary dark:text-dark-primary">Step 1 of 3 · Neighbourhood</span>
+        <span data-design-text-token="label-sm" class="font-label text-label-sm text-light-on-surface-variant dark:text-dark-on-surface-variant">Tailored for winter smog</span>
+      </div>
+      <div class="grid grid-cols-3 gap-gutter-sm" role="tablist">
+        <button type="button" data-step-tab="1" aria-selected="true" class="h-2.5 rounded-full bg-light-primary dark:bg-dark-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-light-primary dark:focus-visible:ring-dark-primary" aria-label="Step 1: Location"></button>
+        <button type="button" data-step-tab="2" aria-selected="false" class="h-2.5 rounded-full bg-light-surface-container-highest dark:bg-dark-surface-container-highest focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-light-primary dark:focus-visible:ring-dark-primary" aria-label="Step 2: Household"></button>
+        <button type="button" data-step-tab="3" aria-selected="false" class="h-2.5 rounded-full bg-light-surface-container-highest dark:bg-dark-surface-container-highest focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-light-primary dark:focus-visible:ring-dark-primary" aria-label="Step 3: Lifestyle"></button>
+      </div>
+    </nav>
+
+    <!-- Main Step Content -->
+    <main class="flex-1 flex flex-col gap-gutter-xl">
+
+      <!-- STEP 1: Location Search -->
+      <section id="step-1" class="flex flex-col gap-gutter-lg">
+        <div class="flex flex-col gap-gutter-xs">
+          <h1 data-design-text-token="headline-lg-mobile" class="font-headline text-headline-lg-mobile md:text-headline-lg text-balance">Where does your family live?</h1>
+          <p data-design-text-token="body-md" class="font-body text-body-md text-light-on-surface-variant dark:text-dark-on-surface-variant text-pretty">We use your neighbourhood station to give calm, hourly smog timing—your exact address stays on this device.</p>
+        </div>
+
+        <div class="flex flex-col gap-gutter-sm">
+          <label for="location-search" data-design-text-token="label-md" class="font-label text-label-md text-light-on-surface dark:text-dark-on-surface">Search city, sector, or pin code</label>
+          <div class="relative flex items-center">
+            <span class="material-symbols-outlined absolute left-4 text-light-on-surface-variant dark:text-dark-on-surface-variant" aria-hidden="true">search</span>
+            <input id="location-search" type="search" value="Rohini, New Delhi" placeholder="e.g. Rohini, Indirapuram, Gurugram" class="w-full min-h-12 pl-12 pr-4 py-gutter-md rounded-md bg-light-surface-container-lowest dark:bg-dark-surface-container-low text-light-on-surface dark:text-dark-on-surface border border-light-outline dark:border-dark-outline font-body text-body-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-light-primary dark:focus-visible:ring-dark-primary">
+          </div>
+          <button type="button" id="use-gps-btn" class="inline-flex items-center justify-center gap-gutter-sm min-h-12 px-gutter-lg rounded-full bg-light-secondary-container dark:bg-dark-secondary-container text-light-on-secondary-container dark:text-dark-on-secondary-container font-label text-label-lg self-start focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-light-primary dark:focus-visible:ring-dark-primary">
+            <span class="material-symbols-outlined text-title-md" aria-hidden="true">my_location</span>
+            <span data-design-text-token="label-lg">Use current location</span>
+          </button>
+        </div>
+
+        <div class="flex flex-col gap-gutter-sm">
+          <h2 data-design-text-token="label-md" class="font-label text-label-md text-light-on-surface-variant dark:text-dark-on-surface-variant">Nearby monitoring stations</h2>
+          <div class="grid grid-cols-1 gap-gutter-sm" role="radiogroup" aria-label="Select monitoring station">
+            <button type="button" data-station="Rohini Sector 13, New Delhi" aria-pressed="true" class="station-opt min-h-12 p-gutter-lg rounded-md bg-light-secondary-container dark:bg-dark-secondary-container border-2 border-light-primary dark:border-dark-primary flex items-center justify-between gap-gutter-md text-left focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-light-primary dark:focus-visible:ring-dark-primary">
+              <div class="flex items-center gap-gutter-md">
+                <span class="material-symbols-outlined text-light-primary dark:text-dark-primary" aria-hidden="true">location_on</span>
+                <div>
+                  <p data-design-text-token="title-md" class="font-title text-title-md text-light-on-surface dark:text-dark-on-surface">Rohini Sector 13, New Delhi</p>
+                  <p data-design-text-token="label-md" class="font-label text-label-md text-light-on-surface-variant dark:text-dark-on-surface-variant">DPCC Station · 1.2 km away</p>
+                </div>
+              </div>
+              <span class="material-symbols-outlined text-light-primary dark:text-dark-primary" aria-hidden="true">check_circle</span>
+            </button>
+
+            <button type="button" data-station="Indirapuram, Ghaziabad" aria-pressed="false" class="station-opt min-h-12 p-gutter-lg rounded-md bg-light-surface-container-lowest dark:bg-dark-surface-container-low border border-light-outline-variant dark:border-dark-outline-variant flex items-center justify-between gap-gutter-md text-left focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-light-primary dark:focus-visible:ring-dark-primary">
+              <div class="flex items-center gap-gutter-md">
+                <span class="material-symbols-outlined text-light-on-surface-variant dark:text-dark-on-surface-variant" aria-hidden="true">location_on</span>
+                <div>
+                  <p data-design-text-token="title-md" class="font-title text-title-md text-light-on-surface dark:text-dark-on-surface">Indirapuram, Ghaziabad</p>
+                  <p data-design-text-token="label-md" class="font-label text-label-md text-light-on-surface-variant dark:text-dark-on-surface-variant">UPPCB Station · 4.8 km away</p>
+                </div>
+              </div>
+            </button>
+
+            <button type="button" data-station="Sector 56, Gurugram" aria-pressed="false" class="station-opt min-h-12 p-gutter-lg rounded-md bg-light-surface-container-lowest dark:bg-dark-surface-container-low border border-light-outline-variant dark:border-dark-outline-variant flex items-center justify-between gap-gutter-md text-left focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-light-primary dark:focus-visible:ring-dark-primary">
+              <div class="flex items-center gap-gutter-md">
+                <span class="material-symbols-outlined text-light-on-surface-variant dark:text-dark-on-surface-variant" aria-hidden="true">location_on</span>
+                <div>
+                  <p data-design-text-token="title-md" class="font-title text-title-md text-light-on-surface dark:text-dark-on-surface">Sector 56, Gurugram</p>
+                  <p data-design-text-token="label-md" class="font-label text-label-md text-light-on-surface-variant dark:text-dark-on-surface-variant">HSPCB Station · 9.4 km away</p>
+                </div>
+              </div>
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <!-- STEP 2: Household -->
+      <section id="step-2" class="hidden flex-col gap-gutter-lg">
+        <div class="flex flex-col gap-gutter-xs">
+          <h1 data-design-text-token="headline-lg-mobile" class="font-headline text-headline-lg-mobile md:text-headline-lg text-balance">Who is in your household?</h1>
+          <p data-design-text-token="body-md" class="font-body text-body-md text-light-on-surface-variant dark:text-dark-on-surface-variant text-pretty">Select all that apply so we adjust safe outdoor thresholds and indoor alerts.</p>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-gutter-md">
+          <button type="button" aria-pressed="true" class="household-toggle min-h-12 p-gutter-lg rounded-md bg-light-secondary-container dark:bg-dark-secondary-container border-2 border-light-primary dark:border-dark-primary flex items-center gap-gutter-md text-left focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-light-primary dark:focus-visible:ring-dark-primary">
+            <span class="material-symbols-outlined text-title-lg text-light-primary dark:text-dark-primary" aria-hidden="true">child_care</span>
+            <div class="flex-1">
+              <p data-design-text-token="title-md" class="font-title text-title-md">Kids (under 12)</p>
+              <p data-design-text-token="label-md" class="font-label text-label-md text-light-on-surface-variant dark:text-dark-on-surface-variant">Stricter outdoor play limits</p>
+            </div>
+            <span class="material-symbols-outlined text-light-primary dark:text-dark-primary" aria-hidden="true">check_circle</span>
+          </button>
+
+          <button type="button" aria-pressed="false" class="household-toggle min-h-12 p-gutter-lg rounded-md bg-light-surface-container-lowest dark:bg-dark-surface-container-low border border-light-outline-variant dark:border-dark-outline-variant flex items-center gap-gutter-md text-left focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-light-primary dark:focus-visible:ring-dark-primary">
+            <span class="material-symbols-outlined text-title-lg text-light-on-surface-variant dark:text-dark-on-surface-variant" aria-hidden="true">elderly</span>
+            <div class="flex-1">
+              <p data-design-text-token="title-md" class="font-title text-title-md">Elderly (65+)</p>
+              <p data-design-text-token="label-md" class="font-label text-label-md text-light-on-surface-variant dark:text-dark-on-surface-variant">Morning walk timing alerts</p>
+            </div>
+          </button>
+
+          <button type="button" aria-pressed="true" class="household-toggle min-h-12 p-gutter-lg rounded-md bg-light-secondary-container dark:bg-dark-secondary-container border-2 border-light-primary dark:border-dark-primary flex items-center gap-gutter-md text-left focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-light-primary dark:focus-visible:ring-dark-primary">
+            <span class="material-symbols-outlined text-title-lg text-light-primary dark:text-dark-primary" aria-hidden="true">pulmonology</span>
+            <div class="flex-1">
+              <p data-design-text-token="title-md" class="font-title text-title-md">Asthma or breathing care</p>
+              <p data-design-text-token="label-md" class="font-label text-label-md text-light-on-surface-variant dark:text-dark-on-surface-variant">Bedroom air &amp; early warnings</p>
+            </div>
+            <span class="material-symbols-outlined text-light-primary dark:text-dark-primary" aria-hidden="true">check_circle</span>
+          </button>
+
+          <button type="button" aria-pressed="false" class="household-toggle min-h-12 p-gutter-lg rounded-md bg-light-surface-container-lowest dark:bg-dark-surface-container-low border border-light-outline-variant dark:border-dark-outline-variant flex items-center gap-gutter-md text-left focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-light-primary dark:focus-visible:ring-dark-primary">
+            <span class="material-symbols-outlined text-title-lg text-light-on-surface-variant dark:text-dark-on-surface-variant" aria-hidden="true">pets</span>
+            <div class="flex-1">
+              <p data-design-text-token="title-md" class="font-title text-title-md">Pets at home</p>
+              <p data-design-text-token="label-md" class="font-label text-label-md text-light-on-surface-variant dark:text-dark-on-surface-variant">Pet-safe ventilation &amp; walks</p>
+            </div>
+          </button>
+        </div>
+      </section>
+
+      <!-- STEP 3: Lifestyle -->
+      <section id="step-3" class="hidden flex-col gap-gutter-lg">
+        <div class="flex flex-col gap-gutter-xs">
+          <h1 data-design-text-token="headline-lg-mobile" class="font-headline text-headline-lg-mobile md:text-headline-lg text-balance">Your daily routine &amp; home</h1>
+          <p data-design-text-token="body-md" class="font-body text-body-md text-light-on-surface-variant dark:text-dark-on-surface-variant text-pretty">We match recommendations to what you already have and your budget.</p>
+        </div>
+
+        <div class="flex flex-col gap-gutter-lg">
+          <div class="flex flex-col gap-gutter-sm">
+            <span data-design-text-token="label-md" class="font-label text-label-md">Primary commute</span>
+            <div class="flex flex-wrap gap-gutter-sm">
+              <button type="button" aria-pressed="false" class="pill-choice min-h-12 px-gutter-lg rounded-full bg-light-surface-container-low dark:bg-dark-surface-container-low border border-light-outline-variant dark:border-dark-outline-variant font-label text-label-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-light-primary dark:focus-visible:ring-dark-primary">Walk / Cycle</button>
+              <button type="button" aria-pressed="true" class="pill-choice min-h-12 px-gutter-lg rounded-full bg-light-primary dark:bg-dark-primary text-light-on-primary dark:text-dark-on-primary font-label text-label-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-light-primary dark:focus-visible:ring-dark-primary">Metro / Bus</button>
+              <button type="button" aria-pressed="false" class="pill-choice min-h-12 px-gutter-lg rounded-full bg-light-surface-container-low dark:bg-dark-surface-container-low border border-light-outline-variant dark:border-dark-outline-variant font-label text-label-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-light-primary dark:focus-visible:ring-dark-primary">Car / Cab</button>
+            </div>
+          </div>
+
+          <div class="flex flex-col gap-gutter-sm">
+            <span data-design-text-token="label-md" class="font-label text-label-md">Home type</span>
+            <div class="flex flex-wrap gap-gutter-sm">
+              <button type="button" aria-pressed="true" class="pill-choice min-h-12 px-gutter-lg rounded-full bg-light-primary dark:bg-dark-primary text-light-on-primary dark:text-dark-on-primary font-label text-label-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-light-primary dark:focus-visible:ring-dark-primary">Apartment</button>
+              <button type="button" aria-pressed="false" class="pill-choice min-h-12 px-gutter-lg rounded-full bg-light-surface-container-low dark:bg-dark-surface-container-low border border-light-outline-variant dark:border-dark-outline-variant font-label text-label-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-light-primary dark:focus-visible:ring-dark-primary">Ground floor</button>
+              <button type="button" aria-pressed="false" class="pill-choice min-h-12 px-gutter-lg rounded-full bg-light-surface-container-low dark:bg-dark-surface-container-low border border-light-outline-variant dark:border-dark-outline-variant font-label text-label-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-light-primary dark:focus-visible:ring-dark-primary">Independent house</button>
+            </div>
+          </div>
+
+          <div class="flex flex-col gap-gutter-sm">
+            <span data-design-text-token="label-md" class="font-label text-label-md">Air purifier at home?</span>
+            <div class="flex flex-wrap gap-gutter-sm">
+              <button type="button" aria-pressed="true" class="pill-choice min-h-12 px-gutter-lg rounded-full bg-light-primary dark:bg-dark-primary text-light-on-primary dark:text-dark-on-primary font-label text-label-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-light-primary dark:focus-visible:ring-dark-primary">Yes, 1 room</button>
+              <button type="button" aria-pressed="false" class="pill-choice min-h-12 px-gutter-lg rounded-full bg-light-surface-container-low dark:bg-dark-surface-container-low border border-light-outline-variant dark:border-dark-outline-variant font-label text-label-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-light-primary dark:focus-visible:ring-dark-primary">No purifier</button>
+              <button type="button" aria-pressed="false" class="pill-choice min-h-12 px-gutter-lg rounded-full bg-light-surface-container-low dark:bg-dark-surface-container-low border border-light-outline-variant dark:border-dark-outline-variant font-label text-label-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-light-primary dark:focus-visible:ring-dark-primary">Planning to buy</button>
+            </div>
+          </div>
+
+          <div class="flex flex-col gap-gutter-sm">
+            <span data-design-text-token="label-md" class="font-label text-label-md">Preferred budget for air hacks</span>
+            <div class="flex flex-wrap gap-gutter-sm">
+              <button type="button" aria-pressed="false" class="pill-choice min-h-12 px-gutter-lg rounded-full bg-light-surface-container-low dark:bg-dark-surface-container-low border border-light-outline-variant dark:border-dark-outline-variant font-label text-label-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-light-primary dark:focus-visible:ring-dark-primary">Free only</button>
+              <button type="button" aria-pressed="true" class="pill-choice min-h-12 px-gutter-lg rounded-full bg-light-primary dark:bg-dark-primary text-light-on-primary dark:text-dark-on-primary font-label text-label-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-light-primary dark:focus-visible:ring-dark-primary">Low cost</button>
+              <button type="button" aria-pressed="false" class="pill-choice min-h-12 px-gutter-lg rounded-full bg-light-surface-container-low dark:bg-dark-surface-container-low border border-light-outline-variant dark:border-dark-outline-variant font-label text-label-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-light-primary dark:focus-visible:ring-dark-primary">Premium</button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+    </main>
+
+    <!-- Bottom Step Actions + Persistent Disclaimer -->
+    <footer class="flex flex-col gap-gutter-md pt-gutter-md border-t border-light-outline-variant dark:border-dark-outline-variant">
+      <div class="flex items-center justify-between gap-gutter-md">
+        <button id="prev-btn" type="button" class="hidden min-h-12 px-gutter-xl rounded-full bg-light-secondary-container dark:bg-dark-secondary-container text-light-on-secondary-container dark:text-dark-on-secondary-container font-label text-label-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-light-primary dark:focus-visible:ring-dark-primary">
+          <span data-design-text-token="label-lg">Back</span>
+        </button>
+        <button id="next-btn" type="button" class="ml-auto inline-flex items-center justify-center gap-gutter-sm min-h-12 px-gutter-xl rounded-full bg-light-primary dark:bg-dark-primary text-light-on-primary dark:text-dark-on-primary font-label text-label-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-light-primary dark:focus-visible:ring-dark-primary">
+          <span id="next-label" data-design-text-token="label-lg">Next: Household</span>
+          <span class="material-symbols-outlined text-title-md" aria-hidden="true">arrow_forward</span>
+        </button>
+      </div>
+      <p data-design-text-token="label-sm" class="font-label text-label-sm text-light-on-surface-variant dark:text-dark-on-surface-variant text-center">
+        General air-quality guidance only—not medical advice. Consult a doctor for breathing symptoms.
+      </p>
+    </footer>
+
+  </div>
+
+  <script>
+    (function () {
+      const root = document.documentElement;
+      const themeBtn = document.getElementById('theme-toggle');
+      try {
+        if (localStorage.getItem('cb_theme') === 'dark') root.classList.add('dark');
+      } catch (e) {}
+      themeBtn.addEventListener('click', () => {
+        root.classList.toggle('dark');
+        try { localStorage.setItem('cb_theme', root.classList.contains('dark') ? 'dark' : 'light'); } catch (e) {}
+      });
+
+      let currentStep = 1;
+      const labels = {
+        1: 'Step 1 of 3 · Neighbourhood',
+        2: 'Step 2 of 3 · Household',
+        3: 'Step 3 of 3 · Lifestyle'
+      };
+      const nextLabels = {
+        1: 'Next: Household',
+        2: 'Next: Lifestyle',
+        3: 'See today’s air plan'
+      };
+
+      function showStep(step) {
+        currentStep = step;
+        [1, 2, 3].forEach((n) => {
+          const el = document.getElementById('step-' + n);
+          const tab = document.querySelector('[data-step-tab="' + n + '"]');
+          if (n === step) {
+            el.classList.remove('hidden');
+            el.classList.add('flex');
+            tab.setAttribute('aria-selected', 'true');
+            tab.className = 'h-2.5 rounded-full bg-light-primary dark:bg-dark-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-light-primary dark:focus-visible:ring-dark-primary';
+          } else {
+            el.classList.add('hidden');
+            el.classList.remove('flex');
+            tab.setAttribute('aria-selected', 'false');
+            tab.className = 'h-2.5 rounded-full bg-light-surface-container-highest dark:bg-dark-surface-container-highest focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-light-primary dark:focus-visible:ring-dark-primary';
+          }
+        });
+        document.getElementById('step-label').textContent = labels[step];
+        document.getElementById('next-label').textContent = nextLabels[step];
+        const prevBtn = document.getElementById('prev-btn');
+        if (step === 1) prevBtn.classList.add('hidden');
+        else prevBtn.classList.remove('hidden');
+      }
+
+      document.querySelectorAll('[data-step-tab]').forEach((btn) => {
+        btn.addEventListener('click', () => showStep(Number(btn.dataset.stepTab)));
+      });
+      document.getElementById('prev-btn').addEventListener('click', () => {
+        if (currentStep > 1) showStep(currentStep - 1);
+      });
+      document.getElementById('next-btn').addEventListener('click', () => {
+        if (currentStep < 3) showStep(currentStep + 1);
+        else window.location.href = '../dashboard/Dashboard.html';
+      });
+
+      document.querySelectorAll('.household-toggle').forEach((btn) => {
+        btn.addEventListener('click', () => {
+          const pressed = btn.getAttribute('aria-pressed') === 'true';
+          btn.setAttribute('aria-pressed', String(!pressed));
+          btn.classList.toggle('bg-light-secondary-container', !pressed);
+          btn.classList.toggle('dark:bg-dark-secondary-container', !pressed);
+          btn.classList.toggle('border-2', !pressed);
+          btn.classList.toggle('border-light-primary', !pressed);
+          btn.classList.toggle('dark:border-dark-primary', !pressed);
+          btn.classList.toggle('bg-light-surface-container-lowest', pressed);
+          btn.classList.toggle('dark:bg-dark-surface-container-low', pressed);
+          btn.classList.toggle('border', pressed);
+          btn.classList.toggle('border-light-outline-variant', pressed);
+          btn.classList.toggle('dark:border-dark-outline-variant', pressed);
+        });
+      });
+    })();
+  </script>
+
+
+</body></html>
+
+<!-- Dashboard — CleanBreath -->
+<!DOCTYPE html><html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard — CleanBreath</title>
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <script id="tailwind-config">/** @type {import('tailwindcss').Config} */
+globalThis.tailwind = globalThis.tailwind || {};
+globalThis.tailwind.config = {
+  darkMode: 'class',
+  theme: {
+    extend: {
+      colors: {
+        'light-primary': '#004345',
+        'light-on-primary': '#FFFFFF',
+        'light-primary-container': '#0F5C5E',
+        'light-on-primary-container': '#F1FFFF',
+        'light-secondary': '#4B6363',
+        'light-on-secondary': '#FFFFFF',
+        'light-secondary-container': '#CBE5E5',
+        'light-on-secondary-container': '#1D3435',
+        'light-tertiary': '#5D3013',
+        'light-on-tertiary': '#FFFFFF',
+        'light-tertiary-container': '#794628',
+        'light-on-tertiary-container': '#FFEDE5',
+        'light-caution': '#B45309',
+        'light-on-caution': '#FFFFFF',
+        'light-caution-container': '#FEF3C7',
+        'light-on-caution-container': '#78350F',
+        'light-good': '#0F766E',
+        'light-on-good': '#FFFFFF',
+        'light-good-container': '#CCFBF1',
+        'light-on-good-container': '#134E4A',
+        'light-error': '#BA1A1A',
+        'light-on-error': '#FFFFFF',
+        'light-error-container': '#FFDAD6',
+        'light-on-error-container': '#93000A',
+        'light-background': '#F8FAF9',
+        'light-on-background': '#191C1C',
+        'light-surface': '#F8FAF9',
+        'light-surface-dim': '#D8DADA',
+        'light-surface-bright': '#F8FAF9',
+        'light-surface-container-lowest': '#FFFFFF',
+        'light-surface-container-low': '#F2F4F3',
+        'light-surface-container': '#ECEEEE',
+        'light-surface-container-high': '#E6E9E8',
+        'light-surface-container-highest': '#E1E3E2',
+        'light-on-surface': '#191C1C',
+        'light-surface-variant': '#DBE4E4',
+        'light-on-surface-variant': '#3F4949',
+        'light-outline': '#576060',
+        'light-outline-variant': '#BFC8C8',
+        'light-inverse-surface': '#2E3131',
+        'light-inverse-on-surface': '#EFF1F0',
+        'light-inverse-primary': '#90D2D4',
+        'light-shadow': '#000000',
+        'light-scrim': '#000000',
+        'dark-primary': '#90D2D4',
+        'dark-on-primary': '#003738',
+        'dark-primary-container': '#0F5C5E',
+        'dark-on-primary-container': '#F1FFFF',
+        'dark-secondary': '#B2CBCC',
+        'dark-on-secondary': '#1D3435',
+        'dark-secondary-container': '#334B4B',
+        'dark-on-secondary-container': '#DCF6F6',
+        'dark-tertiary': '#FDB791',
+        'dark-on-tertiary': '#4F2509',
+        'dark-tertiary-container': '#794628',
+        'dark-on-tertiary-container': '#FFEDE5',
+        'dark-caution': '#FBBF24',
+        'dark-on-caution': '#451A03',
+        'dark-caution-container': '#78350F',
+        'dark-on-caution-container': '#FEF3C7',
+        'dark-good': '#5EEAD4',
+        'dark-on-good': '#042F2E',
+        'dark-good-container': '#115E59',
+        'dark-on-good-container': '#CCFBF1',
+        'dark-error': '#FFB4AB',
+        'dark-on-error': '#690005',
+        'dark-error-container': '#93000A',
+        'dark-on-error-container': '#FFDAD6',
+        'dark-background': '#111414',
+        'dark-on-background': '#E1E3E2',
+        'dark-surface': '#111414',
+        'dark-surface-dim': '#111414',
+        'dark-surface-bright': '#363A3A',
+        'dark-surface-container-lowest': '#0B0F0F',
+        'dark-surface-container-low': '#191C1C',
+        'dark-surface-container': '#1D2020',
+        'dark-surface-container-high': '#272B2B',
+        'dark-surface-container-highest': '#323535',
+        'dark-on-surface': '#E1E3E2',
+        'dark-surface-variant': '#3F4949',
+        'dark-on-surface-variant': '#BFC8C8',
+        'dark-outline': '#899392',
+        'dark-outline-variant': '#3F4949',
+        'dark-inverse-surface': '#E1E3E2',
+        'dark-inverse-on-surface': '#2E3131',
+        'dark-inverse-primary': '#21686A',
+        'dark-shadow': '#000000',
+        'dark-scrim': '#000000',
+      },
+      borderRadius: {
+        'sm': '6px',
+        'DEFAULT': '12px',
+        'md': '16px',
+        'lg': '20px',
+        'xl': '28px',
+        'full': '9999px',
+      },
+      spacing: {
+        'gutter-xs': '4px',
+        'gutter-sm': '8px',
+        'gutter-md': '12px',
+        'gutter-lg': '16px',
+        'gutter-xl': '24px',
+        'section': '32px',
+        'page-margin': '16px',
+      },
+      fontFamily: {
+        'display': ['"Atkinson Hyperlegible"', 'sans-serif'],
+        'headline': ['"Atkinson Hyperlegible"', 'sans-serif'],
+        'title': ['"Atkinson Hyperlegible"', 'sans-serif'],
+        'body': ['"Hedvig Letters Sans"', 'sans-serif'],
+        'label': ['"Atkinson Hyperlegible"', 'sans-serif'],
+        'mono': ['"Source Code Pro"', 'monospace'],
+      },
+      fontSize: {
+        'display-lg': ['56px', { lineHeight: '62px', letterSpacing: '-0.5px', fontWeight: '700' }],
+        'display-lg-mobile': ['32px', { lineHeight: '38px', letterSpacing: '-0.25px', fontWeight: '700' }],
+        'headline-lg': ['36px', { lineHeight: '44px', letterSpacing: '-0.25px', fontWeight: '700' }],
+        'headline-lg-mobile': ['26px', { lineHeight: '32px', letterSpacing: '-0.2px', fontWeight: '700' }],
+        'headline-md': ['22px', { lineHeight: '28px', letterSpacing: '0px', fontWeight: '700' }],
+        'title-lg': ['20px', { lineHeight: '26px', letterSpacing: '0px', fontWeight: '700' }],
+        'title-md': ['18px', { lineHeight: '24px', letterSpacing: '0px', fontWeight: '700' }],
+        'body-lg': ['18px', { lineHeight: '28px', letterSpacing: '0px', fontWeight: '400' }],
+        'body-md': ['16px', { lineHeight: '24px', letterSpacing: '0px', fontWeight: '400' }],
+        'label-lg': ['16px', { lineHeight: '22px', letterSpacing: '0.1px', fontWeight: '700' }],
+        'label-md': ['14px', { lineHeight: '20px', letterSpacing: '0.15px', fontWeight: '700' }],
+        'label-sm': ['12px', { lineHeight: '16px', letterSpacing: '0.2px', fontWeight: '700' }],
+        'mono-md': ['15px', { lineHeight: '20px', letterSpacing: '0px', fontWeight: '600' }],
+      },
+      transitionDuration: {
+        'state-change': '120ms',
+        'surface-enter': '240ms',
+        'surface-exit': '160ms',
+      },
+      transitionDelay: {
+        'state-change': '0ms',
+        'surface-enter': '0ms',
+        'surface-exit': '0ms',
+      },
+      transitionTimingFunction: {
+        'state-change': 'ease-out',
+        'surface-enter': 'cubic-bezier(0.2, 0, 0, 1)',
+        'surface-exit': 'cubic-bezier(0.3, 0, 1, 1)',
+      },
+    },
+  },
+};
+if (typeof module !== 'undefined') module.exports = globalThis.tailwind.config;
+</script>
+  <link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&amp;family=Hedvig+Letters+Sans&amp;family=Source+Code+Pro:wght@600&amp;display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=block" rel="stylesheet">
+  <style>.material-symbols-outlined { display: inline-block; width: 1em; height: 1em; line-height: 1 !important; box-sizing: content-box; overflow: hidden; white-space: nowrap; direction: ltr; vertical-align: middle; }</style>
+</head>
+<body class="bg-light-surface dark:bg-dark-surface text-light-on-surface dark:text-dark-on-surface font-body text-body-md antialiased">
+  <div class="min-h-[884px] flex flex-col max-w-3xl mx-auto" data-stitch-vh="min-h-[884px]===min-h-screen">
+
+    <!-- Shared App Shell Header -->
+    <header class="sticky top-0 z-20 bg-light-surface dark:bg-dark-surface border-b border-light-outline-variant dark:border-dark-outline-variant px-page-margin py-gutter-md flex items-center justify-between gap-gutter-md">
+      <div class="flex items-center gap-gutter-sm min-w-0">
+        <span class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-light-primary dark:bg-dark-primary text-light-on-primary dark:text-dark-on-primary shrink-0">
+          <span class="material-symbols-outlined text-title-lg" aria-hidden="true">air</span>
+        </span>
+        <div class="min-w-0">
+          <p data-design-text-token="title-md" class="font-headline text-title-md text-light-on-surface dark:text-dark-on-surface leading-tight">CleanBreath</p>
+          <a href="../onboarding/Onboarding.html" class="inline-flex items-center gap-gutter-xs font-label text-label-sm text-light-primary dark:text-dark-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-light-primary dark:focus-visible:ring-dark-primary rounded-sm">
+            <span class="material-symbols-outlined text-label-md" aria-hidden="true">location_on</span>
+            <span data-design-text-token="label-sm">Rohini, New Delhi</span>
+          </a>
+        </div>
+      </div>
+
+      <button id="theme-toggle" data-component-id="button-icon" data-component-type="button" data-component-variant="icon" type="button" aria-label="Toggle color theme" class="inline-flex items-center justify-center w-12 h-12 rounded-full bg-light-surface-container-low dark:bg-dark-surface-container-low text-light-on-surface dark:text-dark-on-surface border border-light-outline-variant dark:border-dark-outline-variant shrink-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-light-primary dark:focus-visible:ring-dark-primary">
+        <span class="material-symbols-outlined text-title-lg" aria-hidden="true">dark_mode</span>
+      </button>
+    </header>
+
+    <!-- Main Content -->
+    <main class="flex-1 px-page-margin py-gutter-lg pb-32 flex flex-col gap-gutter-xl">
+
+      <!-- State Preview Bar (Normal / Loading / Error / AQI Data Unavailable) -->
+      <div class="flex flex-wrap items-center gap-gutter-sm" role="group" aria-label="Preview air quality data states">
+        <span data-design-text-token="label-sm" class="font-label text-label-sm text-light-on-surface-variant dark:text-dark-on-surface-variant">View state:</span>
+        <button type="button" data-view-state="normal" aria-pressed="true" class="state-btn min-h-10 px-gutter-md rounded-full bg-light-primary dark:bg-dark-primary text-light-on-primary dark:text-dark-on-primary font-label text-label-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-light-primary dark:focus-visible:ring-dark-primary">Live AQI</button>
+        <button type="button" data-view-state="loading" aria-pressed="false" class="state-btn min-h-10 px-gutter-md rounded-full bg-light-surface-container-low dark:bg-dark-surface-container-low border border-light-outline-variant dark:border-dark-outline-variant font-label text-label-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-light-primary dark:focus-visible:ring-dark-primary">Loading</button>
+        <button type="button" data-view-state="error" aria-pressed="false" class="state-btn min-h-10 px-gutter-md rounded-full bg-light-surface-container-low dark:bg-dark-surface-container-low border border-light-outline-variant dark:border-dark-outline-variant font-label text-label-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-light-primary dark:focus-visible:ring-dark-primary">Error</button>
+        <button type="button" data-view-state="unavailable" aria-pressed="false" class="state-btn min-h-10 px-gutter-md rounded-full bg-light-surface-container-low dark:bg-dark-surface-container-low border border-light-outline-variant dark:border-dark-outline-variant font-label text-label-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-light-primary dark:focus-visible:ring-dark-primary">Data unavailable</button>
+      </div>
+
+      <!-- STATE: NORMAL -->
+      <div id="state-normal" class="flex flex-col gap-gutter-xl">
+
+        <!-- Large AQI Card (Number + Category Text + Icon, never color alone) -->
+        <section aria-labelledby="aqi-heading" class="p-gutter-xl rounded-lg bg-light-caution-container dark:bg-dark-caution-container text-light-on-caution-container dark:text-dark-on-caution-container border border-light-outline-variant dark:border-dark-outline-variant flex flex-col gap-gutter-md">
+          <div class="flex items-start justify-between gap-gutter-md">
+            <div>
+              <h1 id="aqi-heading" data-design-text-token="label-md" class="font-label text-label-md uppercase tracking-wide">Outdoor Air Quality · Updated 8:15 AM</h1>
+              <div class="flex items-baseline gap-gutter-md mt-gutter-xs">
+                <span data-design-text-token="display-lg" class="font-display text-display-lg-mobile md:text-display-lg tabular-nums">248</span>
+                <span data-design-text-token="title-lg" class="font-headline text-title-lg">Poor · Caution</span>
+              </div>
+            </div>
+            <span class="inline-flex items-center justify-center w-12 h-12 rounded-full bg-light-caution dark:bg-dark-caution text-light-on-caution dark:text-dark-on-caution shrink-0" aria-hidden="true">
+              <span class="material-symbols-outlined text-headline-md">masks</span>
+            </span>
+          </div>
+          <p data-design-text-token="body-md" class="font-body text-body-md text-pretty">
+            Smog is heavy for kids and asthma care this morning. Keep bedroom windows closed until 11 AM.
+          </p>
+        </section>
+
+        <!-- Pollutant Chips (PM2.5, PM10, NO2, O3) -->
+        <section aria-labelledby="pollutants-heading" class="flex flex-col gap-gutter-sm">
+          <h2 id="pollutants-heading" data-design-text-token="title-md" class="font-headline text-title-md">Key pollutants</h2>
+          <div class="grid grid-cols-2 sm:grid-cols-4 gap-gutter-sm">
+            <div class="p-gutter-md rounded-md bg-light-surface-container-lowest dark:bg-dark-surface-container-low border border-light-outline-variant dark:border-dark-outline-variant flex items-center gap-gutter-sm">
+              <span class="material-symbols-outlined text-light-caution dark:text-dark-caution shrink-0" aria-hidden="true">grain</span>
+              <div>
+                <p data-design-text-token="label-sm" class="font-label text-label-sm text-light-on-surface-variant dark:text-dark-on-surface-variant">PM2.5</p>
+                <p data-design-text-token="mono-md" class="font-mono text-mono-md tabular-nums">138 µg/m³</p>
+              </div>
+            </div>
+            <div class="p-gutter-md rounded-md bg-light-surface-container-lowest dark:bg-dark-surface-container-low border border-light-outline-variant dark:border-dark-outline-variant flex items-center gap-gutter-sm">
+              <span class="material-symbols-outlined text-light-caution dark:text-dark-caution shrink-0" aria-hidden="true">blur_on</span>
+              <div>
+                <p data-design-text-token="label-sm" class="font-label text-label-sm text-light-on-surface-variant dark:text-dark-on-surface-variant">PM10</p>
+                <p data-design-text-token="mono-md" class="font-mono text-mono-md tabular-nums">214 µg/m³</p>
+              </div>
+            </div>
+            <div class="p-gutter-md rounded-md bg-light-surface-container-lowest dark:bg-dark-surface-container-low border border-light-outline-variant dark:border-dark-outline-variant flex items-center gap-gutter-sm">
+              <span class="material-symbols-outlined text-light-primary dark:text-dark-primary shrink-0" aria-hidden="true">directions_car</span>
+              <div>
+                <p data-design-text-token="label-sm" class="font-label text-label-sm text-light-on-surface-variant dark:text-dark-on-surface-variant">NO2</p>
+                <p data-design-text-token="mono-md" class="font-mono text-mono-md tabular-nums">52 µg/m³</p>
+              </div>
+            </div>
+            <div class="p-gutter-md rounded-md bg-light-surface-container-lowest dark:bg-dark-surface-container-low border border-light-outline-variant dark:border-dark-outline-variant flex items-center gap-gutter-sm">
+              <span class="material-symbols-outlined text-light-good dark:text-dark-good shrink-0" aria-hidden="true">wb_sunny</span>
+              <div>
+                <p data-design-text-token="label-sm" class="font-label text-label-sm text-light-on-surface-variant dark:text-dark-on-surface-variant">O3</p>
+                <p data-design-text-token="mono-md" class="font-mono text-mono-md tabular-nums">38 µg/m³</p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- 24h Forecast Strip -->
+        <section aria-labelledby="forecast-heading" class="flex flex-col gap-gutter-sm">
+          <h2 id="forecast-heading" data-design-text-token="title-md" class="font-headline text-title-md">24-hour forecast</h2>
+          <div class="flex gap-gutter-sm overflow-x-auto pb-gutter-xs" tabindex="0" aria-label="Hourly AQI forecast">
+            <div class="min-w-[88px] p-gutter-md rounded-md bg-light-caution-container dark:bg-dark-caution-container text-light-on-caution-container dark:text-dark-on-caution-container border border-light-outline-variant dark:border-dark-outline-variant flex flex-col items-center gap-gutter-xs">
+              <span data-design-text-token="label-sm" class="font-label text-label-sm">Now</span>
+              <span class="material-symbols-outlined text-title-lg" aria-hidden="true">warning</span>
+              <span data-design-text-token="mono-md" class="font-mono text-mono-md tabular-nums">248</span>
+              <span data-design-text-token="label-sm" class="font-label text-label-sm">Poor</span>
+            </div>
+            <div class="min-w-[88px] p-gutter-md rounded-md bg-light-surface-container-lowest dark:bg-dark-surface-container-low border border-light-outline-variant dark:border-dark-outline-variant flex flex-col items-center gap-gutter-xs">
+              <span data-design-text-token="label-sm" class="font-label text-label-sm">11 AM</span>
+              <span class="material-symbols-outlined text-title-lg text-light-caution dark:text-dark-caution" aria-hidden="true">wb_twilight</span>
+              <span data-design-text-token="mono-md" class="font-mono text-mono-md tabular-nums">186</span>
+              <span data-design-text-token="label-sm" class="font-label text-label-sm">Mod.</span>
+            </div>
+            <div class="min-w-[88px] p-gutter-md rounded-md bg-light-good-container dark:bg-dark-good-container text-light-on-good-container dark:text-dark-on-good-container border border-light-outline-variant dark:border-dark-outline-variant flex flex-col items-center gap-gutter-xs">
+              <span data-design-text-token="label-sm" class="font-label text-label-sm">2 PM</span>
+              <span class="material-symbols-outlined text-title-lg" aria-hidden="true">air</span>
+              <span data-design-text-token="mono-md" class="font-mono text-mono-md tabular-nums">142</span>
+              <span data-design-text-token="label-sm" class="font-label text-label-sm">Better</span>
+            </div>
+            <div class="min-w-[88px] p-gutter-md rounded-md bg-light-surface-container-lowest dark:bg-dark-surface-container-low border border-light-outline-variant dark:border-dark-outline-variant flex flex-col items-center gap-gutter-xs">
+              <span data-design-text-token="label-sm" class="font-label text-label-sm">6 PM</span>
+              <span class="material-symbols-outlined text-title-lg text-light-caution dark:text-dark-caution" aria-hidden="true">nights_stay</span>
+              <span data-design-text-token="mono-md" class="font-mono text-mono-md tabular-nums">264</span>
+              <span data-design-text-token="label-sm" class="font-label text-label-sm">Poor</span>
+            </div>
+            <div class="min-w-[88px] p-gutter-md rounded-md bg-light-error-container dark:bg-dark-error-container text-light-on-error-container dark:text-dark-on-error-container border border-light-outline-variant dark:border-dark-outline-variant flex flex-col items-center gap-gutter-xs">
+              <span data-design-text-token="label-sm" class="font-label text-label-sm">10 PM</span>
+              <span class="material-symbols-outlined text-title-lg" aria-hidden="true">error</span>
+              <span data-design-text-token="mono-md" class="font-mono text-mono-md tabular-nums">338</span>
+              <span data-design-text-token="label-sm" class="font-label text-label-sm">V. Poor</span>
+            </div>
+          </div>
+        </section>
+
+        <!-- Today's Plan Cards (Morning / Afternoon / Evening) -->
+        <section aria-labelledby="plan-heading" class="flex flex-col gap-gutter-md">
+          <h2 id="plan-heading" data-design-text-token="title-md" class="font-headline text-title-md">Today’s family plan</h2>
+          <div class="grid grid-cols-1 gap-gutter-md">
+            <a href="../recommendation-detail/RecommendationDetail.html" data-component-id="card-interactive" data-component-type="card" data-component-variant="interactive" class="p-gutter-lg rounded-lg bg-light-surface-container-lowest dark:bg-dark-surface-container-low border border-light-outline-variant dark:border-dark-outline-variant flex items-start justify-between gap-gutter-md hover:bg-light-surface-container-low dark:hover:bg-dark-surface-container focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-light-primary dark:focus-visible:ring-dark-primary">
+              <div class="flex flex-col gap-gutter-xs">
+                <div class="flex items-center gap-gutter-sm">
+                  <span class="material-symbols-outlined text-light-caution dark:text-dark-caution" aria-hidden="true">wb_twilight</span>
+                  <span data-design-text-token="label-md" class="font-label text-label-md text-light-caution dark:text-dark-caution">Morning · 6 AM – 11 AM</span>
+                </div>
+                <h3 data-design-text-token="title-lg" class="font-title text-title-lg">Use N95 masks for school commute</h3>
+                <p data-design-text-token="body-md" class="font-body text-body-md text-light-on-surface-variant dark:text-dark-on-surface-variant">Keep car windows closed with recirculate on.</p>
+              </div>
+              <span class="material-symbols-outlined text-light-primary dark:text-dark-primary shrink-0 mt-gutter-xs" aria-hidden="true">chevron_right</span>
+            </a>
+
+            <a href="../recommendation-detail/RecommendationDetail.html" data-component-id="card-interactive" data-component-type="card" data-component-variant="interactive" class="p-gutter-lg rounded-lg bg-light-surface-container-lowest dark:bg-dark-surface-container-low border border-light-outline-variant dark:border-dark-outline-variant flex items-start justify-between gap-gutter-md hover:bg-light-surface-container-low dark:hover:bg-dark-surface-container focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-light-primary dark:focus-visible:ring-dark-primary">
+              <div class="flex flex-col gap-gutter-xs">
+                <div class="flex items-center gap-gutter-sm">
+                  <span class="material-symbols-outlined text-light-good dark:text-dark-good" aria-hidden="true">sunny</span>
+                  <span data-design-text-token="label-md" class="font-label text-label-md text-light-good dark:text-dark-good">Afternoon · 1 PM – 3 PM</span>
+                </div>
+                <h3 data-design-text-token="title-lg" class="font-title text-title-lg">Air out rooms for 20 minutes</h3>
+                <p data-design-text-token="body-md" class="font-body text-body-md text-light-on-surface-variant dark:text-dark-on-surface-variant">Lowest PM2.5 window of the day—safe for brief outdoor play.</p>
+              </div>
+              <span class="material-symbols-outlined text-light-primary dark:text-dark-primary shrink-0 mt-gutter-xs" aria-hidden="true">chevron_right</span>
+            </a>
+
+            <a href="../recommendation-detail/RecommendationDetail.html" data-component-id="card-interactive" data-component-type="card" data-component-variant="interactive" class="p-gutter-lg rounded-lg bg-light-surface-container-lowest dark:bg-dark-surface-container-low border border-light-outline-variant dark:border-dark-outline-variant flex items-start justify-between gap-gutter-md hover:bg-light-surface-container-low dark:hover:bg-dark-surface-container focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-light-primary dark:focus-visible:ring-dark-primary">
+              <div class="flex flex-col gap-gutter-xs">
+                <div class="flex items-center gap-gutter-sm">
+                  <span class="material-symbols-outlined text-light-error dark:text-dark-error" aria-hidden="true">error</span>
+                  <span data-design-text-token="label-md" class="font-label text-label-md text-light-error dark:text-dark-error">Evening · 6 PM onwards · Very Poor</span>
+                </div>
+                <h3 data-design-text-token="title-lg" class="font-title text-title-lg">Run purifier in bedroom before sleep</h3>
+                <p data-design-text-token="body-md" class="font-body text-body-md text-light-on-surface-variant dark:text-dark-on-surface-variant">Approx. 30% less indoor PM2.5 overnight.</p>
+              </div>
+              <span class="material-symbols-outlined text-light-primary dark:text-dark-primary shrink-0 mt-gutter-xs" aria-hidden="true">chevron_right</span>
+            </a>
+          </div>
+        </section>
+      </div>
+
+      <!-- STATE: LOADING -->
+      <div id="state-loading" class="hidden flex-col gap-gutter-lg" aria-busy="true" aria-label="Loading air quality data">
+        <div class="p-gutter-xl rounded-lg bg-light-surface-container-low dark:bg-dark-surface-container-low border border-light-outline-variant dark:border-dark-outline-variant flex flex-col gap-gutter-md">
+          <div class="h-4 w-40 rounded-sm bg-light-surface-container-highest dark:bg-dark-surface-container-highest"></div>
+          <div class="h-12 w-32 rounded-sm bg-light-surface-container-highest dark:bg-dark-surface-container-highest"></div>
+          <div class="h-4 w-full rounded-sm bg-light-surface-container-highest dark:bg-dark-surface-container-highest"></div>
+        </div>
+        <p data-design-text-token="body-md" class="font-body text-body-md text-light-on-surface-variant dark:text-dark-on-surface-variant text-center">Fetching latest readings from Rohini Sector 13 station…</p>
+      </div>
+
+      <!-- STATE: ERROR -->
+      <div id="state-error" class="hidden flex-col gap-gutter-md p-gutter-xl rounded-lg bg-light-error-container dark:bg-dark-error-container text-light-on-error-container dark:text-dark-on-error-container border border-light-outline-variant dark:border-dark-outline-variant" role="alert">
+        <div class="flex items-center gap-gutter-sm">
+          <span class="material-symbols-outlined text-title-lg" aria-hidden="true">error</span>
+          <h2 data-design-text-token="title-lg" class="font-title text-title-lg">Could not load AQI readings</h2>
+        </div>
+        <p data-design-text-token="body-md" class="font-body text-body-md">We had trouble reaching the air quality server. Check your internet connection and try again.</p>
+        <button type="button" onclick="setViewState(&#39;normal&#39;)" class="self-start min-h-12 px-gutter-xl rounded-full bg-light-primary dark:bg-dark-primary text-light-on-primary dark:text-dark-on-primary font-label text-label-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-light-primary dark:focus-visible:ring-dark-primary">
+          <span data-design-text-token="label-lg">Retry connection</span>
+        </button>
+      </div>
+
+      <!-- STATE: AQI DATA UNAVAILABLE -->
+      <div id="state-unavailable" class="hidden flex-col gap-gutter-md p-gutter-xl rounded-lg bg-light-secondary-container dark:bg-dark-secondary-container text-light-on-secondary-container dark:text-dark-on-secondary-container border border-light-outline-variant dark:border-dark-outline-variant" role="status">
+        <div class="flex items-center gap-gutter-sm">
+          <span class="material-symbols-outlined text-title-lg" aria-hidden="true">cloud_off</span>
+          <h2 data-design-text-token="title-lg" class="font-title text-title-lg">AQI data unavailable</h2>
+        </div>
+        <p data-design-text-token="body-md" class="font-body text-body-md">The Rohini Sector 13 sensor is offline for maintenance. While live numbers are unavailable, you can still use our offline indoor air hacks.</p>
+        <div class="flex flex-wrap gap-gutter-sm">
+          <a href="../indoor-air-hacks/IndoorAirHacks.html" class="inline-flex items-center justify-center min-h-12 px-gutter-xl rounded-full bg-light-primary dark:bg-dark-primary text-light-on-primary dark:text-dark-on-primary font-label text-label-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-light-primary dark:focus-visible:ring-dark-primary">
+            <span data-design-text-token="label-lg">View offline indoor hacks</span>
+          </a>
+          <button type="button" onclick="setViewState(&#39;normal&#39;)" class="inline-flex items-center justify-center min-h-12 px-gutter-xl rounded-full bg-light-surface-container-lowest dark:bg-dark-surface-container-low text-light-on-surface dark:text-dark-on-surface border border-light-outline-variant dark:border-dark-outline-variant font-label text-label-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-light-primary dark:focus-visible:ring-dark-primary">
+            <span data-design-text-token="label-lg">Check again</span>
+          </button>
+        </div>
+      </div>
+
+    </main>
+
+    <!-- Persistent Health Disclaimer + Shared Bottom Navigation -->
+    <div class="fixed bottom-0 inset-x-0 z-30 bg-light-surface dark:bg-dark-surface border-t border-light-outline-variant dark:border-dark-outline-variant">
+      <div class="max-w-3xl mx-auto">
+        <p data-design-text-token="label-sm" class="px-page-margin py-gutter-xs font-label text-label-sm text-light-on-surface-variant dark:text-dark-on-surface-variant text-center border-b border-light-outline-variant dark:border-dark-outline-variant">
+          General air-quality guidance only—not medical advice. Consult a doctor for breathing symptoms.
+        </p>
+        <nav aria-label="Primary navigation" class="grid grid-cols-5">
+          <a href="../dashboard/Dashboard.html" aria-current="page" class="min-h-12 py-gutter-sm flex flex-col items-center justify-center gap-gutter-xs text-light-primary dark:text-dark-primary font-label text-label-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-light-primary dark:focus-visible:ring-dark-primary">
+            <span class="material-symbols-outlined text-title-lg" style="font-variation-settings: &#39;FILL&#39; 1;" aria-hidden="true">home</span>
+            <span data-design-text-token="label-sm">Today</span>
+          </a>
+          <a href="../indoor-air-hacks/IndoorAirHacks.html" class="min-h-12 py-gutter-sm flex flex-col items-center justify-center gap-gutter-xs text-light-on-surface-variant dark:text-dark-on-surface-variant font-label text-label-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-light-primary dark:focus-visible:ring-dark-primary">
+            <span class="material-symbols-outlined text-title-lg" aria-hidden="true">tips_and_updates</span>
+            <span data-design-text-token="label-sm">Hacks</span>
+          </a>
+          <a href="../chat-assistant/ChatAssistant.html" class="min-h-12 py-gutter-sm flex flex-col items-center justify-center gap-gutter-xs text-light-on-surface-variant dark:text-dark-on-surface-variant font-label text-label-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-light-primary dark:focus-visible:ring-dark-primary">
+            <span class="material-symbols-outlined text-title-lg" aria-hidden="true">chat_bubble</span>
+            <span data-design-text-token="label-sm">Ask</span>
+          </a>
+          <a href="../community-checklist/CommunityChecklist.html" class="min-h-12 py-gutter-sm flex flex-col items-center justify-center gap-gutter-xs text-light-on-surface-variant dark:text-dark-on-surface-variant font-label text-label-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-light-primary dark:focus-visible:ring-dark-primary">
+            <span class="material-symbols-outlined text-title-lg" aria-hidden="true">groups</span>
+            <span data-design-text-token="label-sm">Community</span>
+          </a>
+          <a href="../settings/Settings.html" class="min-h-12 py-gutter-sm flex flex-col items-center justify-center gap-gutter-xs text-light-on-surface-variant dark:text-dark-on-surface-variant font-label text-label-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-light-primary dark:focus-visible:ring-dark-primary">
+            <span class="material-symbols-outlined text-title-lg" aria-hidden="true">settings</span>
+            <span data-design-text-token="label-sm">Settings</span>
+          </a>
+        </nav>
+      </div>
+    </div>
+
+  </div>
+
+  <script>
+    (function () {
+      const root = document.documentElement;
+      const themeBtn = document.getElementById('theme-toggle');
+      try {
+        if (localStorage.getItem('cb_theme') === 'dark') root.classList.add('dark');
+      } catch (e) {}
+      themeBtn.addEventListener('click', () => {
+        root.classList.toggle('dark');
+        try { localStorage.setItem('cb_theme', root.classList.contains('dark') ? 'dark' : 'light'); } catch (e) {}
+      });
+
+      window.setViewState = function (state) {
+        ['normal', 'loading', 'error', 'unavailable'].forEach((s) => {
+          const el = document.getElementById('state-' + s);
+          const btn = document.querySelector('[data-view-state="' + s + '"]');
+          if (s === state) {
+            el.classList.remove('hidden');
+            el.classList.add('flex');
+            btn.setAttribute('aria-pressed', 'true');
+            btn.className = 'state-btn min-h-10 px-gutter-md rounded-full bg-light-primary dark:bg-dark-primary text-light-on-primary dark:text-dark-on-primary font-label text-label-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-light-primary dark:focus-visible:ring-dark-primary';
+          } else {
+            el.classList.add('hidden');
+            el.classList.remove('flex');
+            btn.setAttribute('aria-pressed', 'false');
+            btn.className = 'state-btn min-h-10 px-gutter-md rounded-full bg-light-surface-container-low dark:bg-dark-surface-container-low border border-light-outline-variant dark:border-dark-outline-variant font-label text-label-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-light-primary dark:focus-visible:ring-dark-primary';
+          }
+        });
+      };
+
+      document.querySelectorAll('[data-view-state]').forEach((btn) => {
+        btn.addEventListener('click', () => window.setViewState(btn.dataset.viewState));
+      });
+    })();
+  </script>
+
+
+</body></html>
+
+<!-- Recommendation Detail — CleanBreath -->
+<!DOCTYPE html><html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Recommendation Detail — CleanBreath</title>
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <script id="tailwind-config">/** @type {import('tailwindcss').Config} */
+globalThis.tailwind = globalThis.tailwind || {};
+globalThis.tailwind.config = {
+  darkMode: 'class',
+  theme: {
+    extend: {
+      colors: {
+        'light-primary': '#004345',
+        'light-on-primary': '#FFFFFF',
+        'light-primary-container': '#0F5C5E',
+        'light-on-primary-container': '#F1FFFF',
+        'light-secondary': '#4B6363',
+        'light-on-secondary': '#FFFFFF',
+        'light-secondary-container': '#CBE5E5',
+        'light-on-secondary-container': '#1D3435',
+        'light-tertiary': '#5D3013',
+        'light-on-tertiary': '#FFFFFF',
+        'light-tertiary-container': '#794628',
+        'light-on-tertiary-container': '#FFEDE5',
+        'light-caution': '#B45309',
+        'light-on-caution': '#FFFFFF',
+        'light-caution-container': '#FEF3C7',
+        'light-on-caution-container': '#78350F',
+        'light-good': '#0F766E',
+        'light-on-good': '#FFFFFF',
+        'light-good-container': '#CCFBF1',
+        'light-on-good-container': '#134E4A',
+        'light-error': '#BA1A1A',
+        'light-on-error': '#FFFFFF',
+        'light-error-container': '#FFDAD6',
+        'light-on-error-container': '#93000A',
+        'light-background': '#F8FAF9',
+        'light-on-background': '#191C1C',
+        'light-surface': '#F8FAF9',
+        'light-surface-dim': '#D8DADA',
+        'light-surface-bright': '#F8FAF9',
+        'light-surface-container-lowest': '#FFFFFF',
+        'light-surface-container-low': '#F2F4F3',
+        'light-surface-container': '#ECEEEE',
+        'light-surface-container-high': '#E6E9E8',
+        'light-surface-container-highest': '#E1E3E2',
+        'light-on-surface': '#191C1C',
+        'light-surface-variant': '#DBE4E4',
+        'light-on-surface-variant': '#3F4949',
+        'light-outline': '#576060',
+        'light-outline-variant': '#BFC8C8',
+        'light-inverse-surface': '#2E3131',
+        'light-inverse-on-surface': '#EFF1F0',
+        'light-inverse-primary': '#90D2D4',
+        'light-shadow': '#000000',
+        'light-scrim': '#000000',
+        'dark-primary': '#90D2D4',
+        'dark-on-primary': '#003738',
+        'dark-primary-container': '#0F5C5E',
+        'dark-on-primary-container': '#F1FFFF',
+        'dark-secondary': '#B2CBCC',
+        'dark-on-secondary': '#1D3435',
+        'dark-secondary-container': '#334B4B',
+        'dark-on-secondary-container': '#DCF6F6',
+        'dark-tertiary': '#FDB791',
+        'dark-on-tertiary': '#4F2509',
+        'dark-tertiary-container': '#794628',
+        'dark-on-tertiary-container': '#FFEDE5',
+        'dark-caution': '#FBBF24',
+        'dark-on-caution': '#451A03',
+        'dark-caution-container': '#78350F',
+        'dark-on-caution-container': '#FEF3C7',
+        'dark-good': '#5EEAD4',
+        'dark-on-good': '#042F2E',
+        'dark-good-container': '#115E59',
+        'dark-on-good-container': '#CCFBF1',
+        'dark-error': '#FFB4AB',
+        'dark-on-error': '#690005',
+        'dark-error-container': '#93000A',
+        'dark-on-error-container': '#FFDAD6',
+        'dark-background': '#111414',
+        'dark-on-background': '#E1E3E2',
+        'dark-surface': '#111414',
+        'dark-surface-dim': '#111414',
+        'dark-surface-bright': '#363A3A',
+        'dark-surface-container-lowest': '#0B0F0F',
+        'dark-surface-container-low': '#191C1C',
+        'dark-surface-container': '#1D2020',
+        'dark-surface-container-high': '#272B2B',
+        'dark-surface-container-highest': '#323535',
+        'dark-on-surface': '#E1E3E2',
+        'dark-surface-variant': '#3F4949',
+        'dark-on-surface-variant': '#BFC8C8',
+        'dark-outline': '#899392',
+        'dark-outline-variant': '#3F4949',
+        'dark-inverse-surface': '#E1E3E2',
+        'dark-inverse-on-surface': '#2E3131',
+        'dark-inverse-primary': '#21686A',
+        'dark-shadow': '#000000',
+        'dark-scrim': '#000000',
+      },
+      borderRadius: {
+        'sm': '6px',
+        'DEFAULT': '12px',
+        'md': '16px',
+        'lg': '20px',
+        'xl': '28px',
+        'full': '9999px',
+      },
+      spacing: {
+        'gutter-xs': '4px',
+        'gutter-sm': '8px',
+        'gutter-md': '12px',
+        'gutter-lg': '16px',
+        'gutter-xl': '24px',
+        'section': '32px',
+        'page-margin': '16px',
+      },
+      fontFamily: {
+        'display': ['"Atkinson Hyperlegible"', 'sans-serif'],
+        'headline': ['"Atkinson Hyperlegible"', 'sans-serif'],
+        'title': ['"Atkinson Hyperlegible"', 'sans-serif'],
+        'body': ['"Hedvig Letters Sans"', 'sans-serif'],
+        'label': ['"Atkinson Hyperlegible"', 'sans-serif'],
+        'mono': ['"Source Code Pro"', 'monospace'],
+      },
+      fontSize: {
+        'display-lg': ['56px', { lineHeight: '62px', letterSpacing: '-0.5px', fontWeight: '700' }],
+        'display-lg-mobile': ['32px', { lineHeight: '38px', letterSpacing: '-0.25px', fontWeight: '700' }],
+        'headline-lg': ['36px', { lineHeight: '44px', letterSpacing: '-0.25px', fontWeight: '700' }],
+        'headline-lg-mobile': ['26px', { lineHeight: '32px', letterSpacing: '-0.2px', fontWeight: '700' }],
+        'headline-md': ['22px', { lineHeight: '28px', letterSpacing: '0px', fontWeight: '700' }],
+        'title-lg': ['20px', { lineHeight: '26px', letterSpacing: '0px', fontWeight: '700' }],
+        'title-md': ['18px', { lineHeight: '24px', letterSpacing: '0px', fontWeight: '700' }],
+        'body-lg': ['18px', { lineHeight: '28px', letterSpacing: '0px', fontWeight: '400' }],
+        'body-md': ['16px', { lineHeight: '24px', letterSpacing: '0px', fontWeight: '400' }],
+        'label-lg': ['16px', { lineHeight: '22px', letterSpacing: '0.1px', fontWeight: '700' }],
+        'label-md': ['14px', { lineHeight: '20px', letterSpacing: '0.15px', fontWeight: '700' }],
+        'label-sm': ['12px', { lineHeight: '16px', letterSpacing: '0.2px', fontWeight: '700' }],
+        'mono-md': ['15px', { lineHeight: '20px', letterSpacing: '0px', fontWeight: '600' }],
+      },
+      transitionDuration: {
+        'state-change': '120ms',
+        'surface-enter': '240ms',
+        'surface-exit': '160ms',
+      },
+      transitionDelay: {
+        'state-change': '0ms',
+        'surface-enter': '0ms',
+        'surface-exit': '0ms',
+      },
+      transitionTimingFunction: {
+        'state-change': 'ease-out',
+        'surface-enter': 'cubic-bezier(0.2, 0, 0, 1)',
+        'surface-exit': 'cubic-bezier(0.3, 0, 1, 1)',
+      },
+    },
+  },
+};
+if (typeof module !== 'undefined') module.exports = globalThis.tailwind.config;
+</script>
+  <link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&amp;family=Hedvig+Letters+Sans&amp;family=Source+Code+Pro:wght@600&amp;display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=block" rel="stylesheet">
+  <style>.material-symbols-outlined { display: inline-block; width: 1em; height: 1em; line-height: 1 !important; box-sizing: content-box; overflow: hidden; white-space: nowrap; direction: ltr; vertical-align: middle; }</style>
+</head>
+<body class="bg-light-surface dark:bg-dark-surface text-light-on-surface dark:text-dark-on-surface font-body text-body-md antialiased">
+  <div class="min-h-[884px] flex flex-col max-w-3xl mx-auto" data-stitch-vh="min-h-[884px]===min-h-screen">
+
+    <!-- Contextual Header -->
+    <header class="sticky top-0 z-20 bg-light-surface dark:bg-dark-surface border-b border-light-outline-variant dark:border-dark-outline-variant px-page-margin py-gutter-md flex items-center justify-between gap-gutter-md">
+      <div class="flex items-center gap-gutter-sm">
+        <a href="../dashboard/Dashboard.html" aria-label="Back to Dashboard" class="inline-flex items-center justify-center w-12 h-12 rounded-full bg-light-surface-container-low dark:bg-dark-surface-container-low text-light-on-surface dark:text-dark-on-surface border border-light-outline-variant dark:border-dark-outline-variant focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-light-primary dark:focus-visible:ring-dark-primary">
+          <span class="material-symbols-outlined text-title-lg" aria-hidden="true">arrow_back</span>
+        </a>
+        <h1 data-design-text-token="title-lg" class="font-headline text-title-lg text-light-on-surface dark:text-dark-on-surface">Recommendation detail</h1>
+      </div>
+      <button id="theme-toggle" data-component-id="button-icon" data-component-type="button" data-component-variant="icon" type="button" aria-label="Toggle color theme" class="inline-flex items-center justify-center w-12 h-12 rounded-full bg-light-surface-container-low dark:bg-dark-surface-container-low text-light-on-surface dark:text-dark-on-surface border border-light-outline-variant dark:border-dark-outline-variant focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-light-primary dark:focus-visible:ring-dark-primary">
+        <span class="material-symbols-outlined text-title-lg" aria-hidden="true">dark_mode</span>
+      </button>
+    </header>
+
+    <main class="flex-1 px-page-margin py-gutter-lg pb-32 flex flex-col gap-gutter-xl">
+
+      <!-- Action Hero -->
+      <section class="p-gutter-xl rounded-lg bg-light-surface-container-lowest dark:bg-dark-surface-container-low border border-light-outline-variant dark:border-dark-outline-variant flex flex-col gap-gutter-md">
+        <div class="flex items-center gap-gutter-sm">
+          <span class="inline-flex items-center gap-gutter-xs px-gutter-md py-gutter-xs rounded-full bg-light-secondary-container dark:bg-dark-secondary-container text-light-on-secondary-container dark:text-dark-on-secondary-container font-label text-label-sm">
+            <span class="material-symbols-outlined text-label-md" aria-hidden="true">bedtime</span>
+            <span data-design-text-token="label-sm">Tonight · 9:00 PM – 6:00 AM</span>
+          </span>
+        </div>
+        <h2 data-design-text-token="headline-lg-mobile" class="font-headline text-headline-lg-mobile md:text-headline-lg text-balance">Run purifier in bedroom before sleep</h2>
+        <p data-design-text-token="body-md" class="font-body text-body-md text-light-on-surface-variant dark:text-dark-on-surface-variant text-pretty">
+          Close bedroom windows by 6 PM, run your HEPA purifier on medium 30 minutes before bedtime, and switch to sleep mode overnight.
+        </p>
+        <button id="done-btn" type="button" aria-pressed="false" class="inline-flex items-center justify-center gap-gutter-sm min-h-12 px-gutter-xl rounded-full bg-light-primary dark:bg-dark-primary text-light-on-primary dark:text-dark-on-primary font-label text-label-lg self-start focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-light-primary dark:focus-visible:ring-dark-primary">
+          <span class="material-symbols-outlined text-title-md" aria-hidden="true">check_circle</span>
+          <span id="done-label" data-design-text-token="label-lg">Mark as done tonight</span>
+        </button>
+      </section>
+
+      <!-- Impact Meter -->
+      <section aria-labelledby="impact-heading" class="p-gutter-xl rounded-lg bg-light-good-container dark:bg-dark-good-container text-light-on-good-container dark:text-dark-on-good-container border border-light-outline-variant dark:border-dark-outline-variant flex flex-col gap-gutter-md">
+        <div class="flex items-center justify-between gap-gutter-md">
+          <h3 id="impact-heading" data-design-text-token="title-md" class="font-headline text-title-md">Estimated impact</h3>
+          <span data-design-text-token="label-md" class="px-gutter-md py-gutter-xs rounded-full bg-light-surface-container-lowest dark:bg-dark-surface-container-low text-light-on-surface dark:text-dark-on-surface font-label text-label-md">High confidence</span>
+        </div>
+        <p data-design-text-token="title-lg" class="font-headline text-title-lg tabular-nums">approx. 30% less indoor PM2.5</p>
+        <div class="w-full h-3 rounded-full bg-light-surface-container-lowest dark:bg-dark-surface-container-low overflow-hidden" role="progressbar" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100" aria-label="Approximately 30 percent indoor PM2.5 reduction">
+          <div class="h-full w-1/3 rounded-full bg-light-good dark:bg-dark-good"></div>
+        </div>
+        <p data-design-text-token="label-md" class="font-label text-label-md">Based on closed-door bedroom studies during North Indian winter smog.</p>
+      </section>
+
+      <!-- Why It Helps -->
+      <section aria-labelledby="why-heading" class="flex flex-col gap-gutter-sm">
+        <h3 id="why-heading" data-design-text-token="title-md" class="font-headline text-title-md">Why it helps</h3>
+        <div class="p-gutter-lg rounded-lg bg-light-surface-container-lowest dark:bg-dark-surface-container-low border border-light-outline-variant dark:border-dark-outline-variant flex flex-col gap-gutter-sm">
+          <p data-design-text-token="body-md" class="font-body text-body-md text-pretty">
+            Evening temperatures drop quickly after sunset, trapping vehicle and biomass smoke close to the ground. Kids and people with asthma spend 8–10 continuous hours in the bedroom, so lowering PM2.5 while sleeping gives lungs overnight recovery time.
+          </p>
+        </div>
+      </section>
+
+      <!-- Attributes Grid: Confidence, Cost, Difficulty -->
+      <section aria-label="Action details" class="grid grid-cols-1 sm:grid-cols-3 gap-gutter-md">
+        <div class="p-gutter-lg rounded-md bg-light-surface-container-lowest dark:bg-dark-surface-container-low border border-light-outline-variant dark:border-dark-outline-variant flex items-center gap-gutter-md">
+          <span class="material-symbols-outlined text-title-lg text-light-primary dark:text-dark-primary" aria-hidden="true">verified</span>
+          <div>
+            <p data-design-text-token="label-sm" class="font-label text-label-sm text-light-on-surface-variant dark:text-dark-on-surface-variant">Confidence</p>
+            <p data-design-text-token="title-md" class="font-title text-title-md">High (Studies)</p>
+          </div>
+        </div>
+        <div class="p-gutter-lg rounded-md bg-light-surface-container-lowest dark:bg-dark-surface-container-low border border-light-outline-variant dark:border-dark-outline-variant flex items-center gap-gutter-md">
+          <span class="material-symbols-outlined text-title-lg text-light-primary dark:text-dark-primary" aria-hidden="true">payments</span>
+          <div>
+            <p data-design-text-token="label-sm" class="font-label text-label-sm text-light-on-surface-variant dark:text-dark-on-surface-variant">Cost</p>
+            <p data-design-text-token="title-md" class="font-title text-title-md">Low (existing unit)</p>
+          </div>
+        </div>
+        <div class="p-gutter-lg rounded-md bg-light-surface-container-lowest dark:bg-dark-surface-container-low border border-light-outline-variant dark:border-dark-outline-variant flex items-center gap-gutter-md">
+          <span class="material-symbols-outlined text-title-lg text-light-primary dark:text-dark-primary" aria-hidden="true">bolt</span>
+          <div>
+            <p data-design-text-token="label-sm" class="font-label text-label-sm text-light-on-surface-variant dark:text-dark-on-surface-variant">Difficulty</p>
+            <p data-design-text-token="title-md" class="font-title text-title-md">Easy · 2 mins</p>
+          </div>
+        </div>
+      </section>
+
+    </main>
+
+    <!-- Persistent Health Disclaimer + Shared Bottom Navigation -->
+    <div class="fixed bottom-0 inset-x-0 z-30 bg-light-surface dark:bg-dark-surface border-t border-light-outline-variant dark:border-dark-outline-variant">
+      <div class="max-w-3xl mx-auto">
+        <p data-design-text-token="label-sm" class="px-page-margin py-gutter-xs font-label text-label-sm text-light-on-surface-variant dark:text-dark-on-surface-variant text-center border-b border-light-outline-variant dark:border-dark-outline-variant">
+          General air-quality guidance only—not medical advice. Consult a doctor for breathing symptoms.
+        </p>
+        <nav aria-label="Primary navigation" class="grid grid-cols-5">
+          <a href="../dashboard/Dashboard.html" aria-current="page" class="min-h-12 py-gutter-sm flex flex-col items-center justify-center gap-gutter-xs text-light-primary dark:text-dark-primary font-label text-label-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-light-primary dark:focus-visible:ring-dark-primary">
+            <span class="material-symbols-outlined text-title-lg" style="font-variation-settings: &#39;FILL&#39; 1;" aria-hidden="true">home</span>
+            <span data-design-text-token="label-sm">Today</span>
+          </a>
+          <a href="../indoor-air-hacks/IndoorAirHacks.html" class="min-h-12 py-gutter-sm flex flex-col items-center justify-center gap-gutter-xs text-light-on-surface-variant dark:text-dark-on-surface-variant font-label text-label-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-light-primary dark:focus-visible:ring-dark-primary">
+            <span class="material-symbols-outlined text-title-lg" aria-hidden="true">tips_and_updates</span>
+            <span data-design-text-token="label-sm">Hacks</span>
+          </a>
+          <a href="../chat-assistant/ChatAssistant.html" class="min-h-12 py-gutter-sm flex flex-col items-center justify-center gap-gutter-xs text-light-on-surface-variant dark:text-dark-on-surface-variant font-label text-label-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-light-primary dark:focus-visible:ring-dark-primary">
+            <span class="material-symbols-outlined text-title-lg" aria-hidden="true">chat_bubble</span>
+            <span data-design-text-token="label-sm">Ask</span>
+          </a>
+          <a href="../community-checklist/CommunityChecklist.html" class="min-h-12 py-gutter-sm flex flex-col items-center justify-center gap-gutter-xs text-light-on-surface-variant dark:text-dark-on-surface-variant font-label text-label-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-light-primary dark:focus-visible:ring-dark-primary">
+            <span class="material-symbols-outlined text-title-lg" aria-hidden="true">groups</span>
+            <span data-design-text-token="label-sm">Community</span>
+          </a>
+          <a href="../settings/Settings.html" class="min-h-12 py-gutter-sm flex flex-col items-center justify-center gap-gutter-xs text-light-on-surface-variant dark:text-dark-on-surface-variant font-label text-label-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-light-primary dark:focus-visible:ring-dark-primary">
+            <span class="material-symbols-outlined text-title-lg" aria-hidden="true">settings</span>
+            <span data-design-text-token="label-sm">Settings</span>
+          </a>
+        </nav>
+      </div>
+    </div>
+
+  </div>
+
+  <script>
+    (function () {
+      const root = document.documentElement;
+      const themeBtn = document.getElementById('theme-toggle');
+      try {
+        if (localStorage.getItem('cb_theme') === 'dark') root.classList.add('dark');
+      } catch (e) {}
+      themeBtn.addEventListener('click', () => {
+        root.classList.toggle('dark');
+        try { localStorage.setItem('cb_theme', root.classList.contains('dark') ? 'dark' : 'light'); } catch (e) {}
+      });
+
+      const doneBtn = document.getElementById('done-btn');
+      const doneLabel = document.getElementById('done-label');
+      doneBtn.addEventListener('click', () => {
+        const pressed = doneBtn.getAttribute('aria-pressed') === 'true';
+        doneBtn.setAttribute('aria-pressed', String(!pressed));
+        doneLabel.textContent = !pressed ? 'Done for tonight' : 'Mark as done tonight';
+      });
+    })();
+  </script>
+
+
+</body></html>
+
+<!-- Indoor Air Hacks — CleanBreath -->
+<!DOCTYPE html><html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Indoor Air Hacks — CleanBreath</title>
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <script id="tailwind-config">/** @type {import('tailwindcss').Config} */
+globalThis.tailwind = globalThis.tailwind || {};
+globalThis.tailwind.config = {
+  darkMode: 'class',
+  theme: {
+    extend: {
+      colors: {
+        'light-primary': '#004345',
+        'light-on-primary': '#FFFFFF',
+        'light-primary-container': '#0F5C5E',
+        'light-on-primary-container': '#F1FFFF',
+        'light-secondary': '#4B6363',
+        'light-on-secondary': '#FFFFFF',
+        'light-secondary-container': '#CBE5E5',
+        'light-on-secondary-container': '#1D3435',
+        'light-tertiary': '#5D3013',
+        'light-on-tertiary': '#FFFFFF',
+        'light-tertiary-container': '#794628',
+        'light-on-tertiary-container': '#FFEDE5',
+        'light-caution': '#B45309',
+        'light-on-caution': '#FFFFFF',
+        'light-caution-container': '#FEF3C7',
+        'light-on-caution-container': '#78350F',
+        'light-good': '#0F766E',
+        'light-on-good': '#FFFFFF',
+        'light-good-container': '#CCFBF1',
+        'light-on-good-container': '#134E4A',
+        'light-error': '#BA1A1A',
+        'light-on-error': '#FFFFFF',
+        'light-error-container': '#FFDAD6',
+        'light-on-error-container': '#93000A',
+        'light-background': '#F8FAF9',
+        'light-on-background': '#191C1C',
+        'light-surface': '#F8FAF9',
+        'light-surface-dim': '#D8DADA',
+        'light-surface-bright': '#F8FAF9',
+        'light-surface-container-lowest': '#FFFFFF',
+        'light-surface-container-low': '#F2F4F3',
+        'light-surface-container': '#ECEEEE',
+        'light-surface-container-high': '#E6E9E8',
+        'light-surface-container-highest': '#E1E3E2',
+        'light-on-surface': '#191C1C',
+        'light-surface-variant': '#DBE4E4',
+        'light-on-surface-variant': '#3F4949',
+        'light-outline': '#576060',
+        'light-outline-variant': '#BFC8C8',
+        'light-inverse-surface': '#2E3131',
+        'light-inverse-on-surface': '#EFF1F0',
+        'light-inverse-primary': '#90D2D4',
+        'light-shadow': '#000000',
+        'light-scrim': '#000000',
+        'dark-primary': '#90D2D4',
+        'dark-on-primary': '#003738',
+        'dark-primary-container': '#0F5C5E',
+        'dark-on-primary-container': '#F1FFFF',
+        'dark-secondary': '#B2CBCC',
+        'dark-on-secondary': '#1D3435',
+        'dark-secondary-container': '#334B4B',
+        'dark-on-secondary-container': '#DCF6F6',
+        'dark-tertiary': '#FDB791',
+        'dark-on-tertiary': '#4F2509',
+        'dark-tertiary-container': '#794628',
+        'dark-on-tertiary-container': '#FFEDE5',
+        'dark-caution': '#FBBF24',
+        'dark-on-caution': '#451A03',
+        'dark-caution-container': '#78350F',
+        'dark-on-caution-container': '#FEF3C7',
+        'dark-good': '#5EEAD4',
+        'dark-on-good': '#042F2E',
+        'dark-good-container': '#115E59',
+        'dark-on-good-container': '#CCFBF1',
+        'dark-error': '#FFB4AB',
+        'dark-on-error': '#690005',
+        'dark-error-container': '#93000A',
+        'dark-on-error-container': '#FFDAD6',
+        'dark-background': '#111414',
+        'dark-on-background': '#E1E3E2',
+        'dark-surface': '#111414',
+        'dark-surface-dim': '#111414',
+        'dark-surface-bright': '#363A3A',
+        'dark-surface-container-lowest': '#0B0F0F',
+        'dark-surface-container-low': '#191C1C',
+        'dark-surface-container': '#1D2020',
+        'dark-surface-container-high': '#272B2B',
+        'dark-surface-container-highest': '#323535',
+        'dark-on-surface': '#E1E3E2',
+        'dark-surface-variant': '#3F4949',
+        'dark-on-surface-variant': '#BFC8C8',
+        'dark-outline': '#899392',
+        'dark-outline-variant': '#3F4949',
+        'dark-inverse-surface': '#E1E3E2',
+        'dark-inverse-on-surface': '#2E3131',
+        'dark-inverse-primary': '#21686A',
+        'dark-shadow': '#000000',
+        'dark-scrim': '#000000',
+      },
+      borderRadius: {
+        'sm': '6px',
+        'DEFAULT': '12px',
+        'md': '16px',
+        'lg': '20px',
+        'xl': '28px',
+        'full': '9999px',
+      },
+      spacing: {
+        'gutter-xs': '4px',
+        'gutter-sm': '8px',
+        'gutter-md': '12px',
+        'gutter-lg': '16px',
+        'gutter-xl': '24px',
+        'section': '32px',
+        'page-margin': '16px',
+      },
+      fontFamily: {
+        'display': ['"Atkinson Hyperlegible"', 'sans-serif'],
+        'headline': ['"Atkinson Hyperlegible"', 'sans-serif'],
+        'title': ['"Atkinson Hyperlegible"', 'sans-serif'],
+        'body': ['"Hedvig Letters Sans"', 'sans-serif'],
+        'label': ['"Atkinson Hyperlegible"', 'sans-serif'],
+        'mono': ['"Source Code Pro"', 'monospace'],
+      },
+      fontSize: {
+        'display-lg': ['56px', { lineHeight: '62px', letterSpacing: '-0.5px', fontWeight: '700' }],
+        'display-lg-mobile': ['32px', { lineHeight: '38px', letterSpacing: '-0.25px', fontWeight: '700' }],
+        'headline-lg': ['36px', { lineHeight: '44px', letterSpacing: '-0.25px', fontWeight: '700' }],
+        'headline-lg-mobile': ['26px', { lineHeight: '32px', letterSpacing: '-0.2px', fontWeight: '700' }],
+        'headline-md': ['22px', { lineHeight: '28px', letterSpacing: '0px', fontWeight: '700' }],
+        'title-lg': ['20px', { lineHeight: '26px', letterSpacing: '0px', fontWeight: '700' }],
+        'title-md': ['18px', { lineHeight: '24px', letterSpacing: '0px', fontWeight: '700' }],
+        'body-lg': ['18px', { lineHeight: '28px', letterSpacing: '0px', fontWeight: '400' }],
+        'body-md': ['16px', { lineHeight: '24px', letterSpacing: '0px', fontWeight: '400' }],
+        'label-lg': ['16px', { lineHeight: '22px', letterSpacing: '0.1px', fontWeight: '700' }],
+        'label-md': ['14px', { lineHeight: '20px', letterSpacing: '0.15px', fontWeight: '700' }],
+        'label-sm': ['12px', { lineHeight: '16px', letterSpacing: '0.2px', fontWeight: '700' }],
+        'mono-md': ['15px', { lineHeight: '20px', letterSpacing: '0px', fontWeight: '600' }],
+      },
+      transitionDuration: {
+        'state-change': '120ms',
+        'surface-enter': '240ms',
+        'surface-exit': '160ms',
+      },
+      transitionDelay: {
+        'state-change': '0ms',
+        'surface-enter': '0ms',
+        'surface-exit': '0ms',
+      },
+      transitionTimingFunction: {
+        'state-change': 'ease-out',
+        'surface-enter': 'cubic-bezier(0.2, 0, 0, 1)',
+        'surface-exit': 'cubic-bezier(0.3, 0, 1, 1)',
+      },
+    },
+  },
+};
+if (typeof module !== 'undefined') module.exports = globalThis.tailwind.config;
+</script>
+  <link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&amp;family=Hedvig+Letters+Sans&amp;family=Source+Code+Pro:wght@600&amp;display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=block" rel="stylesheet">
+  <style>.material-symbols-outlined { display: inline-block; width: 1em; height: 1em; line-height: 1 !important; box-sizing: content-box; overflow: hidden; white-space: nowrap; direction: ltr; vertical-align: middle; }</style>
+</head>
+<body class="bg-light-surface dark:bg-dark-surface text-light-on-surface dark:text-dark-on-surface font-body text-body-md antialiased">
+  <div class="min-h-[884px] flex flex-col max-w-3xl mx-auto" data-stitch-vh="min-h-[884px]===min-h-screen">
+
+    <!-- Shared App Shell Header -->
+    <header class="sticky top-0 z-20 bg-light-surface dark:bg-dark-surface border-b border-light-outline-variant dark:border-dark-outline-variant px-page-margin py-gutter-md flex items-center justify-between gap-gutter-md">
+      <div class="flex items-center gap-gutter-sm min-w-0">
+        <span class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-light-primary dark:bg-dark-primary text-light-on-primary dark:text-dark-on-primary shrink-0">
+          <span class="material-symbols-outlined text-title-lg" aria-hidden="true">air</span>
+        </span>
+        <div class="min-w-0">
+          <p data-design-text-token="title-md" class="font-headline text-title-md text-light-on-surface dark:text-dark-on-surface leading-tight">CleanBreath</p>
+          <a href="../onboarding/Onboarding.html" class="inline-flex items-center gap-gutter-xs font-label text-label-sm text-light-primary dark:text-dark-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-light-primary dark:focus-visible:ring-dark-primary rounded-sm">
+            <span class="material-symbols-outlined text-label-md" aria-hidden="true">location_on</span>
+            <span data-design-text-token="label-sm">Rohini, New Delhi</span>
+          </a>
+        </div>
+      </div>
+
+      <button id="theme-toggle" data-component-id="button-icon" data-component-type="button" data-component-variant="icon" type="button" aria-label="Toggle color theme" class="inline-flex items-center justify-center w-12 h-12 rounded-full bg-light-surface-container-low dark:bg-dark-surface-container-low text-light-on-surface dark:text-dark-on-surface border border-light-outline-variant dark:border-dark-outline-variant shrink-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-light-primary dark:focus-visible:ring-dark-primary">
+        <span class="material-symbols-outlined text-title-lg" aria-hidden="true">dark_mode</span>
+      </button>
+    </header>
+
+    <main class="flex-1 px-page-margin py-gutter-lg pb-32 flex flex-col gap-gutter-lg">
+
+      <div class="flex flex-col gap-gutter-xs">
+        <h1 data-design-text-token="headline-lg-mobile" class="font-headline text-headline-lg-mobile md:text-headline-lg">Indoor air hacks</h1>
+        <p data-design-text-token="body-md" class="font-body text-body-md text-light-on-surface-variant dark:text-dark-on-surface-variant">Practical ways to cut indoor PM2.5, sorted by budget.</p>
+      </div>
+
+      <!-- Budget Filter Chips -->
+      <div class="flex flex-wrap gap-gutter-sm" role="group" aria-label="Filter by budget">
+        <button type="button" data-filter="all" aria-pressed="true" class="filter-chip min-h-12 px-gutter-lg rounded-full bg-light-primary dark:bg-dark-primary text-light-on-primary dark:text-dark-on-primary font-label text-label-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-light-primary dark:focus-visible:ring-dark-primary">All (6)</button>
+        <button type="button" data-filter="free" aria-pressed="false" class="filter-chip min-h-12 px-gutter-lg rounded-full bg-light-surface-container-low dark:bg-dark-surface-container-low border border-light-outline-variant dark:border-dark-outline-variant font-label text-label-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-light-primary dark:focus-visible:ring-dark-primary">Free</button>
+        <button type="button" data-filter="low" aria-pressed="false" class="filter-chip min-h-12 px-gutter-lg rounded-full bg-light-surface-container-low dark:bg-dark-surface-container-low border border-light-outline-variant dark:border-dark-outline-variant font-label text-label-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-light-primary dark:focus-visible:ring-dark-primary">Low cost</button>
+        <button type="button" data-filter="premium" aria-pressed="false" class="filter-chip min-h-12 px-gutter-lg rounded-full bg-light-surface-container-low dark:bg-dark-surface-container-low border border-light-outline-variant dark:border-dark-outline-variant font-label text-label-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-light-primary dark:focus-visible:ring-dark-primary">Premium</button>
+        <button type="button" data-filter="empty-demo" aria-pressed="false" class="filter-chip min-h-12 px-gutter-lg rounded-full bg-light-surface-container-low dark:bg-dark-surface-container-low border border-light-outline-variant dark:border-dark-outline-variant font-label text-label-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-light-primary dark:focus-visible:ring-dark-primary">Empty state</button>
+      </div>
+
+      <!-- Hacks List -->
+      <section id="hacks-list" class="grid grid-cols-1 gap-gutter-md" aria-label="Indoor air hacks list">
+        <article data-budget="free" class="hack-card p-gutter-xl rounded-lg bg-light-surface-container-lowest dark:bg-dark-surface-container-low border border-light-outline-variant dark:border-dark-outline-variant flex flex-col gap-gutter-sm">
+          <div class="flex items-center justify-between gap-gutter-sm">
+            <span data-design-text-token="label-sm" class="px-gutter-md py-gutter-xs rounded-full bg-light-good-container dark:bg-dark-good-container text-light-on-good-container dark:text-dark-on-good-container font-label text-label-sm">Free · 5 mins</span>
+            <span data-design-text-token="label-sm" class="font-label text-label-sm text-light-on-surface-variant dark:text-dark-on-surface-variant tabular-nums">~15% less PM2.5</span>
+          </div>
+          <h2 data-design-text-token="title-lg" class="font-title text-title-lg">Seal balcony &amp; main door gaps</h2>
+          <p data-design-text-token="body-md" class="font-body text-body-md text-light-on-surface-variant dark:text-dark-on-surface-variant">Place a rolled damp towel along bottom door gaps during evening smog peaks.</p>
+        </article>
+
+        <article data-budget="free" class="hack-card p-gutter-xl rounded-lg bg-light-surface-container-lowest dark:bg-dark-surface-container-low border border-light-outline-variant dark:border-dark-outline-variant flex flex-col gap-gutter-sm">
+          <div class="flex items-center justify-between gap-gutter-sm">
+            <span data-design-text-token="label-sm" class="px-gutter-md py-gutter-xs rounded-full bg-light-good-container dark:bg-dark-good-container text-light-on-good-container dark:text-dark-on-good-container font-label text-label-sm">Free · Daily habit</span>
+            <span data-design-text-token="label-sm" class="font-label text-label-sm text-light-on-surface-variant dark:text-dark-on-surface-variant tabular-nums">Prevents dust spikes</span>
+          </div>
+          <h2 data-design-text-token="title-lg" class="font-title text-title-lg">Wet mop instead of dry sweeping</h2>
+          <p data-design-text-token="body-md" class="font-body text-body-md text-light-on-surface-variant dark:text-dark-on-surface-variant">Dry brooms kick settled fine dust back into breathing height for kids.</p>
+        </article>
+
+        <article data-budget="free" class="hack-card p-gutter-xl rounded-lg bg-light-surface-container-lowest dark:bg-dark-surface-container-low border border-light-outline-variant dark:border-dark-outline-variant flex flex-col gap-gutter-sm">
+          <div class="flex items-center justify-between gap-gutter-sm">
+            <span data-design-text-token="label-sm" class="px-gutter-md py-gutter-xs rounded-full bg-light-good-container dark:bg-dark-good-container text-light-on-good-container dark:text-dark-on-good-container font-label text-label-sm">Free · Kitchen</span>
+            <span data-design-text-token="label-sm" class="font-label text-label-sm text-light-on-surface-variant dark:text-dark-on-surface-variant tabular-nums">~25% less cooking smoke</span>
+          </div>
+          <h2 data-design-text-token="title-lg" class="font-title text-title-lg">Run kitchen exhaust while tadka/frying</h2>
+          <p data-design-text-token="body-md" class="font-body text-body-md text-light-on-surface-variant dark:text-dark-on-surface-variant">Keep the kitchen door closed and exhaust on for 10 minutes after cooking.</p>
+        </article>
+
+        <article data-budget="low" class="hack-card p-gutter-xl rounded-lg bg-light-surface-container-lowest dark:bg-dark-surface-container-low border border-light-outline-variant dark:border-dark-outline-variant flex flex-col gap-gutter-sm">
+          <div class="flex items-center justify-between gap-gutter-sm">
+            <span data-design-text-token="label-sm" class="px-gutter-md py-gutter-xs rounded-full bg-light-secondary-container dark:bg-dark-secondary-container text-light-on-secondary-container dark:text-dark-on-secondary-container font-label text-label-sm">Low cost · ₹1,200</span>
+            <span data-design-text-token="label-sm" class="font-label text-label-sm text-light-on-surface-variant dark:text-dark-on-surface-variant tabular-nums">~45% less PM2.5</span>
+          </div>
+          <h2 data-design-text-token="title-lg" class="font-title text-title-lg">DIY box-fan HEPA filter</h2>
+          <p data-design-text-token="body-md" class="font-body text-body-md text-light-on-surface-variant dark:text-dark-on-surface-variant">Tape a MERV-13 or replacement HEPA filter to the intake of a standard table fan.</p>
+        </article>
+
+        <article data-budget="low" class="hack-card p-gutter-xl rounded-lg bg-light-surface-container-lowest dark:bg-dark-surface-container-low border border-light-outline-variant dark:border-dark-outline-variant flex flex-col gap-gutter-sm">
+          <div class="flex items-center justify-between gap-gutter-sm">
+            <span data-design-text-token="label-sm" class="px-gutter-md py-gutter-xs rounded-full bg-light-secondary-container dark:bg-dark-secondary-container text-light-on-secondary-container dark:text-dark-on-secondary-container font-label text-label-sm">Low cost · ₹350</span>
+            <span data-design-text-token="label-sm" class="font-label text-label-sm text-light-on-surface-variant dark:text-dark-on-surface-variant tabular-nums">Blocks drafts</span>
+          </div>
+          <h2 data-design-text-token="title-lg" class="font-title text-title-lg">Foam weatherstripping on window frames</h2>
+          <p data-design-text-token="body-md" class="font-body text-body-md text-light-on-surface-variant dark:text-dark-on-surface-variant">Self-adhesive foam strips seal rattling sliding windows in 15 minutes.</p>
+        </article>
+
+        <article data-budget="premium" class="hack-card p-gutter-xl rounded-lg bg-light-surface-container-lowest dark:bg-dark-surface-container-low border border-light-outline-variant dark:border-dark-outline-variant flex flex-col gap-gutter-sm">
+          <div class="flex items-center justify-between gap-gutter-sm">
+            <span data-design-text-token="label-sm" class="px-gutter-md py-gutter-xs rounded-full bg-light-caution-container dark:bg-dark-caution-container text-light-on-caution-container dark:text-dark-on-caution-container font-label text-label-sm">Premium · ₹8,500+</span>
+            <span data-design-text-token="label-sm" class="font-label text-label-sm text-light-on-surface-variant dark:text-dark-on-surface-variant tabular-nums">~70% less bedroom PM2.5</span>
+          </div>
+          <h2 data-design-text-token="title-lg" class="font-title text-title-lg">True HEPA H13 purifier for bedroom</h2>
+          <p data-design-text-token="body-md" class="font-body text-body-md text-light-on-surface-variant dark:text-dark-on-surface-variant">Choose a unit sized for your room’s CADR without an ionizer mode.</p>
+        </article>
+      </section>
+
+      <!-- Empty State -->
+      <section id="empty-state" class="hidden flex-col items-center text-center gap-gutter-md p-gutter-xl rounded-lg bg-light-surface-container-low dark:bg-dark-surface-container-low border border-light-outline-variant dark:border-dark-outline-variant">
+        <span class="material-symbols-outlined text-display-lg-mobile text-light-primary dark:text-dark-primary" aria-hidden="true">filter_alt_off</span>
+        <h2 data-design-text-token="title-lg" class="font-title text-title-lg">No hacks match this filter</h2>
+        <p data-design-text-token="body-md" class="font-body text-body-md text-light-on-surface-variant dark:text-dark-on-surface-variant max-w-prose">Try viewing all budget levels to see free and low-cost ways to protect your home.</p>
+        <button type="button" onclick="applyFilter(&#39;all&#39;)" class="min-h-12 px-gutter-xl rounded-full bg-light-primary dark:bg-dark-primary text-light-on-primary dark:text-dark-on-primary font-label text-label-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-light-primary dark:focus-visible:ring-dark-primary">
+          <span data-design-text-token="label-lg">Show all hacks</span>
+        </button>
+      </section>
+
+    </main>
+
+    <!-- Persistent Health Disclaimer + Shared Bottom Navigation -->
+    <div class="fixed bottom-0 inset-x-0 z-30 bg-light-surface dark:bg-dark-surface border-t border-light-outline-variant dark:border-dark-outline-variant">
+      <div class="max-w-3xl mx-auto">
+        <p data-design-text-token="label-sm" class="px-page-margin py-gutter-xs font-label text-label-sm text-light-on-surface-variant dark:text-dark-on-surface-variant text-center border-b border-light-outline-variant dark:border-dark-outline-variant">
+          General air-quality guidance only—not medical advice. Consult a doctor for breathing symptoms.
+        </p>
+        <nav aria-label="Primary navigation" class="grid grid-cols-5">
+          <a href="../dashboard/Dashboard.html" class="min-h-12 py-gutter-sm flex flex-col items-center justify-center gap-gutter-xs text-light-on-surface-variant dark:text-dark-on-surface-variant font-label text-label-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-light-primary dark:focus-visible:ring-dark-primary">
+            <span class="material-symbols-outlined text-title-lg" aria-hidden="true">home</span>
+            <span data-design-text-token="label-sm">Today</span>
+          </a>
+          <a href="../indoor-air-hacks/IndoorAirHacks.html" aria-current="page" class="min-h-12 py-gutter-sm flex flex-col items-center justify-center gap-gutter-xs text-light-primary dark:text-dark-primary font-label text-label-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-light-primary dark:focus-visible:ring-dark-primary">
+            <span class="material-symbols-outlined text-title-lg" style="font-variation-settings: &#39;FILL&#39; 1;" aria-hidden="true">tips_and_updates</span>
+            <span data-design-text-token="label-sm">Hacks</span>
+          </a>
+          <a href="../chat-assistant/ChatAssistant.html" class="min-h-12 py-gutter-sm flex flex-col items-center justify-center gap-gutter-xs text-light-on-surface-variant dark:text-dark-on-surface-variant font-label text-label-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-light-primary dark:focus-visible:ring-dark-primary">
+            <span class="material-symbols-outlined text-title-lg" aria-hidden="true">chat_bubble</span>
+            <span data-design-text-token="label-sm">Ask</span>
+          </a>
+          <a href="../community-checklist/CommunityChecklist.html" class="min-h-12 py-gutter-sm flex flex-col items-center justify-center gap-gutter-xs text-light-on-surface-variant dark:text-dark-on-surface-variant font-label text-label-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-light-primary dark:focus-visible:ring-dark-primary">
+            <span class="material-symbols-outlined text-title-lg" aria-hidden="true">groups</span>
+            <span data-design-text-token="label-sm">Community</span>
+          </a>
+          <a href="../settings/Settings.html" class="min-h-12 py-gutter-sm flex flex-col items-center justify-center gap-gutter-xs text-light-on-surface-variant dark:text-dark-on-surface-variant font-label text-label-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-light-primary dark:focus-visible:ring-dark-primary">
+            <span class="material-symbols-outlined text-title-lg" aria-hidden="true">settings</span>
+            <span data-design-text-token="label-sm">Settings</span>
+          </a>
+        </nav>
+      </div>
+    </div>
+
+  </div>
+
+  <script>
+    (function () {
+      const root = document.documentElement;
+      const themeBtn = document.getElementById('theme-toggle');
+      try {
+        if (localStorage.getItem('cb_theme') === 'dark') root.classList.add('dark');
+      } catch (e) {}
+      themeBtn.addEventListener('click', () => {
+        root.classList.toggle('dark');
+        try { localStorage.setItem('cb_theme', root.classList.contains('dark') ? 'dark' : 'light'); } catch (e) {}
+      });
+
+      window.applyFilter = function (filter) {
+        document.querySelectorAll('.filter-chip').forEach((btn) => {
+          const active = btn.dataset.filter === filter;
+          btn.setAttribute('aria-pressed', String(active));
+          btn.className = active
+            ? 'filter-chip min-h-12 px-gutter-lg rounded-full bg-light-primary dark:bg-dark-primary text-light-on-primary dark:text-dark-on-primary font-label text-label-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-light-primary dark:focus-visible:ring-dark-primary'
+            : 'filter-chip min-h-12 px-gutter-lg rounded-full bg-light-surface-container-low dark:bg-dark-surface-container-low border border-light-outline-variant dark:border-dark-outline-variant font-label text-label-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-light-primary dark:focus-visible:ring-dark-primary';
+        });
+
+        let visibleCount = 0;
+        document.querySelectorAll('.hack-card').forEach((card) => {
+          const show = filter === 'all' || card.dataset.budget === filter;
+          card.classList.toggle('hidden', !show);
+          if (show) visibleCount++;
+        });
+        const empty = document.getElementById('empty-state');
+        if (visibleCount === 0) {
+          empty.classList.remove('hidden');
+          empty.classList.add('flex');
+        } else {
+          empty.classList.add('hidden');
+          empty.classList.remove('flex');
+        }
+      };
+
+      document.querySelectorAll('.filter-chip').forEach((btn) => {
+        btn.addEventListener('click', () => window.applyFilter(btn.dataset.filter));
+      });
+    })();
+  </script>
+
+
+</body></html>
+
+<!-- Ask CleanBreath — CleanBreath -->
+<!DOCTYPE html><html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ask CleanBreath — CleanBreath</title>
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <script id="tailwind-config">/** @type {import('tailwindcss').Config} */
+globalThis.tailwind = globalThis.tailwind || {};
+globalThis.tailwind.config = {
+  darkMode: 'class',
+  theme: {
+    extend: {
+      colors: {
+        'light-primary': '#004345',
+        'light-on-primary': '#FFFFFF',
+        'light-primary-container': '#0F5C5E',
+        'light-on-primary-container': '#F1FFFF',
+        'light-secondary': '#4B6363',
+        'light-on-secondary': '#FFFFFF',
+        'light-secondary-container': '#CBE5E5',
+        'light-on-secondary-container': '#1D3435',
+        'light-tertiary': '#5D3013',
+        'light-on-tertiary': '#FFFFFF',
+        'light-tertiary-container': '#794628',
+        'light-on-tertiary-container': '#FFEDE5',
+        'light-caution': '#B45309',
+        'light-on-caution': '#FFFFFF',
+        'light-caution-container': '#FEF3C7',
+        'light-on-caution-container': '#78350F',
+        'light-good': '#0F766E',
+        'light-on-good': '#FFFFFF',
+        'light-good-container': '#CCFBF1',
+        'light-on-good-container': '#134E4A',
+        'light-error': '#BA1A1A',
+        'light-on-error': '#FFFFFF',
+        'light-error-container': '#FFDAD6',
+        'light-on-error-container': '#93000A',
+        'light-background': '#F8FAF9',
+        'light-on-background': '#191C1C',
+        'light-surface': '#F8FAF9',
+        'light-surface-dim': '#D8DADA',
+        'light-surface-bright': '#F8FAF9',
+        'light-surface-container-lowest': '#FFFFFF',
+        'light-surface-container-low': '#F2F4F3',
+        'light-surface-container': '#ECEEEE',
+        'light-surface-container-high': '#E6E9E8',
+        'light-surface-container-highest': '#E1E3E2',
+        'light-on-surface': '#191C1C',
+        'light-surface-variant': '#DBE4E4',
+        'light-on-surface-variant': '#3F4949',
+        'light-outline': '#576060',
+        'light-outline-variant': '#BFC8C8',
+        'light-inverse-surface': '#2E3131',
+        'light-inverse-on-surface': '#EFF1F0',
+        'light-inverse-primary': '#90D2D4',
+        'light-shadow': '#000000',
+        'light-scrim': '#000000',
+        'dark-primary': '#90D2D4',
+        'dark-on-primary': '#003738',
+        'dark-primary-container': '#0F5C5E',
+        'dark-on-primary-container': '#F1FFFF',
+        'dark-secondary': '#B2CBCC',
+        'dark-on-secondary': '#1D3435',
+        'dark-secondary-container': '#334B4B',
+        'dark-on-secondary-container': '#DCF6F6',
+        'dark-tertiary': '#FDB791',
+        'dark-on-tertiary': '#4F2509',
+        'dark-tertiary-container': '#794628',
+        'dark-on-tertiary-container': '#FFEDE5',
+        'dark-caution': '#FBBF24',
+        'dark-on-caution': '#451A03',
+        'dark-caution-container': '#78350F',
+        'dark-on-caution-container': '#FEF3C7',
+        'dark-good': '#5EEAD4',
+        'dark-on-good': '#042F2E',
+        'dark-good-container': '#115E59',
+        'dark-on-good-container': '#CCFBF1',
+        'dark-error': '#FFB4AB',
+        'dark-on-error': '#690005',
+        'dark-error-container': '#93000A',
+        'dark-on-error-container': '#FFDAD6',
+        'dark-background': '#111414',
+        'dark-on-background': '#E1E3E2',
+        'dark-surface': '#111414',
+        'dark-surface-dim': '#111414',
+        'dark-surface-bright': '#363A3A',
+        'dark-surface-container-lowest': '#0B0F0F',
+        'dark-surface-container-low': '#191C1C',
+        'dark-surface-container': '#1D2020',
+        'dark-surface-container-high': '#272B2B',
+        'dark-surface-container-highest': '#323535',
+        'dark-on-surface': '#E1E3E2',
+        'dark-surface-variant': '#3F4949',
+        'dark-on-surface-variant': '#BFC8C8',
+        'dark-outline': '#899392',
+        'dark-outline-variant': '#3F4949',
+        'dark-inverse-surface': '#E1E3E2',
+        'dark-inverse-on-surface': '#2E3131',
+        'dark-inverse-primary': '#21686A',
+        'dark-shadow': '#000000',
+        'dark-scrim': '#000000',
+      },
+      borderRadius: {
+        'sm': '6px',
+        'DEFAULT': '12px',
+        'md': '16px',
+        'lg': '20px',
+        'xl': '28px',
+        'full': '9999px',
+      },
+      spacing: {
+        'gutter-xs': '4px',
+        'gutter-sm': '8px',
+        'gutter-md': '12px',
+        'gutter-lg': '16px',
+        'gutter-xl': '24px',
+        'section': '32px',
+        'page-margin': '16px',
+      },
+      fontFamily: {
+        'display': ['"Atkinson Hyperlegible"', 'sans-serif'],
+        'headline': ['"Atkinson Hyperlegible"', 'sans-serif'],
+        'title': ['"Atkinson Hyperlegible"', 'sans-serif'],
+        'body': ['"Hedvig Letters Sans"', 'sans-serif'],
+        'label': ['"Atkinson Hyperlegible"', 'sans-serif'],
+        'mono': ['"Source Code Pro"', 'monospace'],
+      },
+      fontSize: {
+        'display-lg': ['56px', { lineHeight: '62px', letterSpacing: '-0.5px', fontWeight: '700' }],
+        'display-lg-mobile': ['32px', { lineHeight: '38px', letterSpacing: '-0.25px', fontWeight: '700' }],
+        'headline-lg': ['36px', { lineHeight: '44px', letterSpacing: '-0.25px', fontWeight: '700' }],
+        'headline-lg-mobile': ['26px', { lineHeight: '32px', letterSpacing: '-0.2px', fontWeight: '700' }],
+        'headline-md': ['22px', { lineHeight: '28px', letterSpacing: '0px', fontWeight: '700' }],
+        'title-lg': ['20px', { lineHeight: '26px', letterSpacing: '0px', fontWeight: '700' }],
+        'title-md': ['18px', { lineHeight: '24px', letterSpacing: '0px', fontWeight: '700' }],
+        'body-lg': ['18px', { lineHeight: '28px', letterSpacing: '0px', fontWeight: '400' }],
+        'body-md': ['16px', { lineHeight: '24px', letterSpacing: '0px', fontWeight: '400' }],
+        'label-lg': ['16px', { lineHeight: '22px', letterSpacing: '0.1px', fontWeight: '700' }],
+        'label-md': ['14px', { lineHeight: '20px', letterSpacing: '0.15px', fontWeight: '700' }],
+        'label-sm': ['12px', { lineHeight: '16px', letterSpacing: '0.2px', fontWeight: '700' }],
+        'mono-md': ['15px', { lineHeight: '20px', letterSpacing: '0px', fontWeight: '600' }],
+      },
+      transitionDuration: {
+        'state-change': '120ms',
+        'surface-enter': '240ms',
+        'surface-exit': '160ms',
+      },
+      transitionDelay: {
+        'state-change': '0ms',
+        'surface-enter': '0ms',
+        'surface-exit': '0ms',
+      },
+      transitionTimingFunction: {
+        'state-change': 'ease-out',
+        'surface-enter': 'cubic-bezier(0.2, 0, 0, 1)',
+        'surface-exit': 'cubic-bezier(0.3, 0, 1, 1)',
+      },
+    },
+  },
+};
+if (typeof module !== 'undefined') module.exports = globalThis.tailwind.config;
+</script>
+  <link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&amp;family=Hedvig+Letters+Sans&amp;family=Source+Code+Pro:wght@600&amp;display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=block" rel="stylesheet">
+  <style>.material-symbols-outlined { display: inline-block; width: 1em; height: 1em; line-height: 1 !important; box-sizing: content-box; overflow: hidden; white-space: nowrap; direction: ltr; vertical-align: middle; }</style>
+</head>
+<body class="bg-light-surface dark:bg-dark-surface text-light-on-surface dark:text-dark-on-surface font-body text-body-md antialiased">
+  <div class="min-h-[884px] flex flex-col max-w-3xl mx-auto" data-stitch-vh="min-h-[884px]===min-h-screen">
+
+    <!-- Shared App Shell Header -->
+    <header class="sticky top-0 z-20 bg-light-surface dark:bg-dark-surface border-b border-light-outline-variant dark:border-dark-outline-variant px-page-margin py-gutter-md flex items-center justify-between gap-gutter-md">
+      <div class="flex items-center gap-gutter-sm min-w-0">
+        <span class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-light-primary dark:bg-dark-primary text-light-on-primary dark:text-dark-on-primary shrink-0">
+          <span class="material-symbols-outlined text-title-lg" aria-hidden="true">air</span>
+        </span>
+        <div class="min-w-0">
+          <p data-design-text-token="title-md" class="font-headline text-title-md text-light-on-surface dark:text-dark-on-surface leading-tight">CleanBreath</p>
+          <a href="../onboarding/Onboarding.html" class="inline-flex items-center gap-gutter-xs font-label text-label-sm text-light-primary dark:text-dark-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-light-primary dark:focus-visible:ring-dark-primary rounded-sm">
+            <span class="material-symbols-outlined text-label-md" aria-hidden="true">location_on</span>
+            <span data-design-text-token="label-sm">Rohini, New Delhi</span>
+          </a>
+        </div>
+      </div>
+
+      <button id="theme-toggle" data-component-id="button-icon" data-component-type="button" data-component-variant="icon" type="button" aria-label="Toggle color theme" class="inline-flex items-center justify-center w-12 h-12 rounded-full bg-light-surface-container-low dark:bg-dark-surface-container-low text-light-on-surface dark:text-dark-on-surface border border-light-outline-variant dark:border-dark-outline-variant shrink-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-light-primary dark:focus-visible:ring-dark-primary">
+        <span class="material-symbols-outlined text-title-lg" aria-hidden="true">dark_mode</span>
+      </button>
+    </header>
+
+    <main class="flex-1 px-page-margin py-gutter-lg pb-48 flex flex-col gap-gutter-lg">
+
+      <div class="flex flex-col gap-gutter-xs">
+        <h1 data-design-text-token="headline-lg-mobile" class="font-headline text-headline-lg-mobile md:text-headline-lg">Ask CleanBreath</h1>
+        <p data-design-text-token="body-md" class="font-body text-body-md text-light-on-surface-variant dark:text-dark-on-surface-variant">Calm, family-specific answers based on Rohini’s live AQI (248 · Poor).</p>
+      </div>
+
+      <!-- Suggested Question Chips -->
+      <section aria-labelledby="suggested-heading" class="flex flex-col gap-gutter-sm">
+        <h2 id="suggested-heading" data-design-text-token="label-md" class="font-label text-label-md text-light-on-surface-variant dark:text-dark-on-surface-variant">Suggested questions</h2>
+        <div class="flex flex-wrap gap-gutter-sm">
+          <button type="button" data-q="Is it safe for kids to play outside today?" class="suggest-chip min-h-12 px-gutter-lg py-gutter-sm rounded-full bg-light-secondary-container dark:bg-dark-secondary-container text-light-on-secondary-container dark:text-dark-on-secondary-container font-label text-label-md text-left focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-light-primary dark:focus-visible:ring-dark-primary">Is it safe for kids to play outside?</button>
+          <button type="button" data-q="What is the best time to open windows today?" class="suggest-chip min-h-12 px-gutter-lg py-gutter-sm rounded-full bg-light-surface-container-low dark:bg-dark-surface-container-low border border-light-outline-variant dark:border-dark-outline-variant font-label text-label-md text-left focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-light-primary dark:focus-visible:ring-dark-primary">Best time to open windows?</button>
+          <button type="button" data-q="How should I prep the bedroom for asthma?" class="suggest-chip min-h-12 px-gutter-lg py-gutter-sm rounded-full bg-light-surface-container-low dark:bg-dark-surface-container-low border border-light-outline-variant dark:border-dark-outline-variant font-label text-label-md text-left focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-light-primary dark:focus-visible:ring-dark-primary">Prep bedroom for asthma?</button>
+        </div>
+      </section>
+
+      <!-- Streaming Reply Area -->
+      <section id="chat-thread" aria-live="polite" aria-label="Assistant conversation" class="flex flex-col gap-gutter-md">
+        <!-- User bubble -->
+        <div class="self-end max-w-[85%] p-gutter-lg rounded-lg bg-light-primary dark:bg-dark-primary text-light-on-primary dark:text-dark-on-primary">
+          <p data-design-text-token="body-md" class="font-body text-body-md">Is it safe for kids to play outside today?</p>
+        </div>
+
+        <!-- Assistant streaming reply bubble -->
+        <article class="p-gutter-xl rounded-lg bg-light-surface-container-lowest dark:bg-dark-surface-container-low border border-light-outline-variant dark:border-dark-outline-variant flex flex-col gap-gutter-sm">
+          <div class="flex items-center gap-gutter-sm">
+            <span class="material-symbols-outlined text-light-primary dark:text-dark-primary" aria-hidden="true">smart_toy</span>
+            <span data-design-text-token="label-md" class="font-label text-label-md text-light-primary dark:text-dark-primary">CleanBreath Assistant</span>
+          </div>
+          <p id="streaming-reply" data-design-text-token="body-md" class="font-body text-body-md text-pretty">
+            Right now AQI is 248 (Poor), so skip morning outdoor play. Between 1:00 PM and 3:00 PM it is forecast to dip near 142—that is the safest 20-minute window for light outdoor activity. Keep rescue inhalers handy and switch back indoors before 5:00 PM.
+          </p>
+        </article>
+      </section>
+
+    </main>
+
+    <!-- Chat Composer + Persistent Disclaimer + Bottom Nav -->
+    <div class="fixed bottom-0 inset-x-0 z-30 bg-light-surface dark:bg-dark-surface border-t border-light-outline-variant dark:border-dark-outline-variant">
+      <div class="max-w-3xl mx-auto">
+        <form id="chat-form" class="px-page-margin py-gutter-sm flex items-center gap-gutter-sm border-b border-light-outline-variant dark:border-dark-outline-variant">
+          <label for="chat-input" class="sr-only">Ask a question about air quality</label>
+          <input id="chat-input" type="text" placeholder="Ask about masks, windows, or kids…" class="flex-1 min-h-12 px-gutter-lg rounded-full bg-light-surface-container-lowest dark:bg-dark-surface-container-low text-light-on-surface dark:text-dark-on-surface border border-light-outline dark:border-dark-outline font-body text-body-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-light-primary dark:focus-visible:ring-dark-primary">
+          <button type="submit" aria-label="Send question" class="inline-flex items-center justify-center w-12 h-12 rounded-full bg-light-primary dark:bg-dark-primary text-light-on-primary dark:text-dark-on-primary shrink-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-light-primary dark:focus-visible:ring-dark-primary">
+            <span class="material-symbols-outlined text-title-lg" aria-hidden="true">send</span>
+          </button>
+        </form>
+        <p data-design-text-token="label-sm" class="px-page-margin py-gutter-xs font-label text-label-sm text-light-on-surface-variant dark:text-dark-on-surface-variant text-center border-b border-light-outline-variant dark:border-dark-outline-variant">
+          General air-quality guidance only—not medical advice. Consult a doctor for breathing symptoms.
+        </p>
+        <nav aria-label="Primary navigation" class="grid grid-cols-5">
+          <a href="../dashboard/Dashboard.html" class="min-h-12 py-gutter-sm flex flex-col items-center justify-center gap-gutter-xs text-light-on-surface-variant dark:text-dark-on-surface-variant font-label text-label-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-light-primary dark:focus-visible:ring-dark-primary">
+            <span class="material-symbols-outlined text-title-lg" aria-hidden="true">home</span>
+            <span data-design-text-token="label-sm">Today</span>
+          </a>
+          <a href="../indoor-air-hacks/IndoorAirHacks.html" class="min-h-12 py-gutter-sm flex flex-col items-center justify-center gap-gutter-xs text-light-on-surface-variant dark:text-dark-on-surface-variant font-label text-label-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-light-primary dark:focus-visible:ring-dark-primary">
+            <span class="material-symbols-outlined text-title-lg" aria-hidden="true">tips_and_updates</span>
+            <span data-design-text-token="label-sm">Hacks</span>
+          </a>
+          <a href="../chat-assistant/ChatAssistant.html" aria-current="page" class="min-h-12 py-gutter-sm flex flex-col items-center justify-center gap-gutter-xs text-light-primary dark:text-dark-primary font-label text-label-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-light-primary dark:focus-visible:ring-dark-primary">
+            <span class="material-symbols-outlined text-title-lg" style="font-variation-settings: &#39;FILL&#39; 1;" aria-hidden="true">chat_bubble</span>
+            <span data-design-text-token="label-sm">Ask</span>
+          </a>
+          <a href="../community-checklist/CommunityChecklist.html" class="min-h-12 py-gutter-sm flex flex-col items-center justify-center gap-gutter-xs text-light-on-surface-variant dark:text-dark-on-surface-variant font-label text-label-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-light-primary dark:focus-visible:ring-dark-primary">
+            <span class="material-symbols-outlined text-title-lg" aria-hidden="true">groups</span>
+            <span data-design-text-token="label-sm">Community</span>
+          </a>
+          <a href="../settings/Settings.html" class="min-h-12 py-gutter-sm flex flex-col items-center justify-center gap-gutter-xs text-light-on-surface-variant dark:text-dark-on-surface-variant font-label text-label-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-light-primary dark:focus-visible:ring-dark-primary">
+            <span class="material-symbols-outlined text-title-lg" aria-hidden="true">settings</span>
+            <span data-design-text-token="label-sm">Settings</span>
+          </a>
+        </nav>
+      </div>
+    </div>
+
+  </div>
+
+  <script>
+    (function () {
+      const root = document.documentElement;
+      const themeBtn = document.getElementById('theme-toggle');
+      try {
+        if (localStorage.getItem('cb_theme') === 'dark') root.classList.add('dark');
+      } catch (e) {}
+      themeBtn.addEventListener('click', () => {
+        root.classList.toggle('dark');
+        try { localStorage.setItem('cb_theme', root.classList.contains('dark') ? 'dark' : 'light'); } catch (e) {}
+      });
+
+      const replies = {
+        'What is the best time to open windows today?': 'Open windows briefly between 1:00 PM and 3:00 PM for 15–20 minutes when afternoon sun lifts the smog layer. Close them again before 5:00 PM.',
+        'How should I prep the bedroom for asthma?': 'Seal bottom door gaps with a damp towel, avoid incense or mosquito coils, and run your HEPA purifier on medium 30 minutes before bedtime.'
+      };
+
+      function streamAnswer(question) {
+        const thread = document.getElementById('chat-thread');
+        const userDiv = document.createElement('div');
+        userDiv.className = 'self-end max-w-[85%] p-gutter-lg rounded-lg bg-light-primary dark:bg-dark-primary text-light-on-primary dark:text-dark-on-primary';
+        userDiv.innerHTML = '<p class="font-body text-body-md"></p>';
+        userDiv.querySelector('p').textContent = question;
+        thread.appendChild(userDiv);
+
+        const botArt = document.createElement('article');
+        botArt.className = 'p-gutter-xl rounded-lg bg-light-surface-container-lowest dark:bg-dark-surface-container-low border border-light-outline-variant dark:border-dark-outline-variant flex flex-col gap-gutter-sm';
+        botArt.innerHTML = '<div class="flex items-center gap-gutter-sm"><span class="material-symbols-outlined text-light-primary dark:text-dark-primary" aria-hidden="true">smart_toy</span><span class="font-label text-label-md text-light-primary dark:text-dark-primary">CleanBreath Assistant</span></div><p class="font-body text-body-md text-pretty"></p>';
+        thread.appendChild(botArt);
+
+        const text = replies[question] || 'Based on Rohini’s current AQI of 248, keep windows closed this morning, use an N95 mask outdoors, and run your bedroom purifier tonight.';
+        const target = botArt.querySelector('p');
+        let idx = 0;
+        const timer = setInterval(() => {
+          idx += 4;
+          target.textContent = text.slice(0, idx);
+          if (idx >= text.length) clearInterval(timer);
+        }, 25);
+      }
+
+      document.querySelectorAll('.suggest-chip').forEach((btn) => {
+        btn.addEventListener('click', () => streamAnswer(btn.dataset.q));
+      });
+      document.getElementById('chat-form').addEventListener('submit', (e) => {
+        e.preventDefault();
+        const input = document.getElementById('chat-input');
+        const val = input.value.trim();
+        if (!val) return;
+        input.value = '';
+        streamAnswer(val);
+      });
+    })();
+  </script>
+
+
+</body></html>
+
+<!-- Community Checklist — CleanBreath -->
+<!DOCTYPE html><html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Community Checklist — CleanBreath</title>
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <script id="tailwind-config">/** @type {import('tailwindcss').Config} */
+globalThis.tailwind = globalThis.tailwind || {};
+globalThis.tailwind.config = {
+  darkMode: 'class',
+  theme: {
+    extend: {
+      colors: {
+        'light-primary': '#004345',
+        'light-on-primary': '#FFFFFF',
+        'light-primary-container': '#0F5C5E',
+        'light-on-primary-container': '#F1FFFF',
+        'light-secondary': '#4B6363',
+        'light-on-secondary': '#FFFFFF',
+        'light-secondary-container': '#CBE5E5',
+        'light-on-secondary-container': '#1D3435',
+        'light-tertiary': '#5D3013',
+        'light-on-tertiary': '#FFFFFF',
+        'light-tertiary-container': '#794628',
+        'light-on-tertiary-container': '#FFEDE5',
+        'light-caution': '#B45309',
+        'light-on-caution': '#FFFFFF',
+        'light-caution-container': '#FEF3C7',
+        'light-on-caution-container': '#78350F',
+        'light-good': '#0F766E',
+        'light-on-good': '#FFFFFF',
+        'light-good-container': '#CCFBF1',
+        'light-on-good-container': '#134E4A',
+        'light-error': '#BA1A1A',
+        'light-on-error': '#FFFFFF',
+        'light-error-container': '#FFDAD6',
+        'light-on-error-container': '#93000A',
+        'light-background': '#F8FAF9',
+        'light-on-background': '#191C1C',
+        'light-surface': '#F8FAF9',
+        'light-surface-dim': '#D8DADA',
+        'light-surface-bright': '#F8FAF9',
+        'light-surface-container-lowest': '#FFFFFF',
+        'light-surface-container-low': '#F2F4F3',
+        'light-surface-container': '#ECEEEE',
+        'light-surface-container-high': '#E6E9E8',
+        'light-surface-container-highest': '#E1E3E2',
+        'light-on-surface': '#191C1C',
+        'light-surface-variant': '#DBE4E4',
+        'light-on-surface-variant': '#3F4949',
+        'light-outline': '#576060',
+        'light-outline-variant': '#BFC8C8',
+        'light-inverse-surface': '#2E3131',
+        'light-inverse-on-surface': '#EFF1F0',
+        'light-inverse-primary': '#90D2D4',
+        'light-shadow': '#000000',
+        'light-scrim': '#000000',
+        'dark-primary': '#90D2D4',
+        'dark-on-primary': '#003738',
+        'dark-primary-container': '#0F5C5E',
+        'dark-on-primary-container': '#F1FFFF',
+        'dark-secondary': '#B2CBCC',
+        'dark-on-secondary': '#1D3435',
+        'dark-secondary-container': '#334B4B',
+        'dark-on-secondary-container': '#DCF6F6',
+        'dark-tertiary': '#FDB791',
+        'dark-on-tertiary': '#4F2509',
+        'dark-tertiary-container': '#794628',
+        'dark-on-tertiary-container': '#FFEDE5',
+        'dark-caution': '#FBBF24',
+        'dark-on-caution': '#451A03',
+        'dark-caution-container': '#78350F',
+        'dark-on-caution-container': '#FEF3C7',
+        'dark-good': '#5EEAD4',
+        'dark-on-good': '#042F2E',
+        'dark-good-container': '#115E59',
+        'dark-on-good-container': '#CCFBF1',
+        'dark-error': '#FFB4AB',
+        'dark-on-error': '#690005',
+        'dark-error-container': '#93000A',
+        'dark-on-error-container': '#FFDAD6',
+        'dark-background': '#111414',
+        'dark-on-background': '#E1E3E2',
+        'dark-surface': '#111414',
+        'dark-surface-dim': '#111414',
+        'dark-surface-bright': '#363A3A',
+        'dark-surface-container-lowest': '#0B0F0F',
+        'dark-surface-container-low': '#191C1C',
+        'dark-surface-container': '#1D2020',
+        'dark-surface-container-high': '#272B2B',
+        'dark-surface-container-highest': '#323535',
+        'dark-on-surface': '#E1E3E2',
+        'dark-surface-variant': '#3F4949',
+        'dark-on-surface-variant': '#BFC8C8',
+        'dark-outline': '#899392',
+        'dark-outline-variant': '#3F4949',
+        'dark-inverse-surface': '#E1E3E2',
+        'dark-inverse-on-surface': '#2E3131',
+        'dark-inverse-primary': '#21686A',
+        'dark-shadow': '#000000',
+        'dark-scrim': '#000000',
+      },
+      borderRadius: {
+        'sm': '6px',
+        'DEFAULT': '12px',
+        'md': '16px',
+        'lg': '20px',
+        'xl': '28px',
+        'full': '9999px',
+      },
+      spacing: {
+        'gutter-xs': '4px',
+        'gutter-sm': '8px',
+        'gutter-md': '12px',
+        'gutter-lg': '16px',
+        'gutter-xl': '24px',
+        'section': '32px',
+        'page-margin': '16px',
+      },
+      fontFamily: {
+        'display': ['"Atkinson Hyperlegible"', 'sans-serif'],
+        'headline': ['"Atkinson Hyperlegible"', 'sans-serif'],
+        'title': ['"Atkinson Hyperlegible"', 'sans-serif'],
+        'body': ['"Hedvig Letters Sans"', 'sans-serif'],
+        'label': ['"Atkinson Hyperlegible"', 'sans-serif'],
+        'mono': ['"Source Code Pro"', 'monospace'],
+      },
+      fontSize: {
+        'display-lg': ['56px', { lineHeight: '62px', letterSpacing: '-0.5px', fontWeight: '700' }],
+        'display-lg-mobile': ['32px', { lineHeight: '38px', letterSpacing: '-0.25px', fontWeight: '700' }],
+        'headline-lg': ['36px', { lineHeight: '44px', letterSpacing: '-0.25px', fontWeight: '700' }],
+        'headline-lg-mobile': ['26px', { lineHeight: '32px', letterSpacing: '-0.2px', fontWeight: '700' }],
+        'headline-md': ['22px', { lineHeight: '28px', letterSpacing: '0px', fontWeight: '700' }],
+        'title-lg': ['20px', { lineHeight: '26px', letterSpacing: '0px', fontWeight: '700' }],
+        'title-md': ['18px', { lineHeight: '24px', letterSpacing: '0px', fontWeight: '700' }],
+        'body-lg': ['18px', { lineHeight: '28px', letterSpacing: '0px', fontWeight: '400' }],
+        'body-md': ['16px', { lineHeight: '24px', letterSpacing: '0px', fontWeight: '400' }],
+        'label-lg': ['16px', { lineHeight: '22px', letterSpacing: '0.1px', fontWeight: '700' }],
+        'label-md': ['14px', { lineHeight: '20px', letterSpacing: '0.15px', fontWeight: '700' }],
+        'label-sm': ['12px', { lineHeight: '16px', letterSpacing: '0.2px', fontWeight: '700' }],
+        'mono-md': ['15px', { lineHeight: '20px', letterSpacing: '0px', fontWeight: '600' }],
+      },
+      transitionDuration: {
+        'state-change': '120ms',
+        'surface-enter': '240ms',
+        'surface-exit': '160ms',
+      },
+      transitionDelay: {
+        'state-change': '0ms',
+        'surface-enter': '0ms',
+        'surface-exit': '0ms',
+      },
+      transitionTimingFunction: {
+        'state-change': 'ease-out',
+        'surface-enter': 'cubic-bezier(0.2, 0, 0, 1)',
+        'surface-exit': 'cubic-bezier(0.3, 0, 1, 1)',
+      },
+    },
+  },
+};
+if (typeof module !== 'undefined') module.exports = globalThis.tailwind.config;
+</script>
+  <link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&amp;family=Hedvig+Letters+Sans&amp;family=Source+Code+Pro:wght@600&amp;display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=block" rel="stylesheet">
+  <style>.material-symbols-outlined { display: inline-block; width: 1em; height: 1em; line-height: 1 !important; box-sizing: content-box; overflow: hidden; white-space: nowrap; direction: ltr; vertical-align: middle; }</style>
+</head>
+<body class="bg-light-surface dark:bg-dark-surface text-light-on-surface dark:text-dark-on-surface font-body text-body-md antialiased">
+  <div class="min-h-[884px] flex flex-col max-w-3xl mx-auto" data-stitch-vh="min-h-[884px]===min-h-screen">
+
+    <!-- Shared App Shell Header -->
+    <header class="sticky top-0 z-20 bg-light-surface dark:bg-dark-surface border-b border-light-outline-variant dark:border-dark-outline-variant px-page-margin py-gutter-md flex items-center justify-between gap-gutter-md">
+      <div class="flex items-center gap-gutter-sm min-w-0">
+        <span class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-light-primary dark:bg-dark-primary text-light-on-primary dark:text-dark-on-primary shrink-0">
+          <span class="material-symbols-outlined text-title-lg" aria-hidden="true">air</span>
+        </span>
+        <div class="min-w-0">
+          <p data-design-text-token="title-md" class="font-headline text-title-md text-light-on-surface dark:text-dark-on-surface leading-tight">CleanBreath</p>
+          <a href="../onboarding/Onboarding.html" class="inline-flex items-center gap-gutter-xs font-label text-label-sm text-light-primary dark:text-dark-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-light-primary dark:focus-visible:ring-dark-primary rounded-sm">
+            <span class="material-symbols-outlined text-label-md" aria-hidden="true">location_on</span>
+            <span data-design-text-token="label-sm">Rohini, New Delhi</span>
+          </a>
+        </div>
+      </div>
+
+      <button id="theme-toggle" data-component-id="button-icon" data-component-type="button" data-component-variant="icon" type="button" aria-label="Toggle color theme" class="inline-flex items-center justify-center w-12 h-12 rounded-full bg-light-surface-container-low dark:bg-dark-surface-container-low text-light-on-surface dark:text-dark-on-surface border border-light-outline-variant dark:border-dark-outline-variant shrink-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-light-primary dark:focus-visible:ring-dark-primary">
+        <span class="material-symbols-outlined text-title-lg" aria-hidden="true">dark_mode</span>
+      </button>
+    </header>
+
+    <main class="flex-1 px-page-margin py-gutter-lg pb-32 flex flex-col gap-gutter-lg">
+
+      <div class="flex flex-col gap-gutter-xs">
+        <h1 data-design-text-token="headline-lg-mobile" class="font-headline text-headline-lg-mobile md:text-headline-lg">Community checklist</h1>
+        <p data-design-text-token="body-md" class="font-body text-body-md text-light-on-surface-variant dark:text-dark-on-surface-variant">Neighbourhood &amp; RWA actions to cut local winter smoke together.</p>
+      </div>
+
+      <!-- Progress Summary -->
+      <section class="p-gutter-lg rounded-lg bg-light-secondary-container dark:bg-dark-secondary-container text-light-on-secondary-container dark:text-dark-on-secondary-container flex items-center justify-between gap-gutter-md">
+        <div>
+          <p data-design-text-token="title-md" class="font-headline text-title-md tabular-nums"><span id="done-count">3</span> of 5 society actions active</p>
+          <p data-design-text-token="label-md" class="font-label text-label-md">Rohini Sector 13 RWA · Winter Smog Drive</p>
+        </div>
+        <button id="share-btn" type="button" class="inline-flex items-center justify-center gap-gutter-xs min-h-12 px-gutter-lg rounded-full bg-light-primary dark:bg-dark-primary text-light-on-primary dark:text-dark-on-primary font-label text-label-md shrink-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-light-primary dark:focus-visible:ring-dark-primary">
+          <span class="material-symbols-outlined text-title-md" aria-hidden="true">share</span>
+          <span data-design-text-token="label-md">Share</span>
+        </button>
+      </section>
+
+      <div id="share-toast" role="status" class="hidden p-gutter-md rounded-md bg-light-good-container dark:bg-dark-good-container text-light-on-good-container dark:text-dark-on-good-container font-label text-label-md">
+        Checklist summary copied—ready to paste into your society WhatsApp group.
+      </div>
+
+      <!-- Checklist Items -->
+      <section aria-label="Neighbourhood checklist items" class="flex flex-col gap-gutter-sm">
+        <label class="min-h-12 p-gutter-lg rounded-lg bg-light-surface-container-lowest dark:bg-dark-surface-container-low border border-light-outline-variant dark:border-dark-outline-variant flex items-center gap-gutter-md cursor-pointer">
+          <input type="checkbox" checked class="comm-check mt-1 w-6 h-6 rounded-sm text-light-primary focus:ring-light-primary">
+          <div>
+            <p data-design-text-token="title-md" class="font-title text-title-md">Stop dry leaf &amp; waste burning in parks</p>
+            <p data-design-text-token="body-md" class="font-body text-body-md text-light-on-surface-variant dark:text-dark-on-surface-variant">Compost garden trimmings instead of burning at dawn.</p>
+          </div>
+        </label>
+
+        <label class="min-h-12 p-gutter-lg rounded-lg bg-light-surface-container-lowest dark:bg-dark-surface-container-low border border-light-outline-variant dark:border-dark-outline-variant flex items-center gap-gutter-md cursor-pointer">
+          <input type="checkbox" checked class="comm-check mt-1 w-6 h-6 rounded-sm text-light-primary focus:ring-light-primary">
+          <div>
+            <p data-design-text-token="title-md" class="font-title text-title-md">Wet-sweep driveways &amp; basements at 7 AM</p>
+            <p data-design-text-token="body-md" class="font-body text-body-md text-light-on-surface-variant dark:text-dark-on-surface-variant">Sprinkle water before sweeping to keep PM10 dust down.</p>
+          </div>
+        </label>
+
+        <label class="min-h-12 p-gutter-lg rounded-lg bg-light-surface-container-lowest dark:bg-dark-surface-container-low border border-light-outline-variant dark:border-dark-outline-variant flex items-center gap-gutter-md cursor-pointer">
+          <input type="checkbox" checked class="comm-check mt-1 w-6 h-6 rounded-sm text-light-primary focus:ring-light-primary">
+          <div>
+            <p data-design-text-token="title-md" class="font-title text-title-md">Provide N95 masks &amp; heaters for guards</p>
+            <p data-design-text-token="body-md" class="font-body text-body-md text-light-on-surface-variant dark:text-dark-on-surface-variant">Electric heaters prevent night-time wood or coal fires at gates.</p>
+          </div>
+        </label>
+
+        <label class="min-h-12 p-gutter-lg rounded-lg bg-light-surface-container-lowest dark:bg-dark-surface-container-low border border-light-outline-variant dark:border-dark-outline-variant flex items-center gap-gutter-md cursor-pointer">
+          <input type="checkbox" class="comm-check mt-1 w-6 h-6 rounded-sm text-light-primary focus:ring-light-primary">
+          <div>
+            <p data-design-text-token="title-md" class="font-title text-title-md">Post daily AQI &amp; play-window notice</p>
+            <p data-design-text-token="body-md" class="font-body text-body-md text-light-on-surface-variant dark:text-dark-on-surface-variant">Pin today’s safe outdoor hours at the lift lobby and society chat.</p>
+          </div>
+        </label>
+
+        <label class="min-h-12 p-gutter-lg rounded-lg bg-light-surface-container-lowest dark:bg-dark-surface-container-low border border-light-outline-variant dark:border-dark-outline-variant flex items-center gap-gutter-md cursor-pointer">
+          <input type="checkbox" class="comm-check mt-1 w-6 h-6 rounded-sm text-light-primary focus:ring-light-primary">
+          <div>
+            <p data-design-text-token="title-md" class="font-title text-title-md">Switch delivery vehicles off at main gate</p>
+            <p data-design-text-token="body-md" class="font-body text-body-md text-light-on-surface-variant dark:text-dark-on-surface-variant">Add a polite “Engines off while waiting” sign for couriers.</p>
+          </div>
+        </label>
+      </section>
+
+    </main>
+
+    <!-- Persistent Health Disclaimer + Shared Bottom Navigation -->
+    <div class="fixed bottom-0 inset-x-0 z-30 bg-light-surface dark:bg-dark-surface border-t border-light-outline-variant dark:border-dark-outline-variant">
+      <div class="max-w-3xl mx-auto">
+        <p data-design-text-token="label-sm" class="px-page-margin py-gutter-xs font-label text-label-sm text-light-on-surface-variant dark:text-dark-on-surface-variant text-center border-b border-light-outline-variant dark:border-dark-outline-variant">
+          General air-quality guidance only—not medical advice. Consult a doctor for breathing symptoms.
+        </p>
+        <nav aria-label="Primary navigation" class="grid grid-cols-5">
+          <a href="../dashboard/Dashboard.html" class="min-h-12 py-gutter-sm flex flex-col items-center justify-center gap-gutter-xs text-light-on-surface-variant dark:text-dark-on-surface-variant font-label text-label-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-light-primary dark:focus-visible:ring-dark-primary">
+            <span class="material-symbols-outlined text-title-lg" aria-hidden="true">home</span>
+            <span data-design-text-token="label-sm">Today</span>
+          </a>
+          <a href="../indoor-air-hacks/IndoorAirHacks.html" class="min-h-12 py-gutter-sm flex flex-col items-center justify-center gap-gutter-xs text-light-on-surface-variant dark:text-dark-on-surface-variant font-label text-label-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-light-primary dark:focus-visible:ring-dark-primary">
+            <span class="material-symbols-outlined text-title-lg" aria-hidden="true">tips_and_updates</span>
+            <span data-design-text-token="label-sm">Hacks</span>
+          </a>
+          <a href="../chat-assistant/ChatAssistant.html" class="min-h-12 py-gutter-sm flex flex-col items-center justify-center gap-gutter-xs text-light-on-surface-variant dark:text-dark-on-surface-variant font-label text-label-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-light-primary dark:focus-visible:ring-dark-primary">
+            <span class="material-symbols-outlined text-title-lg" aria-hidden="true">chat_bubble</span>
+            <span data-design-text-token="label-sm">Ask</span>
+          </a>
+          <a href="../community-checklist/CommunityChecklist.html" aria-current="page" class="min-h-12 py-gutter-sm flex flex-col items-center justify-center gap-gutter-xs text-light-primary dark:text-dark-primary font-label text-label-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-light-primary dark:focus-visible:ring-dark-primary">
+            <span class="material-symbols-outlined text-title-lg" style="font-variation-settings: &#39;FILL&#39; 1;" aria-hidden="true">groups</span>
+            <span data-design-text-token="label-sm">Community</span>
+          </a>
+          <a href="../settings/Settings.html" class="min-h-12 py-gutter-sm flex flex-col items-center justify-center gap-gutter-xs text-light-on-surface-variant dark:text-dark-on-surface-variant font-label text-label-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-light-primary dark:focus-visible:ring-dark-primary">
+            <span class="material-symbols-outlined text-title-lg" aria-hidden="true">settings</span>
+            <span data-design-text-token="label-sm">Settings</span>
+          </a>
+        </nav>
+      </div>
+    </div>
+
+  </div>
+
+  <script>
+    (function () {
+      const root = document.documentElement;
+      const themeBtn = document.getElementById('theme-toggle');
+      try {
+        if (localStorage.getItem('cb_theme') === 'dark') root.classList.add('dark');
+      } catch (e) {}
+      themeBtn.addEventListener('click', () => {
+        root.classList.toggle('dark');
+        try { localStorage.setItem('cb_theme', root.classList.contains('dark') ? 'dark' : 'light'); } catch (e) {}
+      });
+
+      const checks = document.querySelectorAll('.comm-check');
+      const countEl = document.getElementById('done-count');
+      function updateCount() {
+        countEl.textContent = Array.from(checks).filter((c) => c.checked).length;
+      }
+      checks.forEach((c) => c.addEventListener('change', updateCount));
+
+      document.getElementById('share-btn').addEventListener('click', () => {
+        document.getElementById('share-toast').classList.remove('hidden');
+      });
+    })();
+  </script>
+
+
+</body></html>
+
+<!-- Settings — CleanBreath -->
+<!DOCTYPE html><html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Settings — CleanBreath</title>
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <script id="tailwind-config">/** @type {import('tailwindcss').Config} */
+globalThis.tailwind = globalThis.tailwind || {};
+globalThis.tailwind.config = {
+  darkMode: 'class',
+  theme: {
+    extend: {
+      colors: {
+        'light-primary': '#004345',
+        'light-on-primary': '#FFFFFF',
+        'light-primary-container': '#0F5C5E',
+        'light-on-primary-container': '#F1FFFF',
+        'light-secondary': '#4B6363',
+        'light-on-secondary': '#FFFFFF',
+        'light-secondary-container': '#CBE5E5',
+        'light-on-secondary-container': '#1D3435',
+        'light-tertiary': '#5D3013',
+        'light-on-tertiary': '#FFFFFF',
+        'light-tertiary-container': '#794628',
+        'light-on-tertiary-container': '#FFEDE5',
+        'light-caution': '#B45309',
+        'light-on-caution': '#FFFFFF',
+        'light-caution-container': '#FEF3C7',
+        'light-on-caution-container': '#78350F',
+        'light-good': '#0F766E',
+        'light-on-good': '#FFFFFF',
+        'light-good-container': '#CCFBF1',
+        'light-on-good-container': '#134E4A',
+        'light-error': '#BA1A1A',
+        'light-on-error': '#FFFFFF',
+        'light-error-container': '#FFDAD6',
+        'light-on-error-container': '#93000A',
+        'light-background': '#F8FAF9',
+        'light-on-background': '#191C1C',
+        'light-surface': '#F8FAF9',
+        'light-surface-dim': '#D8DADA',
+        'light-surface-bright': '#F8FAF9',
+        'light-surface-container-lowest': '#FFFFFF',
+        'light-surface-container-low': '#F2F4F3',
+        'light-surface-container': '#ECEEEE',
+        'light-surface-container-high': '#E6E9E8',
+        'light-surface-container-highest': '#E1E3E2',
+        'light-on-surface': '#191C1C',
+        'light-surface-variant': '#DBE4E4',
+        'light-on-surface-variant': '#3F4949',
+        'light-outline': '#576060',
+        'light-outline-variant': '#BFC8C8',
+        'light-inverse-surface': '#2E3131',
+        'light-inverse-on-surface': '#EFF1F0',
+        'light-inverse-primary': '#90D2D4',
+        'light-shadow': '#000000',
+        'light-scrim': '#000000',
+        'dark-primary': '#90D2D4',
+        'dark-on-primary': '#003738',
+        'dark-primary-container': '#0F5C5E',
+        'dark-on-primary-container': '#F1FFFF',
+        'dark-secondary': '#B2CBCC',
+        'dark-on-secondary': '#1D3435',
+        'dark-secondary-container': '#334B4B',
+        'dark-on-secondary-container': '#DCF6F6',
+        'dark-tertiary': '#FDB791',
+        'dark-on-tertiary': '#4F2509',
+        'dark-tertiary-container': '#794628',
+        'dark-on-tertiary-container': '#FFEDE5',
+        'dark-caution': '#FBBF24',
+        'dark-on-caution': '#451A03',
+        'dark-caution-container': '#78350F',
+        'dark-on-caution-container': '#FEF3C7',
+        'dark-good': '#5EEAD4',
+        'dark-on-good': '#042F2E',
+        'dark-good-container': '#115E59',
+        'dark-on-good-container': '#CCFBF1',
+        'dark-error': '#FFB4AB',
+        'dark-on-error': '#690005',
+        'dark-error-container': '#93000A',
+        'dark-on-error-container': '#FFDAD6',
+        'dark-background': '#111414',
+        'dark-on-background': '#E1E3E2',
+        'dark-surface': '#111414',
+        'dark-surface-dim': '#111414',
+        'dark-surface-bright': '#363A3A',
+        'dark-surface-container-lowest': '#0B0F0F',
+        'dark-surface-container-low': '#191C1C',
+        'dark-surface-container': '#1D2020',
+        'dark-surface-container-high': '#272B2B',
+        'dark-surface-container-highest': '#323535',
+        'dark-on-surface': '#E1E3E2',
+        'dark-surface-variant': '#3F4949',
+        'dark-on-surface-variant': '#BFC8C8',
+        'dark-outline': '#899392',
+        'dark-outline-variant': '#3F4949',
+        'dark-inverse-surface': '#E1E3E2',
+        'dark-inverse-on-surface': '#2E3131',
+        'dark-inverse-primary': '#21686A',
+        'dark-shadow': '#000000',
+        'dark-scrim': '#000000',
+      },
+      borderRadius: {
+        'sm': '6px',
+        'DEFAULT': '12px',
+        'md': '16px',
+        'lg': '20px',
+        'xl': '28px',
+        'full': '9999px',
+      },
+      spacing: {
+        'gutter-xs': '4px',
+        'gutter-sm': '8px',
+        'gutter-md': '12px',
+        'gutter-lg': '16px',
+        'gutter-xl': '24px',
+        'section': '32px',
+        'page-margin': '16px',
+      },
+      fontFamily: {
+        'display': ['"Atkinson Hyperlegible"', 'sans-serif'],
+        'headline': ['"Atkinson Hyperlegible"', 'sans-serif'],
+        'title': ['"Atkinson Hyperlegible"', 'sans-serif'],
+        'body': ['"Hedvig Letters Sans"', 'sans-serif'],
+        'label': ['"Atkinson Hyperlegible"', 'sans-serif'],
+        'mono': ['"Source Code Pro"', 'monospace'],
+      },
+      fontSize: {
+        'display-lg': ['56px', { lineHeight: '62px', letterSpacing: '-0.5px', fontWeight: '700' }],
+        'display-lg-mobile': ['32px', { lineHeight: '38px', letterSpacing: '-0.25px', fontWeight: '700' }],
+        'headline-lg': ['36px', { lineHeight: '44px', letterSpacing: '-0.25px', fontWeight: '700' }],
+        'headline-lg-mobile': ['26px', { lineHeight: '32px', letterSpacing: '-0.2px', fontWeight: '700' }],
+        'headline-md': ['22px', { lineHeight: '28px', letterSpacing: '0px', fontWeight: '700' }],
+        'title-lg': ['20px', { lineHeight: '26px', letterSpacing: '0px', fontWeight: '700' }],
+        'title-md': ['18px', { lineHeight: '24px', letterSpacing: '0px', fontWeight: '700' }],
+        'body-lg': ['18px', { lineHeight: '28px', letterSpacing: '0px', fontWeight: '400' }],
+        'body-md': ['16px', { lineHeight: '24px', letterSpacing: '0px', fontWeight: '400' }],
+        'label-lg': ['16px', { lineHeight: '22px', letterSpacing: '0.1px', fontWeight: '700' }],
+        'label-md': ['14px', { lineHeight: '20px', letterSpacing: '0.15px', fontWeight: '700' }],
+        'label-sm': ['12px', { lineHeight: '16px', letterSpacing: '0.2px', fontWeight: '700' }],
+        'mono-md': ['15px', { lineHeight: '20px', letterSpacing: '0px', fontWeight: '600' }],
+      },
+      transitionDuration: {
+        'state-change': '120ms',
+        'surface-enter': '240ms',
+        'surface-exit': '160ms',
+      },
+      transitionDelay: {
+        'state-change': '0ms',
+        'surface-enter': '0ms',
+        'surface-exit': '0ms',
+      },
+      transitionTimingFunction: {
+        'state-change': 'ease-out',
+        'surface-enter': 'cubic-bezier(0.2, 0, 0, 1)',
+        'surface-exit': 'cubic-bezier(0.3, 0, 1, 1)',
+      },
+    },
+  },
+};
+if (typeof module !== 'undefined') module.exports = globalThis.tailwind.config;
+</script>
+  <link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&amp;family=Hedvig+Letters+Sans&amp;family=Source+Code+Pro:wght@600&amp;display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=block" rel="stylesheet">
+  <style>.material-symbols-outlined { display: inline-block; width: 1em; height: 1em; line-height: 1 !important; box-sizing: content-box; overflow: hidden; white-space: nowrap; direction: ltr; vertical-align: middle; }</style>
+</head>
+<body class="bg-light-surface dark:bg-dark-surface text-light-on-surface dark:text-dark-on-surface font-body text-body-md antialiased">
+  <div class="min-h-[884px] flex flex-col max-w-3xl mx-auto" data-stitch-vh="min-h-[884px]===min-h-screen">
+
+    <!-- Shared App Shell Header -->
+    <header class="sticky top-0 z-20 bg-light-surface dark:bg-dark-surface border-b border-light-outline-variant dark:border-dark-outline-variant px-page-margin py-gutter-md flex items-center justify-between gap-gutter-md">
+      <div class="flex items-center gap-gutter-sm min-w-0">
+        <span class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-light-primary dark:bg-dark-primary text-light-on-primary dark:text-dark-on-primary shrink-0">
+          <span class="material-symbols-outlined text-title-lg" aria-hidden="true">air</span>
+        </span>
+        <div class="min-w-0">
+          <p data-design-text-token="title-md" class="font-headline text-title-md text-light-on-surface dark:text-dark-on-surface leading-tight">CleanBreath</p>
+          <a href="../onboarding/Onboarding.html" class="inline-flex items-center gap-gutter-xs font-label text-label-sm text-light-primary dark:text-dark-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-light-primary dark:focus-visible:ring-dark-primary rounded-sm">
+            <span class="material-symbols-outlined text-label-md" aria-hidden="true">location_on</span>
+            <span data-design-text-token="label-sm">Rohini, New Delhi</span>
+          </a>
+        </div>
+      </div>
+
+      <button id="theme-toggle" data-component-id="button-icon" data-component-type="button" data-component-variant="icon" type="button" aria-label="Toggle color theme" class="inline-flex items-center justify-center w-12 h-12 rounded-full bg-light-surface-container-low dark:bg-dark-surface-container-low text-light-on-surface dark:text-dark-on-surface border border-light-outline-variant dark:border-dark-outline-variant shrink-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-light-primary dark:focus-visible:ring-dark-primary">
+        <span class="material-symbols-outlined text-title-lg" aria-hidden="true">dark_mode</span>
+      </button>
+    </header>
+
+    <main class="flex-1 px-page-margin py-gutter-lg pb-32 flex flex-col gap-gutter-xl">
+
+      <div class="flex flex-col gap-gutter-xs">
+        <h1 id="settings-title" data-design-text-token="headline-lg-mobile" class="font-headline text-headline-lg-mobile md:text-headline-lg">Settings &amp; Accessibility</h1>
+        <p id="settings-sub" data-design-text-token="body-md" class="font-body text-body-md text-light-on-surface-variant dark:text-dark-on-surface-variant">Personalize language, reading comfort, and privacy.</p>
+      </div>
+
+      <!-- Language (English / Hindi) -->
+      <section aria-labelledby="lang-heading" class="p-gutter-xl rounded-lg bg-light-surface-container-lowest dark:bg-dark-surface-container-low border border-light-outline-variant dark:border-dark-outline-variant flex flex-col gap-gutter-md">
+        <h2 id="lang-heading" data-design-text-token="title-md" class="font-title text-title-md">Language / भाषा</h2>
+        <div class="grid grid-cols-2 gap-gutter-sm" role="group" aria-label="Choose app language">
+          <button type="button" data-lang="en" aria-pressed="true" class="lang-btn min-h-12 px-gutter-lg rounded-full bg-light-primary dark:bg-dark-primary text-light-on-primary dark:text-dark-on-primary font-label text-label-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-light-primary dark:focus-visible:ring-dark-primary">English</button>
+          <button type="button" data-lang="hi" aria-pressed="false" class="lang-btn min-h-12 px-gutter-lg rounded-full bg-light-surface-container-low dark:bg-dark-surface-container-low border border-light-outline-variant dark:border-dark-outline-variant font-label text-label-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-light-primary dark:focus-visible:ring-dark-primary">हिन्दी (Hindi)</button>
+        </div>
+      </section>
+
+      <!-- Reading & Display: Text Size, Theme, Reduce Motion -->
+      <section aria-labelledby="display-heading" class="p-gutter-xl rounded-lg bg-light-surface-container-lowest dark:bg-dark-surface-container-low border border-light-outline-variant dark:border-dark-outline-variant flex flex-col gap-gutter-lg">
+        <h2 id="display-heading" data-design-text-token="title-md" class="font-title text-title-md">Display &amp; Comfort</h2>
+
+        <div class="flex flex-col gap-gutter-sm">
+          <span data-design-text-token="label-md" class="font-label text-label-md">Text size</span>
+          <div class="grid grid-cols-3 gap-gutter-sm" role="group" aria-label="Text size">
+            <button type="button" data-size="16px" aria-pressed="true" class="size-btn min-h-12 px-gutter-md rounded-full bg-light-primary dark:bg-dark-primary text-light-on-primary dark:text-dark-on-primary font-label text-label-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-light-primary dark:focus-visible:ring-dark-primary">16px</button>
+            <button type="button" data-size="18px" aria-pressed="false" class="size-btn min-h-12 px-gutter-md rounded-full bg-light-surface-container-low dark:bg-dark-surface-container-low border border-light-outline-variant dark:border-dark-outline-variant font-label text-label-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-light-primary dark:focus-visible:ring-dark-primary">18px</button>
+            <button type="button" data-size="20px" aria-pressed="false" class="size-btn min-h-12 px-gutter-md rounded-full bg-light-surface-container-low dark:bg-dark-surface-container-low border border-light-outline-variant dark:border-dark-outline-variant font-label text-label-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-light-primary dark:focus-visible:ring-dark-primary">20px</button>
+          </div>
+        </div>
+
+        <label class="min-h-12 flex items-center justify-between gap-gutter-md cursor-pointer">
+          <div>
+            <p data-design-text-token="title-md" class="font-title text-title-md">Reduce motion</p>
+            <p data-design-text-token="body-md" class="font-body text-body-md text-light-on-surface-variant dark:text-dark-on-surface-variant">Disable transitions and streaming text animation.</p>
+          </div>
+          <input id="reduce-motion" type="checkbox" class="w-6 h-6 rounded-sm text-light-primary focus:ring-light-primary">
+        </label>
+      </section>
+
+      <!-- Privacy -->
+      <section aria-labelledby="privacy-heading" class="p-gutter-xl rounded-lg bg-light-surface-container-lowest dark:bg-dark-surface-container-low border border-light-outline-variant dark:border-dark-outline-variant flex flex-col gap-gutter-md">
+        <h2 id="privacy-heading" data-design-text-token="title-md" class="font-title text-title-md">Privacy &amp; Data</h2>
+        <div class="flex items-start gap-gutter-sm">
+          <span class="material-symbols-outlined text-light-good dark:text-dark-good shrink-0" aria-hidden="true">shield_lock</span>
+          <p data-design-text-token="body-md" class="font-body text-body-md text-light-on-surface-variant dark:text-dark-on-surface-variant">Your household profile and neighbourhood stay stored only on this device—no account or tracking required.</p>
+        </div>
+        <button id="clear-data-btn" type="button" class="self-start min-h-12 px-gutter-xl rounded-full bg-light-error-container dark:bg-dark-error-container text-light-on-error-container dark:text-dark-on-error-container font-label text-label-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-light-error dark:focus-visible:ring-dark-error">
+          <span data-design-text-token="label-lg">Clear saved household data</span>
+        </button>
+        <p id="clear-status" role="status" class="hidden font-label text-label-md text-light-good dark:text-dark-good">Saved household preferences cleared from this device.</p>
+      </section>
+
+    </main>
+
+    <!-- Persistent Health Disclaimer + Shared Bottom Navigation -->
+    <div class="fixed bottom-0 inset-x-0 z-30 bg-light-surface dark:bg-dark-surface border-t border-light-outline-variant dark:border-dark-outline-variant">
+      <div class="max-w-3xl mx-auto">
+        <p data-design-text-token="label-sm" class="px-page-margin py-gutter-xs font-label text-label-sm text-light-on-surface-variant dark:text-dark-on-surface-variant text-center border-b border-light-outline-variant dark:border-dark-outline-variant">
+          General air-quality guidance only—not medical advice. Consult a doctor for breathing symptoms.
+        </p>
+        <nav aria-label="Primary navigation" class="grid grid-cols-5">
+          <a href="../dashboard/Dashboard.html" class="min-h-12 py-gutter-sm flex flex-col items-center justify-center gap-gutter-xs text-light-on-surface-variant dark:text-dark-on-surface-variant font-label text-label-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-light-primary dark:focus-visible:ring-dark-primary">
+            <span class="material-symbols-outlined text-title-lg" aria-hidden="true">home</span>
+            <span data-design-text-token="label-sm">Today</span>
+          </a>
+          <a href="../indoor-air-hacks/IndoorAirHacks.html" class="min-h-12 py-gutter-sm flex flex-col items-center justify-center gap-gutter-xs text-light-on-surface-variant dark:text-dark-on-surface-variant font-label text-label-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-light-primary dark:focus-visible:ring-dark-primary">
+            <span class="material-symbols-outlined text-title-lg" aria-hidden="true">tips_and_updates</span>
+            <span data-design-text-token="label-sm">Hacks</span>
+          </a>
+          <a href="../chat-assistant/ChatAssistant.html" class="min-h-12 py-gutter-sm flex flex-col items-center justify-center gap-gutter-xs text-light-on-surface-variant dark:text-dark-on-surface-variant font-label text-label-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-light-primary dark:focus-visible:ring-dark-primary">
+            <span class="material-symbols-outlined text-title-lg" aria-hidden="true">chat_bubble</span>
+            <span data-design-text-token="label-sm">Ask</span>
+          </a>
+          <a href="../community-checklist/CommunityChecklist.html" class="min-h-12 py-gutter-sm flex flex-col items-center justify-center gap-gutter-xs text-light-on-surface-variant dark:text-dark-on-surface-variant font-label text-label-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-light-primary dark:focus-visible:ring-dark-primary">
+            <span class="material-symbols-outlined text-title-lg" aria-hidden="true">groups</span>
+            <span data-design-text-token="label-sm">Community</span>
+          </a>
+          <a href="../settings/Settings.html" aria-current="page" class="min-h-12 py-gutter-sm flex flex-col items-center justify-center gap-gutter-xs text-light-primary dark:text-dark-primary font-label text-label-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-light-primary dark:focus-visible:ring-dark-primary">
+            <span class="material-symbols-outlined text-title-lg" style="font-variation-settings: &#39;FILL&#39; 1;" aria-hidden="true">settings</span>
+            <span data-design-text-token="label-sm">Settings</span>
+          </a>
+        </nav>
+      </div>
+    </div>
+
+  </div>
+
+  <script>
+    (function () {
+      const root = document.documentElement;
+      const themeBtn = document.getElementById('theme-toggle');
+      try {
+        if (localStorage.getItem('cb_theme') === 'dark') root.classList.add('dark');
+      } catch (e) {}
+      themeBtn.addEventListener('click', () => {
+        root.classList.toggle('dark');
+        try { localStorage.setItem('cb_theme', root.classList.contains('dark') ? 'dark' : 'light'); } catch (e) {}
+      });
+
+      document.querySelectorAll('.lang-btn').forEach((btn) => {
+        btn.addEventListener('click', () => {
+          const isHi = btn.dataset.lang === 'hi';
+          document.getElementById('settings-title').textContent = isHi ? 'सेटिंग्स और सुगम्यता' : 'Settings & Accessibility';
+          document.getElementById('settings-sub').textContent = isHi ? 'भाषा, टेक्स्ट आकार और गोपनीयता चुनें।' : 'Personalize language, reading comfort, and privacy.';
+          document.querySelectorAll('.lang-btn').forEach((b) => {
+            const active = b === btn;
+            b.setAttribute('aria-pressed', String(active));
+            b.className = active
+              ? 'lang-btn min-h-12 px-gutter-lg rounded-full bg-light-primary dark:bg-dark-primary text-light-on-primary dark:text-dark-on-primary font-label text-label-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-light-primary dark:focus-visible:ring-dark-primary'
+              : 'lang-btn min-h-12 px-gutter-lg rounded-full bg-light-surface-container-low dark:bg-dark-surface-container-low border border-light-outline-variant dark:border-dark-outline-variant font-label text-label-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-light-primary dark:focus-visible:ring-dark-primary';
+          });
+        });
+      });
+
+      document.querySelectorAll('.size-btn').forEach((btn) => {
+        btn.addEventListener('click', () => {
+          document.body.style.fontSize = btn.dataset.size;
+          document.querySelectorAll('.size-btn').forEach((b) => {
+            const active = b === btn;
+            b.setAttribute('aria-pressed', String(active));
+            b.className = active
+              ? 'size-btn min-h-12 px-gutter-md rounded-full bg-light-primary dark:bg-dark-primary text-light-on-primary dark:text-dark-on-primary font-label text-label-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-light-primary dark:focus-visible:ring-dark-primary'
+              : 'size-btn min-h-12 px-gutter-md rounded-full bg-light-surface-container-low dark:bg-dark-surface-container-low border border-light-outline-variant dark:border-dark-outline-variant font-label text-label-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-light-primary dark:focus-visible:ring-dark-primary';
+          });
+        });
+      });
+
+      document.getElementById('clear-data-btn').addEventListener('click', () => {
+        try { localStorage.removeItem('cb_theme'); } catch (e) {}
+        document.getElementById('clear-status').classList.remove('hidden');
+      });
+    })();
+  </script>
+
+
+</body></html>

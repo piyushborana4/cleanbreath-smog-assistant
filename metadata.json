@@ -1,0 +1,6 @@
+{
+  "name": "CleanBreath",
+  "description": "GenAI assistant helping families and communities navigate severe winter smog and urban air pollution with personalized low-emission routines, indoor air hacks, and transparent impact explanations.",
+  "requestFramePermissions": ["geolocation"],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

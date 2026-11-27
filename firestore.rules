@@ -1,0 +1,160 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // Global default-deny safety net
+    match /{document=**} {
+      allow read, write: if false;
+    }
+
+    function incoming() {
+      return request.resource.data;
+    }
+
+    function existing() {
+      return resource.data;
+    }
+
+    function isSignedIn() {
+      return request.auth != null;
+    }
+
+    function isTrustedUser() {
+      return isSignedIn() && (
+        request.auth.token.email_verified == true ||
+        request.auth.token.firebase.sign_in_provider == 'anonymous'
+      );
+    }
+
+    function isValidId(id) {
+      return id is string && id.size() >= 1 && id.size() <= 128 && id.matches('^[a-zA-Z0-9_\\-]+$');
+    }
+
+    function isOwner(userId) {
+      return isSignedIn() && request.auth.uid == userId;
+    }
+
+    function hasValidParentUser(userId) {
+      return exists(/databases/$(database)/documents/users/$(userId)) &&
+        get(/databases/$(database)/documents/users/$(userId)).data.uid == request.auth.uid;
+    }
+
+    function isValidUserAccount(data, userId) {
+      return data.keys().hasAll(['uid', 'preferredLanguage', 'updatedAt']) &&
+        data.keys().hasOnly(['uid', 'displayName', 'preferredLanguage', 'updatedAt']) &&
+        data.uid is string && data.uid == userId && data.uid == request.auth.uid &&
+        data.preferredLanguage in ['en', 'hi'] &&
+        (!('displayName' in data) || (data.displayName is string && data.displayName.size() >= 1 && data.displayName.size() <= 80)) &&
+        data.updatedAt == request.time;
+    }
+
+    function isValidProfile(data) {
+      return data.keys().hasAll([
+          'ownerUid', 'city', 'locality', 'commuteMode', 'homeType',
+          'ownsAirPurifier', 'budgetLevel', 'language', 'household', 'createdAt', 'updatedAt'
+        ]) &&
+        data.keys().hasOnly([
+          'ownerUid', 'city', 'locality', 'commuteMode', 'homeType',
+          'ownsAirPurifier', 'budgetLevel', 'language', 'household', 'createdAt', 'updatedAt'
+        ]) &&
+        data.ownerUid is string && data.ownerUid == request.auth.uid &&
+        data.city is string && data.city.size() >= 2 && data.city.size() <= 80 &&
+        data.locality is string && data.locality.size() >= 1 && data.locality.size() <= 100 &&
+        data.commuteMode in ['walk_cycle', 'two_wheeler', 'public_transit', 'car_solo', 'carpool', 'work_from_home'] &&
+        data.homeType in ['apartment_high_rise', 'apartment_low_rise', 'independent_house', 'shared_housing'] &&
+        data.ownsAirPurifier is bool &&
+        data.budgetLevel in ['low', 'medium', 'flexible'] &&
+        data.language in ['en', 'hi'] &&
+        data.household is map &&
+        data.household.keys().hasAll(['householdSize', 'hasChildren', 'hasElderly', 'hasRespiratorySensitivity', 'hasPets']) &&
+        data.household.keys().hasOnly(['householdSize', 'hasChildren', 'hasElderly', 'hasRespiratorySensitivity', 'hasPets']) &&
+        data.household.householdSize is int && data.household.householdSize >= 1 && data.household.householdSize <= 20 &&
+        data.household.hasChildren is bool &&
+        data.household.hasElderly is bool &&
+        data.household.hasRespiratorySensitivity is bool &&
+        data.household.hasPets is bool &&
+        data.createdAt is timestamp &&
+        data.updatedAt == request.time;
+    }
+
+    function isValidSavedPlan(data) {
+      return data.keys().hasAll([
+          'ownerUid', 'locationLabel', 'aqi', 'category', 'personalizationSummary', 'planData', 'createdAt'
+        ]) &&
+        data.keys().hasOnly([
+          'ownerUid', 'locationLabel', 'aqi', 'category', 'personalizationSummary', 'planData', 'createdAt'
+        ]) &&
+        data.ownerUid is string && data.ownerUid == request.auth.uid &&
+        data.locationLabel is string && data.locationLabel.size() >= 2 && data.locationLabel.size() <= 140 &&
+        data.aqi is number && data.aqi >= 0 && data.aqi <= 500 &&
+        data.category in ['good', 'moderate', 'sensitive', 'unhealthy', 'very_unhealthy', 'severe'] &&
+        data.personalizationSummary is string && data.personalizationSummary.size() >= 5 && data.personalizationSummary.size() <= 400 &&
+        data.planData is map &&
+        data.createdAt == request.time;
+    }
+
+    function isValidChecklist(data) {
+      return data.keys().hasAll([
+          'ownerUid', 'isPublic', 'settingType', 'locality', 'aqi', 'shareableText', 'items', 'createdAt'
+        ]) &&
+        data.keys().hasOnly([
+          'ownerUid', 'isPublic', 'settingType', 'locality', 'aqi', 'shareableText', 'items', 'createdAt'
+        ]) &&
+        data.ownerUid is string && data.ownerUid == request.auth.uid &&
+        data.isPublic is bool &&
+        data.settingType in ['apartment_society', 'school'] &&
+        data.locality is string && data.locality.size() >= 2 && data.locality.size() <= 120 &&
+        data.aqi is number && data.aqi >= 0 && data.aqi <= 500 &&
+        data.shareableText is string && data.shareableText.size() >= 10 && data.shareableText.size() <= 4000 &&
+        data.items is list && data.items.size() >= 1 && data.items.size() <= 12 &&
+        data.items[0] is map &&
+        data.createdAt is timestamp;
+    }
+
+    match /users/{userId} {
+      allow get: if isValidId(userId) && isOwner(userId);
+      allow create: if isTrustedUser() && isValidId(userId) && isOwner(userId) && isValidUserAccount(incoming(), userId);
+      allow update: if isTrustedUser() && isValidId(userId) && isOwner(userId) &&
+        isValidUserAccount(incoming(), userId) &&
+        incoming().uid == existing().uid &&
+        incoming().diff(existing()).affectedKeys().hasOnly(['displayName', 'preferredLanguage', 'updatedAt']);
+      allow delete: if isTrustedUser() && isValidId(userId) && isOwner(userId);
+
+      match /profiles/{profileId} {
+        allow get: if isValidId(userId) && isValidId(profileId) && isOwner(userId);
+        allow list: if isOwner(userId) && resource.data.ownerUid == request.auth.uid;
+        allow create: if isTrustedUser() && isValidId(userId) && isValidId(profileId) && isOwner(userId) &&
+          isValidProfile(incoming()) && incoming().createdAt == request.time && hasValidParentUser(userId);
+        allow update: if isTrustedUser() && isValidId(userId) && isValidId(profileId) && isOwner(userId) &&
+          isValidProfile(incoming()) &&
+          incoming().ownerUid == existing().ownerUid &&
+          incoming().createdAt == existing().createdAt &&
+          incoming().diff(existing()).affectedKeys().hasOnly([
+            'city', 'locality', 'commuteMode', 'homeType', 'ownsAirPurifier',
+            'budgetLevel', 'language', 'household', 'updatedAt'
+          ]);
+        allow delete: if isTrustedUser() && isValidId(userId) && isValidId(profileId) && isOwner(userId);
+      }
+
+      match /plans/{planId} {
+        allow get: if isValidId(userId) && isValidId(planId) && isOwner(userId);
+        allow list: if isOwner(userId) && resource.data.ownerUid == request.auth.uid;
+        allow create: if isTrustedUser() && isValidId(userId) && isValidId(planId) && isOwner(userId) &&
+          isValidSavedPlan(incoming()) && hasValidParentUser(userId);
+        allow delete: if isTrustedUser() && isValidId(userId) && isValidId(planId) && isOwner(userId);
+      }
+    }
+
+    match /community_checklists/{checklistId} {
+      allow get: if isValidId(checklistId) && isSignedIn() && (existing().ownerUid == request.auth.uid || existing().isPublic == true);
+      allow list: if isSignedIn() && (resource.data.ownerUid == request.auth.uid || resource.data.isPublic == true);
+      allow create: if isTrustedUser() && isValidId(checklistId) && isValidChecklist(incoming()) && incoming().createdAt == request.time;
+      allow update: if isTrustedUser() && isValidId(checklistId) &&
+        isValidChecklist(incoming()) &&
+        existing().ownerUid == request.auth.uid &&
+        incoming().ownerUid == existing().ownerUid &&
+        incoming().createdAt == existing().createdAt &&
+        incoming().diff(existing()).affectedKeys().hasOnly(['isPublic', 'shareableText']);
+      allow delete: if isTrustedUser() && isValidId(checklistId) && existing().ownerUid == request.auth.uid;
+    }
+  }
+}
