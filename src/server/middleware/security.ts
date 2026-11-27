@@ -5,24 +5,25 @@ import helmet from 'helmet';
 import compression from 'compression';
 import express from 'express';
 
+const isProd = process.env.NODE_ENV === 'production';
+
 /**
- * Applies Helmet security headers (iframe-compatible for AI Studio preview),
- * strict CORS allow-list + same-origin verification, gzip compression,
- * JSON body size cap, and API rate limiting.
+ * Applies Helmet security headers, strict CORS allow-list + same-origin verification,
+ * gzip compression, JSON body size cap, and API rate limiting.
  */
 export function applySecurityMiddleware(app: Express, allowedOrigins: string[]): void {
   app.disable('x-powered-by');
 
   app.use(
     helmet({
-      xFrameOptions: false,
+      xFrameOptions: isProd ? { action: 'sameorigin' } : false,
       crossOriginEmbedderPolicy: false,
       crossOriginOpenerPolicy: { policy: 'same-origin-allow-popups' },
-      crossOriginResourcePolicy: false,
+      crossOriginResourcePolicy: isProd ? { policy: 'same-origin' } : false,
       contentSecurityPolicy: {
         directives: {
           defaultSrc: ["'self'"],
-          scriptSrc: ["'self'", "'unsafe-inline'", 'https://apis.google.com'],
+          scriptSrc: isProd ? ["'self'"] : ["'self'", "'unsafe-inline'", 'https://apis.google.com'],
           styleSrc: ["'self'", "'unsafe-inline'", 'https://fonts.googleapis.com'],
           fontSrc: ["'self'", 'https://fonts.gstatic.com'],
           imgSrc: ["'self'", 'data:', 'https:'],
@@ -36,13 +37,15 @@ export function applySecurityMiddleware(app: Express, allowedOrigins: string[]):
             'https://securetoken.googleapis.com',
           ],
           frameSrc: ["'self'", 'https://*.firebaseapp.com', 'https://accounts.google.com'],
-          frameAncestors: [
-            "'self'",
-            'https://aistudio.google.com',
-            'https://*.aistudio.google.com',
-            'https://*.google.com',
-            'https://*.usercontent.goog',
-          ],
+          frameAncestors: isProd
+            ? ["'self'"]
+            : [
+                "'self'",
+                'https://aistudio.google.com',
+                'https://*.aistudio.google.com',
+                'https://*.google.com',
+                'https://*.usercontent.goog',
+              ],
           upgradeInsecureRequests: null,
         },
       },
@@ -80,9 +83,9 @@ export function applySecurityMiddleware(app: Express, allowedOrigins: string[]):
 }
 
 /**
- * Creates a rate-limiting middleware for /api routes.
+ * Creates a general rate-limiting middleware for /api routes.
  */
-export function createApiRateLimiter(maxRequests = 60): RequestHandler {
+export function createApiRateLimiter(maxRequests = 90): RequestHandler {
   return rateLimit({
     windowMs: 15 * 60 * 1000,
     max: maxRequests,
@@ -90,6 +93,21 @@ export function createApiRateLimiter(maxRequests = 60): RequestHandler {
     legacyHeaders: false,
     message: {
       error: 'Too many requests from this client. Please wait a few minutes and try again.',
+    },
+  });
+}
+
+/**
+ * Creates a strict rate-limiting middleware for /api/plan and /api/chat (12 requests per 15 minutes).
+ */
+export function createAiRateLimiter(): RequestHandler {
+  return rateLimit({
+    windowMs: 15 * 60 * 1000,
+    max: 12,
+    standardHeaders: true,
+    legacyHeaders: false,
+    message: {
+      error: 'Too many AI requests. Please wait a few minutes before generating another plan or chat.',
     },
   });
 }

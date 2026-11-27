@@ -236,7 +236,7 @@ export function OnboardingWizard({
             Tailored for winter smog
           </span>
         </div>
-        <div className="grid grid-cols-3 gap-gutter-sm" role="tablist">
+        <ol className="grid grid-cols-3 gap-gutter-sm list-none p-0 m-0">
           {(
             [
               [1, 'Step 1: Location'],
@@ -244,22 +244,18 @@ export function OnboardingWizard({
               [3, 'Step 3: Lifestyle'],
             ] as const
           ).map(([n, label]) => (
-            <button
+            <li
               key={n}
-              type="button"
-              role="tab"
-              aria-selected={step === n}
+              aria-current={step === n ? 'step' : undefined}
               aria-label={label}
-              onClick={() => setStep(n)}
-              onKeyDown={(e) => handleTabKeyDown(e, n)}
-              className={`h-2.5 rounded-full focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-light-primary dark:focus-visible:ring-dark-primary ${
+              className={`h-2.5 rounded-full ${
                 step === n
                   ? 'bg-light-primary dark:bg-dark-primary'
                   : 'bg-light-surface-container-highest dark:bg-dark-surface-container-highest'
               }`}
             />
           ))}
-        </div>
+        </ol>
       </nav>
 
       <main

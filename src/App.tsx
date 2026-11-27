@@ -290,17 +290,15 @@ export default function App() {
               {view === 'chat' && (
                 <Suspense
                   fallback={
-                    <main
-                      id="main-content"
-                      tabIndex={-1}
+                    <div
                       aria-busy="true"
                       aria-live="polite"
-                      className="flex-1 px-page-margin py-gutter-lg focus:outline-none"
+                      className="flex-1 px-page-margin py-gutter-lg"
                     >
                       <p className="font-body text-body-md text-light-on-surface-variant dark:text-dark-on-surface-variant">
                         Loading interactive assistant…
                       </p>
-                    </main>
+                    </div>
                   }
                 >
                   <ChatAssistant profile={profile} aqi={aqi} t={t} />
@@ -310,17 +308,15 @@ export default function App() {
               {view === 'community' && (
                 <Suspense
                   fallback={
-                    <main
-                      id="main-content"
-                      tabIndex={-1}
+                    <div
                       aria-busy="true"
                       aria-live="polite"
-                      className="flex-1 px-page-margin py-gutter-lg focus:outline-none"
+                      className="flex-1 px-page-margin py-gutter-lg"
                     >
                       <p className="font-body text-body-md text-light-on-surface-variant dark:text-dark-on-surface-variant">
                         Loading community checklist…
                       </p>
-                    </main>
+                    </div>
                   }
                 >
                   <CommunityChecklist

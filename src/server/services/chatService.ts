@@ -10,11 +10,13 @@ import { GEMINI_FLASH_MODEL, getGeminiClient } from './geminiClient';
 export interface ChatServiceDeps {
   geminiApiKey?: string;
   aiClient?: GoogleGenAI | null;
+  signal?: AbortSignal;
 }
 
 /**
  * Streams a grounded air-quality chat answer chunk by chunk.
- * Blocks blatant prompt-injection overrides and degrades gracefully if Gemini is unavailable.
+ * Filters chat history to keep only user messages, checks all user messages for injection,
+ * respects AbortSignal cancellation, and degrades gracefully if Gemini is unavailable.
  */
 export async function streamGroundedChat(
   profile: HouseholdProfile,
@@ -23,14 +25,19 @@ export async function streamGroundedChat(
   onChunk: (text: string) => void,
   deps: ChatServiceDeps = {},
 ): Promise<void> {
-  const latestUserMsg = [...messages].reverse().find((m) => m.role === 'user')?.text ?? '';
+  const sanitizedMessages = messages.filter((m) => m.role === 'user');
+  const hasInjection = sanitizedMessages.some((m) => hasPromptInjectionSignals(m.text));
 
-  if (hasPromptInjectionSignals(latestUserMsg)) {
+  if (hasInjection) {
     const refusal =
       profile.language === 'hi'
         ? 'मैं केवल वायु गुणवत्ता, स्मॉग सुरक्षा, इनडोर हवा और कम उत्सर्जन वाली आदतों में मदद कर सकता हूँ। कृपया अपने इलाके की हवा या परिवार की सुरक्षा से जुड़ा सवाल पूछें।'
         : 'I can only help with air quality, winter smog protection, indoor air hacks, and low-emission household choices. Ask a question about your local AQI or household plan.';
     onChunk(refusal);
+    return;
+  }
+
+  if (deps.signal?.aborted) {
     return;
   }
 
@@ -45,7 +52,7 @@ export async function streamGroundedChat(
     return;
   }
 
-  const contents = buildGroundedChatContents(profile, aqi, messages);
+  const contents = buildGroundedChatContents(profile, aqi, sanitizedMessages);
   const systemInstruction = buildChatSystemInstruction(profile.language);
 
   const stream = await ai.models.generateContentStream({
@@ -58,9 +65,11 @@ export async function streamGroundedChat(
   });
 
   for await (const chunk of stream) {
+    if (deps.signal?.aborted) {
+      break;
+    }
     const text = chunk.text;
     if (text) {
-      // Preserve newlines in markdown lists while stripping control/HTML chars
       const safe = text.replace(/<[^>]*>/g, '');
       if (safe) {
         onChunk(safe);
