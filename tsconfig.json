@@ -2,10 +2,12 @@
   "compilerOptions": {
     "target": "ES2022",
     "strict": true,
+    "noUncheckedIndexedAccess": true,
+    "noImplicitReturns": true,
     "experimentalDecorators": true,
     "useDefineForClassFields": false,
     "module": "ESNext",
-    "types": ["vite/client"],
+    "types": ["vite/client", "node"],
     "lib": [
       "ES2022",
       "DOM",
@@ -25,5 +27,6 @@
     "allowImportingTsExtensions": true,
     "noEmit": true
   },
-  "exclude": ["dist"]
+  "include": ["src", "tests", "server.ts", "scripts"],
+  "exclude": ["dist", "dist-server", "node_modules"]
 }

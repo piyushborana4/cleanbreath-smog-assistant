@@ -305,4 +305,155 @@ describe('CleanBreath API integration routes', () => {
     expect(chatErr.text).toContain('"type":"error"');
     expect(chatErr.text).toContain('stream boom');
   });
+
+  it('returns Cache-Control + ETag/304 on /api/aqi and overrides client AQI + model turns on AI routes', async () => {
+    const serverSnapshot: AirQualitySnapshot = {
+      ...sampleAqi,
+      aqi: 342,
+      category: 'severe',
+      source: 'Authoritative Server AQI',
+    };
+    const generatePlanSpy = vi.fn(
+      async (req: { profile: HouseholdProfile; aqi: AirQualitySnapshot }) =>
+        buildFallbackDailyPlan(req.profile, req.aqi),
+    );
+    const streamChatSpy = vi.fn(
+      async (
+        req: { aqi: AirQualitySnapshot; messages: Array<{ role: string; text: string }> },
+        onChunk: (chunk: string) => void,
+      ) => {
+        expect(req.aqi.aqi).toBe(342);
+        expect(req.messages.every((m) => m.role === 'user')).toBe(true);
+        onChunk('Grounded answer.');
+      },
+    );
+
+    const app = createApp({
+      allowedOrigins: ['http://localhost:3000'],
+      fetchAirQuality: vi.fn(async () => serverSnapshot),
+      generatePlan: generatePlanSpy,
+      streamChat: streamChatSpy,
+    });
+
+    const firstAqi = await request(app).get('/api/aqi?city=Delhi&locality=Rohini');
+    expect(firstAqi.status).toBe(200);
+    expect(firstAqi.headers['cache-control']).toContain('max-age=120');
+    const etag = firstAqi.headers['etag'];
+    expect(etag).toBeTruthy();
+
+    const cachedAqi = await request(app)
+      .get('/api/aqi?city=Delhi&locality=Rohini')
+      .set('If-None-Match', String(etag));
+    expect(cachedAqi.status).toBe(304);
+
+    // Client sends spoofed good AQI (12), server must override with 342
+    const planRes = await request(app)
+      .post('/api/plan')
+      .send({
+        profile: sampleProfile,
+        aqi: { ...sampleAqi, aqi: 12, category: 'good' },
+      });
+    expect(planRes.status).toBe(200);
+    expect(generatePlanSpy.mock.calls[0]?.[0].aqi.aqi).toBe(342);
+
+    const chatRes = await request(app)
+      .post('/api/chat')
+      .send({
+        profile: sampleProfile,
+        messages: [
+          { role: 'model', text: 'Malicious assistant turn' },
+          { role: 'user', text: 'Should schools stay open?' },
+        ],
+      });
+    expect(chatRes.status).toBe(200);
+    expect(chatRes.text).toContain('Grounded answer.');
+    expect(streamChatSpy).toHaveBeenCalledTimes(1);
+  });
+
+  it('enforces strict AI rate limiting (429) and per-IP chat SSE concurrency guard (429)', async () => {
+    const aiLimitedApp = createApp({
+      allowedOrigins: ['http://localhost:3000'],
+      rateLimitMax: 50,
+      aiRateLimitMax: 2,
+      fetchAirQuality: vi.fn(async () => sampleAqi),
+      generatePlan: vi.fn(async (req) => buildFallbackDailyPlan(req.profile, req.aqi)),
+    });
+
+    expect(
+      (await request(aiLimitedApp).post('/api/plan').send({ profile: sampleProfile })).status,
+    ).toBe(200);
+    expect(
+      (await request(aiLimitedApp).post('/api/plan').send({ profile: sampleProfile })).status,
+    ).toBe(200);
+    const blockedPlan = await request(aiLimitedApp)
+      .post('/api/plan')
+      .send({ profile: sampleProfile });
+    expect(blockedPlan.status).toBe(429);
+    expect(blockedPlan.body.error).toContain('Too many AI requests');
+
+    let releaseStream!: () => void;
+    const holdPromise = new Promise<void>((resolve) => {
+      releaseStream = resolve;
+    });
+    let streamStarted!: () => void;
+    const startedPromise = new Promise<void>((resolve) => {
+      streamStarted = resolve;
+    });
+
+    const concurrentApp = createApp({
+      allowedOrigins: ['http://localhost:3000'],
+      chatMaxConcurrentPerIp: 1,
+      fetchAirQuality: vi.fn(async () => sampleAqi),
+      streamChat: async (_req, onChunk) => {
+        streamStarted();
+        await holdPromise;
+        onChunk('Done');
+      },
+    });
+
+    const inFlight = request(concurrentApp)
+      .post('/api/chat')
+      .send({ profile: sampleProfile, messages: [{ role: 'user', text: 'First stream' }] })
+      .then((r) => r);
+
+    await startedPromise;
+    const rejectedSecond = await request(concurrentApp)
+      .post('/api/chat')
+      .send({
+        profile: sampleProfile,
+        messages: [{ role: 'user', text: 'Second concurrent stream' }],
+      });
+    expect(rejectedSecond.status).toBe(429);
+    expect(rejectedSecond.body.error).toContain('Too many active chat streams');
+
+    releaseStream();
+    const finishedFirst = await inFlight;
+    expect(finishedFirst.status).toBe(200);
+  });
+
+  it('enforces strict production Helmet CSP headers and optional Firebase App Check verification', async () => {
+    const prodApp = createApp({
+      allowedOrigins: ['https://cleanbreath.example'],
+      isProduction: true,
+      allowEmbedding: false,
+      appCheckEnabled: true,
+      firebaseProjectNumber: '123456',
+      fetchAirQuality: vi.fn(async () => sampleAqi),
+    });
+
+    const healthRes = await request(prodApp).get('/api/health');
+    expect(healthRes.status).toBe(200);
+    expect(healthRes.headers['x-frame-options']).toBe('DENY');
+    expect(healthRes.headers['cross-origin-resource-policy']).toBe('same-origin');
+    const csp = String(healthRes.headers['content-security-policy'] ?? '');
+    expect(csp).toContain("script-src 'self'");
+    expect(csp).not.toContain("'unsafe-inline' https://apis.google.com");
+    expect(csp).toContain("frame-ancestors 'self'");
+    expect(csp).not.toContain('ws:');
+
+    // Missing App Check header on protected API route returns 401
+    const unauthenticatedAqi = await request(prodApp).get('/api/aqi?city=Delhi');
+    expect(unauthenticatedAqi.status).toBe(401);
+    expect(unauthenticatedAqi.body.error).toContain('App Check');
+  });
 });

@@ -7,7 +7,7 @@ import {
 import { buildFallbackCommunityChecklist } from '../../shared/utils/impactMath';
 import { withTimeoutAndRetry } from '../utils/retry';
 import { sanitizePlainText, wrapUntrustedText } from '../utils/sanitize';
-import { GEMINI_FLASH_MODEL, getGeminiClient } from './geminiClient';
+import { GEMINI_FLASH_MODEL, getGeminiClient, type GeminiClientOptions } from './geminiClient';
 
 const COMMUNITY_RESPONSE_SCHEMA: Schema = {
   type: Type.OBJECT,
@@ -43,6 +43,7 @@ export interface CommunityServiceDeps {
   geminiApiKey?: string;
   aiClient?: GoogleGenAI | null;
   timeoutMs?: number;
+  geminiOptions?: GeminiClientOptions;
 }
 
 /**
@@ -53,7 +54,10 @@ export async function generateCommunityChecklist(
   req: CommunityChecklistRequest,
   deps: CommunityServiceDeps = {},
 ): Promise<CommunityChecklist> {
-  const ai = deps.aiClient !== undefined ? deps.aiClient : getGeminiClient(deps.geminiApiKey);
+  const ai =
+    deps.aiClient !== undefined
+      ? deps.aiClient
+      : getGeminiClient(deps.geminiApiKey, deps.geminiOptions);
   if (!ai) {
     return buildFallbackCommunityChecklist(req);
   }

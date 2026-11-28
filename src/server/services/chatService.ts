@@ -5,18 +5,22 @@ import type { HouseholdProfile } from '../../shared/schemas/profile.schema';
 import { buildGroundedChatContents } from '../prompts/chatPrompt';
 import { buildChatSystemInstruction } from '../prompts/systemInstructions';
 import { hasPromptInjectionSignals, sanitizePlainText } from '../utils/sanitize';
-import { GEMINI_FLASH_MODEL, getGeminiClient } from './geminiClient';
+import { GEMINI_FLASH_MODEL, getGeminiClient, type GeminiClientOptions } from './geminiClient';
 
 export interface ChatServiceDeps {
   geminiApiKey?: string;
   aiClient?: GoogleGenAI | null;
   signal?: AbortSignal;
+  timeoutMs?: number;
+  geminiOptions?: GeminiClientOptions;
 }
+
+const DEFAULT_CHAT_TIMEOUT_MS = 45_000;
 
 /**
  * Streams a grounded air-quality chat answer chunk by chunk.
- * Filters chat history to keep only user messages, checks all user messages for injection,
- * respects AbortSignal cancellation, and degrades gracefully if Gemini is unavailable.
+ * Drops untrusted client-supplied model turns, checks all user turns for injection,
+ * enforces AbortSignal cancellation + overall stream timeout, and degrades gracefully offline.
  */
 export async function streamGroundedChat(
   profile: HouseholdProfile,
@@ -25,7 +29,12 @@ export async function streamGroundedChat(
   onChunk: (text: string) => void,
   deps: ChatServiceDeps = {},
 ): Promise<void> {
+  // Never trust client-supplied assistant/model turns; retain only verified user turns
   const sanitizedMessages = messages.filter((m) => m.role === 'user');
+  if (sanitizedMessages.length === 0) {
+    return;
+  }
+
   const hasInjection = sanitizedMessages.some((m) => hasPromptInjectionSignals(m.text));
 
   if (hasInjection) {
@@ -41,7 +50,10 @@ export async function streamGroundedChat(
     return;
   }
 
-  const ai = deps.aiClient !== undefined ? deps.aiClient : getGeminiClient(deps.geminiApiKey);
+  const ai =
+    deps.aiClient !== undefined
+      ? deps.aiClient
+      : getGeminiClient(deps.geminiApiKey, deps.geminiOptions);
 
   if (!ai) {
     const offlineText =
@@ -55,26 +67,47 @@ export async function streamGroundedChat(
   const contents = buildGroundedChatContents(profile, aqi, sanitizedMessages);
   const systemInstruction = buildChatSystemInstruction(profile.language);
 
-  const stream = await ai.models.generateContentStream({
-    model: GEMINI_FLASH_MODEL,
-    contents,
-    config: {
-      systemInstruction,
-      thinkingConfig: { thinkingLevel: ThinkingLevel.LOW },
-    },
-  });
+  const timeoutController = new AbortController();
+  const onParentAbort = () => timeoutController.abort();
+  deps.signal?.addEventListener('abort', onParentAbort, { once: true });
 
-  for await (const chunk of stream) {
-    if (deps.signal?.aborted) {
-      break;
-    }
-    const text = chunk.text;
-    if (text) {
-      const safe = text.replace(/<[^>]*>/g, '');
-      if (safe) {
-        onChunk(safe);
+  const timeoutMs = deps.timeoutMs ?? DEFAULT_CHAT_TIMEOUT_MS;
+  let timedOut = false;
+  const timer = setTimeout(() => {
+    timedOut = true;
+    timeoutController.abort();
+  }, timeoutMs);
+
+  try {
+    const stream = await ai.models.generateContentStream({
+      model: GEMINI_FLASH_MODEL,
+      contents,
+      config: {
+        systemInstruction,
+        thinkingConfig: { thinkingLevel: ThinkingLevel.LOW },
+        abortSignal: timeoutController.signal,
+      },
+    });
+
+    for await (const chunk of stream) {
+      if (timeoutController.signal.aborted) {
+        break;
+      }
+      const text = chunk.text;
+      if (text) {
+        const safe = text.replace(/<[^>]*>/g, '');
+        if (safe) {
+          onChunk(safe);
+        }
       }
     }
+
+    if (timedOut) {
+      throw new Error(`Chat stream timed out after ${timeoutMs}ms`);
+    }
+  } finally {
+    clearTimeout(timer);
+    deps.signal?.removeEventListener('abort', onParentAbort);
   }
 }
 

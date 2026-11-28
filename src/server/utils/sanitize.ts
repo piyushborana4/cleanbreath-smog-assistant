@@ -1,16 +1,29 @@
 import crypto from 'node:crypto';
 import type { PersonalizedDailyPlan } from '../../shared/schemas/plan.schema';
 
-const CONTROL_CHARS_RE = /[\u0000-\u0008\u000B\u000C\u000E-\u001F\u007F]/g;
 const HTML_TAG_RE = /<[^>]*>/g;
+
+function stripControlChars(value: string): string {
+  let out = '';
+  for (let i = 0; i < value.length; i += 1) {
+    const code = value.charCodeAt(i);
+    const isUnsafeCtrl =
+      (code >= 0 && code <= 8) ||
+      code === 11 ||
+      code === 12 ||
+      (code >= 14 && code <= 31) ||
+      code === 127;
+    out += isUnsafeCtrl ? ' ' : (value[i] ?? '');
+  }
+  return out;
+}
 
 /**
  * Strips control characters, HTML tags, and collapses whitespace from untrusted text.
  * Prevents XSS or delimiter breakout when embedding user strings into prompts or JSON outputs.
  */
 export function sanitizePlainText(input: string, maxLength = 600): string {
-  return input
-    .replace(CONTROL_CHARS_RE, ' ')
+  return stripControlChars(input)
     .replace(HTML_TAG_RE, ' ')
     .replace(/\s+/g, ' ')
     .trim()
@@ -28,19 +41,22 @@ export function wrapUntrustedText(tagName: string, rawText: string, maxLength = 
 }
 
 /**
- * Detects obvious prompt-injection override attempts in chat messages so callers
+ * Detects prompt-injection override attempts in chat messages so callers
  * can reinforce boundaries or refuse off-topic hijacking.
  */
 export function hasPromptInjectionSignals(text: string): boolean {
   const normalized = text.toLowerCase();
   const patterns = [
-    /(ignore|forget|override)\s+(all\s+)?(previous|prior|above|your)\s+(instructions|rules|prompt)/,
-    /disregard\s+(the\s+|all\s+)?system\s+prompt/,
-    /(reveal|print|dump|show)\s+(your|the)\s+(system\s+prompt|hidden\s+instructions)/,
-    /act\s+as\s+(a\s+)?(jailbreak|dan|unrestricted)/,
-    /(bypass|disable)\s+(all\s+)?(safety|guardrails|filters)/,
-    /enter\s+developer\s+mode/,
-    /output\s+your\s+(api\s+key|environment\s+variables|secrets)/,
+    /(ignore|forget|override|discard)\s+(all\s+)?(previous|prior|above|your|earlier)\s+(instructions|rules|prompt|directives)/,
+    /disregard\s+(the\s+|all\s+)?(system\s+prompt|instructions|rules)/,
+    /(reveal|print|dump|show|leak|repeat)\s+(your|the)\s+(system\s+prompt|hidden\s+instructions|developer\s+prompt)/,
+    /act\s+as\s+(a\s+)?(jailbreak|dan|unrestricted|system|root)/,
+    /(bypass|disable|circumvent)\s+(all\s+)?(safety|guardrails|filters|restrictions)/,
+    /enter\s+(developer|admin|god|jailbreak)\s+mode/,
+    /output\s+your\s+(api\s+key|environment\s+variables|secrets|credentials)/,
+    /<\/?(system|assistant|grounded_context|user_message|conversation_history)>/,
+    /(new|updated)\s+system\s+(instructions|prompt)\s*:/,
+    /you\s+are\s+now\s+(an?\s+)?(unfiltered|unrestricted|evil|different)\s+ai/,
   ];
   return patterns.some((re) => re.test(normalized));
 }

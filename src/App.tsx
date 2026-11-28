@@ -2,16 +2,12 @@ import { Suspense, lazy, useEffect, useRef, useState } from 'react';
 import { MotionConfig } from 'motion/react';
 import { DashboardView } from './components/DashboardView';
 import { ErrorBoundary } from './components/ErrorBoundary';
-import { IndoorHacksPanel } from './components/IndoorHacksPanel';
-import { OnboardingWizard } from './components/OnboardingWizard';
-import {
-  RecommendationDetailView,
-  type RecommendationDetailItem,
-} from './components/RecommendationDetailView';
-import { SettingsView, type FontSizeOption } from './components/SettingsView';
+import type { RecommendationDetailItem } from './components/RecommendationDetailView';
+import type { FontSizeOption } from './components/SettingsView';
 import { StitchShell, type AppTab } from './components/StitchShell';
 import { DEFAULT_PROFILE, useCleanBreath } from './hooks/useCleanBreath';
 import { getTranslations } from './i18n/translations';
+import { subscribeMapsQuotaExceeded } from './services/quotaEvents';
 import type { Language } from './shared/schemas/profile.schema';
 
 const ChatAssistant = lazy(() =>
@@ -19,6 +15,20 @@ const ChatAssistant = lazy(() =>
 );
 const CommunityChecklist = lazy(() =>
   import('./components/CommunityChecklist').then((m) => ({ default: m.CommunityChecklist })),
+);
+const IndoorHacksPanel = lazy(() =>
+  import('./components/IndoorHacksPanel').then((m) => ({ default: m.IndoorHacksPanel })),
+);
+const OnboardingWizard = lazy(() =>
+  import('./components/OnboardingWizard').then((m) => ({ default: m.OnboardingWizard })),
+);
+const RecommendationDetailView = lazy(() =>
+  import('./components/RecommendationDetailView').then((m) => ({
+    default: m.RecommendationDetailView,
+  })),
+);
+const SettingsView = lazy(() =>
+  import('./components/SettingsView').then((m) => ({ default: m.SettingsView })),
 );
 
 type ActiveView = AppTab | 'onboarding' | 'detail';
@@ -87,9 +97,7 @@ export default function App() {
   const isFirstViewRender = useRef(true);
 
   useEffect(() => {
-    const onQuota = () => setQuotaExceeded(true);
-    window.addEventListener('gmp-quota-exceeded', onQuota);
-    return () => window.removeEventListener('gmp-quota-exceeded', onQuota);
+    return subscribeMapsQuotaExceeded(() => setQuotaExceeded(true));
   }, []);
 
   useEffect(() => {
@@ -112,7 +120,15 @@ export default function App() {
     };
     setRouteAnnouncement(labels[view]);
     const frame = window.requestAnimationFrame(() => {
-      document.getElementById('main-content')?.focus();
+      const heading = document.querySelector('#main-content h1');
+      if (heading instanceof HTMLElement) {
+        if (!heading.hasAttribute('tabindex')) {
+          heading.setAttribute('tabindex', '-1');
+        }
+        heading.focus();
+      } else {
+        document.getElementById('main-content')?.focus();
+      }
     });
     return () => window.cancelAnimationFrame(frame);
   }, [view, selectedDetail?.id]);
@@ -216,29 +232,59 @@ export default function App() {
           )}
 
           {view === 'onboarding' ? (
-            <OnboardingWizard
-              profile={profile}
-              theme={theme}
-              loading={loading}
-              t={t}
-              onChange={setProfile}
-              onSubmit={(nextProfile) => {
-                void refreshAqiAndPlan(nextProfile, communitySetting);
-                setView('dashboard');
-              }}
-              onSkip={() => setView('dashboard')}
-              onToggleTheme={toggleTheme}
-            />
+            <Suspense
+              fallback={
+                <main
+                  id="main-content"
+                  tabIndex={-1}
+                  aria-busy="true"
+                  className="flex-1 px-page-margin py-gutter-lg max-w-3xl mx-auto"
+                >
+                  <p className="font-body text-body-md text-light-on-surface-variant dark:text-dark-on-surface-variant">
+                    Loading household setup…
+                  </p>
+                </main>
+              }
+            >
+              <OnboardingWizard
+                profile={profile}
+                theme={theme}
+                loading={loading}
+                t={t}
+                onChange={setProfile}
+                onSubmit={(nextProfile) => {
+                  void refreshAqiAndPlan(nextProfile, communitySetting);
+                  setView('dashboard');
+                }}
+                onSkip={() => setView('dashboard')}
+                onToggleTheme={toggleTheme}
+              />
+            </Suspense>
           ) : view === 'detail' && selectedDetail ? (
-            <RecommendationDetailView
-              item={selectedDetail}
-              isDone={Boolean(completedIds[selectedDetail.id])}
-              theme={theme}
-              t={t}
-              onToggleDone={handleToggleDone}
-              onBack={() => setView(selectedDetail.returnTab)}
-              onToggleTheme={toggleTheme}
-            />
+            <Suspense
+              fallback={
+                <main
+                  id="main-content"
+                  tabIndex={-1}
+                  aria-busy="true"
+                  className="flex-1 px-page-margin py-gutter-lg max-w-3xl mx-auto"
+                >
+                  <p className="font-body text-body-md text-light-on-surface-variant dark:text-dark-on-surface-variant">
+                    Loading action details…
+                  </p>
+                </main>
+              }
+            >
+              <RecommendationDetailView
+                item={selectedDetail}
+                isDone={Boolean(completedIds[selectedDetail.id])}
+                theme={theme}
+                t={t}
+                onToggleDone={handleToggleDone}
+                onBack={() => setView(selectedDetail.returnTab)}
+                onToggleTheme={toggleTheme}
+              />
+            </Suspense>
           ) : (
             <StitchShell
               activeTab={activeTab}
@@ -276,15 +322,29 @@ export default function App() {
               )}
 
               {view === 'hacks' && (
-                <IndoorHacksPanel
-                  hacks={plan?.indoorHacks ?? []}
-                  loading={loading}
-                  t={t}
-                  onSelectDetail={(item) => {
-                    setSelectedDetail(item);
-                    setView('detail');
-                  }}
-                />
+                <Suspense
+                  fallback={
+                    <div
+                      aria-busy="true"
+                      aria-live="polite"
+                      className="flex-1 px-page-margin py-gutter-lg"
+                    >
+                      <p className="font-body text-body-md text-light-on-surface-variant dark:text-dark-on-surface-variant">
+                        Loading indoor air hacks…
+                      </p>
+                    </div>
+                  }
+                >
+                  <IndoorHacksPanel
+                    hacks={plan?.indoorHacks ?? []}
+                    loading={loading}
+                    t={t}
+                    onSelectDetail={(item) => {
+                      setSelectedDetail(item);
+                      setView('detail');
+                    }}
+                  />
+                </Suspense>
               )}
 
               {view === 'chat' && (
@@ -333,25 +393,39 @@ export default function App() {
               )}
 
               {view === 'settings' && (
-                <SettingsView
-                  language={profile.language}
-                  theme={theme}
-                  fontSize={fontSize}
-                  reduceMotion={reduceMotion}
-                  user={user}
-                  savedPlans={savedPlans}
-                  cloudStatus={cloudStatus}
-                  t={t}
-                  onSetLanguage={handleSetLanguage}
-                  onSetFontSize={setFontSize}
-                  onToggleTheme={toggleTheme}
-                  onToggleReduceMotion={setReduceMotion}
-                  onSignIn={() => void handleSignIn()}
-                  onSignInGuest={() => void handleSignInAnonymously()}
-                  onSignOut={() => void handleSignOut()}
-                  onDeletePlan={(id) => void handleDeletePlan(id)}
-                  onClearData={handleClearData}
-                />
+                <Suspense
+                  fallback={
+                    <div
+                      aria-busy="true"
+                      aria-live="polite"
+                      className="flex-1 px-page-margin py-gutter-lg"
+                    >
+                      <p className="font-body text-body-md text-light-on-surface-variant dark:text-dark-on-surface-variant">
+                        Loading settings…
+                      </p>
+                    </div>
+                  }
+                >
+                  <SettingsView
+                    language={profile.language}
+                    theme={theme}
+                    fontSize={fontSize}
+                    reduceMotion={reduceMotion}
+                    user={user}
+                    savedPlans={savedPlans}
+                    cloudStatus={cloudStatus}
+                    t={t}
+                    onSetLanguage={handleSetLanguage}
+                    onSetFontSize={setFontSize}
+                    onToggleTheme={toggleTheme}
+                    onToggleReduceMotion={setReduceMotion}
+                    onSignIn={() => void handleSignIn()}
+                    onSignInGuest={() => void handleSignInAnonymously()}
+                    onSignOut={() => void handleSignOut()}
+                    onDeletePlan={(id) => void handleDeletePlan(id)}
+                    onClearData={handleClearData}
+                  />
+                </Suspense>
               )}
             </StitchShell>
           )}

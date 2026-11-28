@@ -14,10 +14,11 @@ export type ChatMessage = z.infer<typeof ChatMessageSchema>;
 
 /**
  * Request body schema for POST /api/chat (SSE streaming).
+ * Client-supplied AQI is optional and ignored server-side in favor of authoritative cached AQI.
  */
 export const ChatRequestSchema = z.object({
   profile: HouseholdProfileSchema,
-  aqi: AirQualitySnapshotSchema,
+  aqi: AirQualitySnapshotSchema.optional(),
   messages: z.array(ChatMessageSchema).min(1).max(12),
 });
 

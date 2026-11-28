@@ -5,6 +5,20 @@ import type {
   CommunityChecklistRequest,
 } from '../shared/schemas/community.schema';
 import type { PersonalizedDailyPlan, PlanRequest } from '../shared/schemas/plan.schema';
+import { getAppCheckToken } from './firebase';
+import { emitMapsQuotaExceeded } from './quotaEvents';
+
+async function buildApiHeaders(includeJsonContentType: boolean): Promise<Record<string, string>> {
+  const headers: Record<string, string> = {};
+  if (includeJsonContentType) {
+    headers['Content-Type'] = 'application/json';
+  }
+  const appCheckToken = await getAppCheckToken();
+  if (appCheckToken) {
+    headers['X-Firebase-AppCheck'] = appCheckToken;
+  }
+  return headers;
+}
 
 async function parseErrorMessage(res: Response): Promise<string> {
   try {
@@ -31,17 +45,18 @@ export async function fetchLiveAqi(
   }
   if (params.lang) qs.set('lang', params.lang);
 
-  const res = await fetch(`/api/aqi?${qs.toString()}`, { signal });
+  const headers = await buildApiHeaders(false);
+  const res = await fetch(`/api/aqi?${qs.toString()}`, { headers, signal });
   if (!res.ok) {
     if (res.status === 429) {
-      window.dispatchEvent(new CustomEvent('gmp-quota-exceeded'));
+      emitMapsQuotaExceeded();
     }
     throw new Error(await parseErrorMessage(res));
   }
 
   const snapshot = (await res.json()) as AirQualitySnapshot;
   if (snapshot.mapsQuotaExceeded) {
-    window.dispatchEvent(new CustomEvent('gmp-quota-exceeded'));
+    emitMapsQuotaExceeded();
   }
   return snapshot;
 }
@@ -53,9 +68,10 @@ export async function fetchDailyPlan(
   payload: PlanRequest,
   signal?: AbortSignal,
 ): Promise<PersonalizedDailyPlan> {
+  const headers = await buildApiHeaders(true);
   const res = await fetch('/api/plan', {
     method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
+    headers,
     body: JSON.stringify(payload),
     signal,
   });
@@ -73,9 +89,10 @@ export async function fetchCommunityChecklist(
   payload: CommunityChecklistRequest,
   signal?: AbortSignal,
 ): Promise<CommunityChecklist> {
+  const headers = await buildApiHeaders(true);
   const res = await fetch('/api/community/checklist', {
     method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
+    headers,
     body: JSON.stringify(payload),
     signal,
   });
@@ -94,9 +111,10 @@ export async function streamAssistantChat(
   onChunk: (text: string) => void,
   signal?: AbortSignal,
 ): Promise<void> {
+  const headers = await buildApiHeaders(true);
   const res = await fetch('/api/chat', {
     method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
+    headers,
     body: JSON.stringify(payload),
     signal,
   });

@@ -1,5 +1,11 @@
 import { initializeApp } from 'firebase/app';
 import {
+  getToken,
+  initializeAppCheck,
+  ReCaptchaEnterpriseProvider,
+  type AppCheck,
+} from 'firebase/app-check';
+import {
   GoogleAuthProvider,
   getAuth,
   onAuthStateChanged,
@@ -15,6 +21,7 @@ import {
   getDoc,
   getDocFromServer,
   getDocs,
+  getFirestore,
   limit,
   orderBy,
   query,
@@ -30,17 +37,34 @@ import type { PersonalizedDailyPlan } from '../shared/schemas/plan.schema';
 import type { HouseholdProfile, Language } from '../shared/schemas/profile.schema';
 
 const app = initializeApp(firebaseConfig);
-export const db = getFirestoreWithDatabase(app);
+export const db = getFirestore(app, firebaseConfig.firestoreDatabaseId);
 export const auth = getAuth(app);
 
-function getFirestoreWithDatabase(firebaseApp: ReturnType<typeof initializeApp>) {
-  // Lazy-imported style helper kept synchronous via top-level import below
-  return getFirestoreInstance(firebaseApp);
+let appCheckInstance: AppCheck | null = null;
+const recaptchaSiteKey =
+  typeof import.meta !== 'undefined' && import.meta.env
+    ? String(import.meta.env.VITE_RECAPTCHA_ENTERPRISE_SITE_KEY ?? '').trim()
+    : '';
+
+if (typeof window !== 'undefined' && recaptchaSiteKey) {
+  appCheckInstance = initializeAppCheck(app, {
+    provider: new ReCaptchaEnterpriseProvider(recaptchaSiteKey),
+    isTokenAutoRefreshEnabled: true,
+  });
 }
 
-import { getFirestore } from 'firebase/firestore';
-function getFirestoreInstance(firebaseApp: ReturnType<typeof initializeApp>) {
-  return getFirestore(firebaseApp, firebaseConfig.firestoreDatabaseId);
+/**
+ * Returns a Firebase App Check token header value when App Check is enabled on the client,
+ * or null in local/test mode.
+ */
+export async function getAppCheckToken(): Promise<string | null> {
+  if (!appCheckInstance) return null;
+  try {
+    const result = await getToken(appCheckInstance, false);
+    return result.token || null;
+  } catch {
+    return null;
+  }
 }
 
 export enum OperationType {

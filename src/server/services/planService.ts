@@ -9,9 +9,10 @@ import { buildFallbackDailyPlan } from '../../shared/utils/impactMath';
 import { buildDailyPlanPrompt } from '../prompts/planPrompt';
 import { buildPlanSystemInstruction } from '../prompts/systemInstructions';
 import { TtlCache } from '../utils/cache';
+import { logInfo } from '../utils/logger';
 import { withTimeoutAndRetry } from '../utils/retry';
 import { hashCacheKey, sanitizePlanOutput } from '../utils/sanitize';
-import { GEMINI_FLASH_MODEL, getGeminiClient } from './geminiClient';
+import { GEMINI_FLASH_MODEL, getGeminiClient, type GeminiClientOptions } from './geminiClient';
 
 const PLAN_CACHE_TTL_MS = 30 * 60 * 1000;
 const defaultPlanCache = new TtlCache<PersonalizedDailyPlan>(PLAN_CACHE_TTL_MS, 150);
@@ -131,11 +132,12 @@ export interface PlanServiceDeps {
   aiClient?: GoogleGenAI | null;
   cache?: TtlCache<PersonalizedDailyPlan>;
   timeoutMs?: number;
+  geminiOptions?: GeminiClientOptions;
 }
 
 /**
  * Generates a personalized daily plan via Gemini Flash structured JSON output,
- * caches identical profile+AQI requests, validates with Zod, and degrades gracefully on outage.
+ * caches identical profile+AQI-band requests, validates with Zod, and degrades gracefully on outage.
  */
 export async function generatePersonalizedPlan(
   profile: HouseholdProfile,
@@ -152,10 +154,15 @@ export async function generatePersonalizedPlan(
 
   const cached = cache.get(cacheKey);
   if (cached) {
+    logInfo('plan_cache_hit', { detail: `aqiBand=${aqi.category}` });
     return cached;
   }
 
-  const ai = deps.aiClient !== undefined ? deps.aiClient : getGeminiClient(deps.geminiApiKey);
+  logInfo('plan_cache_miss', { detail: `aqiBand=${aqi.category}` });
+  const ai =
+    deps.aiClient !== undefined
+      ? deps.aiClient
+      : getGeminiClient(deps.geminiApiKey, deps.geminiOptions);
   if (!ai) {
     return buildFallbackDailyPlan(profile, aqi);
   }

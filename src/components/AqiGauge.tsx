@@ -193,7 +193,17 @@ export function AqiGauge({ aqi, category, categoryLabel, language = 'en' }: AqiG
       });
   }, [targetAngleDeg]);
 
-  const activeBand = GAUGE_BANDS.find((b) => b.category === category) ?? GAUGE_BANDS[0];
+  const activeBand =
+    GAUGE_BANDS.find((b) => b.category === category) ??
+    ({
+      category: 'good',
+      min: 0,
+      max: 50,
+      rangeText: '0–50',
+      shortEn: 'Good',
+      shortHi: 'अच्छा',
+      colorVar: 'var(--gauge-good)',
+    } satisfies GaugeBand);
   const ariaLabel =
     language === 'hi'
       ? `वायु गुणवत्ता सूचकांक गेज: ${clampedAqi} (0 से 500 स्केल पर), श्रेणी ${categoryLabel}`
@@ -205,7 +215,7 @@ export function AqiGauge({ aqi, category, categoryLabel, language = 'en' }: AqiG
         role="img"
         aria-label={ariaLabel}
         viewBox={`0 0 ${VIEW_WIDTH} ${VIEW_HEIGHT}`}
-        className="w-[248px] sm:w-[272px] h-auto overflow-visible"
+        className="w-full max-w-[272px] h-auto"
       >
         <g transform={`translate(${CENTER_X}, ${CENTER_Y})`}>
           {segments.map((seg) => (

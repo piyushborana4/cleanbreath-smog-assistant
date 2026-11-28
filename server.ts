@@ -14,6 +14,19 @@ async function startServer(): Promise<void> {
     geminiApiKey: config.geminiApiKey,
     googleMapsApiKey: config.googleMapsApiKey,
     allowedOrigins: config.allowedOrigins,
+    isProduction: config.nodeEnv === 'production',
+    allowEmbedding: config.allowEmbedding,
+    rateLimitMax: config.apiRateLimitMax,
+    aiRateLimitMax: config.aiRateLimitMax,
+    chatStreamTimeoutMs: config.chatStreamTimeoutMs,
+    chatMaxConcurrentPerIp: config.chatMaxConcurrentPerIp,
+    appCheckEnabled: config.firebaseAppCheckEnabled,
+    firebaseProjectNumber: config.firebaseProjectNumber,
+    geminiOptions: {
+      useVertexAi: config.useVertexAi,
+      project: config.gcpProject,
+      location: config.gcpLocation,
+    },
   });
 
   if (config.nodeEnv !== 'production') {

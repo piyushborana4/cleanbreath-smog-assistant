@@ -141,6 +141,7 @@ describe('Frontend WCAG 2.2 AA accessibility (axe-core)', () => {
 
   it('RecommendationDetailView passes axe checks including Impact progressbar', async () => {
     const firstHack = plan.indoorHacks[0];
+    if (!firstHack) throw new Error('Expected at least one indoor hack');
     const { container } = render(
       <RecommendationDetailView
         item={{
@@ -208,5 +209,57 @@ describe('Frontend WCAG 2.2 AA accessibility (axe-core)', () => {
       />,
     );
     await expectNoA11yViolations(container);
+  });
+
+  it('passes axe checks in dark mode for DashboardView and Hindi mode for IndoorHacksPanel', async () => {
+    const hiT = getTranslations('hi');
+    const hiProfile: HouseholdProfile = { ...profile, language: 'hi' };
+    const hiPlan = buildFallbackDailyPlan(hiProfile, aqi);
+
+    const { container: darkContainer } = render(
+      <StitchShell
+        activeTab="dashboard"
+        locationLabel="Rohini Sector 13, New Delhi"
+        language="hi"
+        theme="dark"
+        t={hiT}
+        onSelectTab={vi.fn()}
+        onOpenOnboarding={vi.fn()}
+        onToggleTheme={vi.fn()}
+        onToggleLanguage={vi.fn()}
+      >
+        <DashboardView
+          profile={hiProfile}
+          aqi={aqi}
+          plan={hiPlan}
+          loading={false}
+          error={null}
+          user={null}
+          cloudStatus={null}
+          completedIds={{}}
+          t={hiT}
+          onRetry={vi.fn()}
+          onOpenOnboarding={vi.fn()}
+          onOpenHacks={vi.fn()}
+          onSelectDetail={vi.fn()}
+          onSavePlan={vi.fn()}
+          onSignIn={vi.fn()}
+          onSignInGuest={vi.fn()}
+        />
+      </StitchShell>,
+    );
+    await expectNoA11yViolations(darkContainer);
+
+    cleanup();
+
+    const { container: hacksContainer } = render(
+      <IndoorHacksPanel
+        hacks={hiPlan.indoorHacks}
+        loading={false}
+        t={hiT}
+        onSelectDetail={vi.fn()}
+      />,
+    );
+    await expectNoA11yViolations(hacksContainer);
   });
 });

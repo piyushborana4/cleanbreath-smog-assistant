@@ -157,20 +157,21 @@ export function SettingsView({
           </div>
         </div>
 
-        <label className="min-h-12 flex items-center justify-between gap-gutter-md cursor-pointer">
-          <div>
-            <p className="font-title text-title-md">{t.reduceMotionTitle}</p>
-            <p className="font-body text-body-md text-light-on-surface-variant dark:text-dark-on-surface-variant">
+        <div className="min-h-12 flex items-center justify-between gap-gutter-md">
+          <label htmlFor="reduce-motion-toggle" className="cursor-pointer flex-1">
+            <span className="block font-title text-title-md">{t.reduceMotionTitle}</span>
+            <span className="block font-body text-body-md text-light-on-surface-variant dark:text-dark-on-surface-variant">
               {t.reduceMotionSub}
-            </p>
-          </div>
+            </span>
+          </label>
           <input
+            id="reduce-motion-toggle"
             type="checkbox"
             checked={reduceMotion}
             onChange={(e) => onToggleReduceMotion(e.target.checked)}
-            className="w-6 h-6 rounded-sm text-light-primary focus:ring-light-primary"
+            className="w-6 h-6 rounded-sm text-light-primary focus:ring-light-primary shrink-0"
           />
-        </label>
+        </div>
       </section>
 
       {/* Account & Saved Plans (Firebase) */}

@@ -123,10 +123,11 @@ export type PersonalizedDailyPlan = z.infer<typeof PersonalizedDailyPlanSchema>;
 
 /**
  * Request body schema for POST /api/plan.
+ * Client-supplied AQI is optional and ignored server-side in favor of authoritative cached AQI.
  */
 export const PlanRequestSchema = z.object({
   profile: HouseholdProfileSchema,
-  aqi: AirQualitySnapshotSchema,
+  aqi: AirQualitySnapshotSchema.optional(),
 });
 
 export type PlanRequest = z.infer<typeof PlanRequestSchema>;

@@ -3,9 +3,11 @@ import type { ChatMessage } from '../../shared/schemas/chat.schema';
 import type { HouseholdProfile } from '../../shared/schemas/profile.schema';
 import { wrapUntrustedText } from '../utils/sanitize';
 
+export const MAX_CHAT_HISTORY_CHARS = 2400;
+
 /**
  * Pure prompt builder grounding each chat turn in live AQI and household profile context.
- * Wraps conversation turns as delimited data to mitigate prompt injection.
+ * Wraps conversation turns as delimited data and caps total history characters to prevent prompt bloat.
  */
 export function buildGroundedChatContents(
   profile: HouseholdProfile,
@@ -15,10 +17,21 @@ export function buildGroundedChatContents(
   const safeCity = wrapUntrustedText('city', profile.location.city, 80);
   const safeLocality = wrapUntrustedText('locality', profile.location.locality, 100);
 
-  const historyLines = messages.map((msg) => {
+  const boundedHistory: string[] = [];
+  let charBudget = MAX_CHAT_HISTORY_CHARS;
+
+  // Walk backwards from most recent message so the latest question is always retained
+  for (let i = messages.length - 1; i >= 0; i -= 1) {
+    const msg = messages[i];
+    if (!msg) continue;
     const tag = msg.role === 'user' ? 'user_message' : 'assistant_message';
-    return wrapUntrustedText(tag, msg.text, 600);
-  });
+    const wrapped = wrapUntrustedText(tag, msg.text, 600);
+    if (boundedHistory.length > 0 && charBudget - wrapped.length < 0) {
+      break;
+    }
+    charBudget -= wrapped.length;
+    boundedHistory.unshift(wrapped);
+  }
 
   return [
     '<grounded_context>',
@@ -29,7 +42,7 @@ export function buildGroundedChatContents(
     `  <lifestyle>commute=${profile.commuteMode}, home=${profile.homeType}, purifier=${profile.ownsAirPurifier}, budget=${profile.budgetLevel}</lifestyle>`,
     '</grounded_context>',
     '<conversation_history>',
-    ...historyLines,
+    ...boundedHistory,
     '</conversation_history>',
     'Answer the latest <user_message> directly, grounded in the <grounded_context> above.',
   ].join('\n');

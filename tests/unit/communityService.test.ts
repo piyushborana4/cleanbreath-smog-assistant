@@ -76,7 +76,7 @@ describe('communityService (apartment & school checklists)', () => {
     );
 
     expect(result.items.length).toBe(4);
-    expect(result.items[0].action).toContain('diesel generator');
+    expect(result.items[0]?.action).toContain('diesel generator');
     expect(result.shareableText).toContain('CleanBreath Apartment Society Checklist');
   });
 
@@ -94,5 +94,79 @@ describe('communityService (apartment & school checklists)', () => {
 
     expect(result.items.length).toBeGreaterThan(0);
     expect(result.settingType).toBe('school');
+  });
+
+  it('degrades gracefully on malformed JSON or thrown AI errors and strips HTML tags in Hindi mode', async () => {
+    const malformedAi = {
+      models: {
+        generateContent: async () => ({ text: '{bad-json' }),
+      },
+    } as unknown as GoogleGenAI;
+
+    const badJsonFallback = await generateCommunityChecklist(
+      {
+        settingType: 'apartment_society',
+        locality: 'Indirapuram',
+        aqi: 260,
+        category: 'very_unhealthy',
+        language: 'hi',
+      },
+      { aiClient: malformedAi },
+    );
+    expect(badJsonFallback.items.length).toBeGreaterThanOrEqual(4);
+
+    const throwingAi = {
+      models: {
+        generateContent: async () => {
+          throw new Error('Gemini unavailable');
+        },
+      },
+    } as unknown as GoogleGenAI;
+
+    const errFallback = await generateCommunityChecklist(
+      {
+        settingType: 'school',
+        locality: 'Saket',
+        aqi: 210,
+        category: 'very_unhealthy',
+        language: 'en',
+      },
+      { aiClient: throwingAi },
+    );
+    expect(errFallback.items.length).toBeGreaterThanOrEqual(4);
+
+    const htmlAi = {
+      models: {
+        generateContent: async () => ({
+          text: JSON.stringify({
+            items: [1, 2, 3, 4].map((n) => ({
+              id: `id-${n}`,
+              audience: '<b>Students</b>',
+              action: '<script>alert(1)</script>Keep windows shut during traffic peaks',
+              frequency: 'Daily',
+              impact: {
+                why: 'Lowers indoor PM2.5.',
+                estimatedEffect: '15-25% lower classroom PM2.5',
+                confidence: 'high',
+                isEstimateDisclaimer: 'Directional estimate.',
+              },
+            })),
+          }),
+        }),
+      },
+    } as unknown as GoogleGenAI;
+
+    const cleaned = await generateCommunityChecklist(
+      {
+        settingType: 'school',
+        locality: 'Saket',
+        aqi: 210,
+        category: 'very_unhealthy',
+        language: 'hi',
+      },
+      { aiClient: htmlAi },
+    );
+    expect(cleaned.items[0]?.audience).toBe('Students');
+    expect(cleaned.items[0]?.action).not.toContain('<script>');
   });
 });

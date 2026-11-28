@@ -5,7 +5,7 @@ WORKDIR /app
 COPY package.json package-lock.json* ./
 RUN npm ci --ignore-scripts --legacy-peer-deps
 
-COPY tsconfig.json vite.config.ts index.html metadata.json ./
+COPY tsconfig.json vite.config.ts index.html metadata.json server.ts ./
 COPY src ./src
 RUN npm run build
 
@@ -19,9 +19,7 @@ COPY package.json package-lock.json* ./
 RUN npm ci --omit=dev --ignore-scripts --legacy-peer-deps && npm cache clean --force
 
 COPY --from=builder /app/dist ./dist
-COPY server.ts tsconfig.json ./
-COPY src/server ./src/server
-COPY src/shared ./src/shared
+COPY --from=builder /app/dist-server ./dist-server
 
 # Run as non-root user for least-privilege container execution
 RUN addgroup -g 1001 -S nodejs && adduser -S cleanbreath -u 1001 -G nodejs \
@@ -33,4 +31,4 @@ EXPOSE 3000
 HEALTHCHECK --interval=30s --timeout=5s --start-period=10s --retries=3 \
   CMD wget -qO- http://127.0.0.1:${PORT}/api/health || exit 1
 
-CMD ["./node_modules/.bin/tsx", "server.ts"]
+CMD ["node", "dist-server/server.js"]

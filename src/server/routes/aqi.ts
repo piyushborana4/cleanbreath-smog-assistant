@@ -1,3 +1,4 @@
+import crypto from 'node:crypto';
 import { Router } from 'express';
 import {
   AqiQuerySchema,
@@ -11,8 +12,18 @@ export interface AqiRouterDeps {
   fetchAirQuality?: (query: AqiQuery) => Promise<AirQualitySnapshot>;
 }
 
+function buildSnapshotEtag(snapshot: AirQualitySnapshot): string {
+  const stablePayload = { ...snapshot, fetchedAt: undefined };
+  const digest = crypto
+    .createHash('sha1')
+    .update(JSON.stringify(stablePayload))
+    .digest('base64url');
+  return `"${digest}"`;
+}
+
 /**
- * Creates GET /api/aqi route validating location query params and returning cached AQI + forecast.
+ * Creates GET /api/aqi route validating location query params and returning cached AQI + forecast
+ * with Cache-Control and deterministic ETag/304 support.
  */
 export function createAqiRouter(deps: AqiRouterDeps = {}): Router {
   const router = Router();
@@ -46,6 +57,16 @@ export function createAqiRouter(deps: AqiRouterDeps = {}): Router {
 
     try {
       const snapshot = await fetcher(parsed.data);
+      const etag = buildSnapshotEtag(snapshot);
+      res.setHeader('Cache-Control', 'public, max-age=120, stale-while-revalidate=600');
+      res.setHeader('ETag', etag);
+
+      const ifNoneMatch = req.header('If-None-Match');
+      if (ifNoneMatch && ifNoneMatch.split(',').some((tag) => tag.trim() === etag)) {
+        res.status(304).end();
+        return;
+      }
+
       res.status(200).json(snapshot);
     } catch (err) {
       next(err);

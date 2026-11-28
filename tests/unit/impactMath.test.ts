@@ -61,7 +61,7 @@ describe('impactMath utilities', () => {
     const planEn = buildFallbackDailyPlan(sampleProfile, sampleAqi);
     expect(planEn.isFallback).toBe(true);
     expect(planEn.routines).toHaveLength(3);
-    expect(planEn.indoorHacks[0].title).toContain('Box-Fan');
+    expect(planEn.indoorHacks[0]?.title).toContain('Box-Fan');
     expect(planEn.safetyNotice.severeSymptomEscalation).toContain('chest pain');
 
     const planHi = buildFallbackDailyPlan(
@@ -69,7 +69,7 @@ describe('impactMath utilities', () => {
       sampleAqi,
     );
     expect(planHi.personalizationSummary).toContain('Rohini');
-    expect(planHi.indoorHacks[0].title).toContain('Single-Room');
+    expect(planHi.indoorHacks[0]?.title).toContain('Single-Room');
   });
 
   it('builds fallback community checklists for both apartment societies and schools', () => {

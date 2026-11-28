@@ -66,9 +66,9 @@ export function RecommendationDetailView({
               arrow_back
             </span>
           </button>
-          <h1 className="font-headline text-title-lg text-light-on-surface dark:text-dark-on-surface">
+          <p className="font-headline text-title-lg text-light-on-surface dark:text-dark-on-surface">
             Recommendation detail
-          </h1>
+          </p>
         </div>
         <button
           type="button"
@@ -98,9 +98,12 @@ export function RecommendationDetailView({
             </span>
           </div>
 
-          <h2 className="font-headline text-headline-lg-mobile md:text-headline-lg text-balance">
+          <h1
+            tabIndex={-1}
+            className="font-headline text-headline-lg-mobile md:text-headline-lg text-balance focus:outline-none"
+          >
             {item.title}
-          </h2>
+          </h1>
           <p className="font-body text-body-md text-light-on-surface-variant dark:text-dark-on-surface-variant text-pretty">
             {item.description}
           </p>
@@ -134,9 +137,9 @@ export function RecommendationDetailView({
           className="p-gutter-xl rounded-lg bg-light-good-container dark:bg-dark-good-container text-light-on-good-container dark:text-dark-on-good-container border border-light-outline-variant dark:border-dark-outline-variant flex flex-col gap-gutter-md"
         >
           <div className="flex flex-wrap items-center justify-between gap-gutter-md">
-            <h3 id="impact-heading" className="font-headline text-title-md">
+            <h2 id="impact-heading" className="font-headline text-title-md">
               {t.effectLabel}
-            </h3>
+            </h2>
             <span className="px-gutter-md py-gutter-xs rounded-full bg-light-surface-container-lowest dark:bg-dark-surface-container-low text-light-on-surface dark:text-dark-on-surface font-label text-label-md">
               {confidenceText}
             </span>
@@ -163,9 +166,9 @@ export function RecommendationDetailView({
 
         {/* Why It Helps */}
         <section aria-labelledby="why-heading" className="flex flex-col gap-gutter-sm">
-          <h3 id="why-heading" className="font-headline text-title-md">
+          <h2 id="why-heading" className="font-headline text-title-md">
             {t.whyLabel}
-          </h3>
+          </h2>
           <div className="p-gutter-lg rounded-lg bg-light-surface-container-lowest dark:bg-dark-surface-container-low border border-light-outline-variant dark:border-dark-outline-variant">
             <p className="font-body text-body-md text-pretty">{item.impact.why}</p>
           </div>
@@ -234,9 +237,9 @@ export function RecommendationDetailView({
             medical_services
           </span>
           <div className="flex flex-col gap-gutter-xs">
-            <h3 id="detail-escalation-heading" className="font-title text-title-md">
+            <h2 id="detail-escalation-heading" className="font-title text-title-md">
               {t.escalationTitle}
-            </h3>
+            </h2>
             <p className="font-body text-body-md text-light-on-surface-variant dark:text-dark-on-surface-variant">
               {t.escalationBody}
             </p>

@@ -67,9 +67,17 @@ export function summarizeForecastWindows(forecast: AirQualitySnapshot['forecast'
     };
   }
   const sorted = [...forecast].sort((a, b) => a.aqi - b.aqi);
+  const first = sorted[0];
+  const last = sorted[sorted.length - 1];
+  if (!first || !last) {
+    return {
+      bestLabel: '13:00–16:00 (typical afternoon mixing)',
+      worstLabel: '06:00–09:30 & 19:00–22:00 (inversion peak)',
+    };
+  }
   return {
-    bestLabel: `${sorted[0].hourLabel} (AQI ~${sorted[0].aqi})`,
-    worstLabel: `${sorted[sorted.length - 1].hourLabel} (AQI ~${sorted[sorted.length - 1].aqi})`,
+    bestLabel: `${first.hourLabel} (AQI ~${first.aqi})`,
+    worstLabel: `${last.hourLabel} (AQI ~${last.aqi})`,
   };
 }
 
